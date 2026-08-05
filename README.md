@@ -14,6 +14,8 @@ Built by [Microlent Systems](https://microlent.com), Jodhpur.
 | [`docs/02-design-system.md`](docs/02-design-system.md) | Visual language — direction, cycle-strip signature, colour, type, components, motion, accessibility floor. |
 | [`docs/03-stack-and-setup.md`](docs/03-stack-and-setup.md) | Stack, Tailwind v4 tokens, motion setup, placeholder policy, password-protected preview, performance budget. |
 
+| [`docs/04-homepage-plan.md`](docs/04-homepage-plan.md) | Section-by-section homepage build spec, content readiness, component split, build order. |
+
 [`CLAUDE.md`](CLAUDE.md) carries the standing build rules for Claude Code sessions on this repo.
 
 The source PDF is preserved at [`docs/client/`](docs/client/). Client-supplied brand assets and their
