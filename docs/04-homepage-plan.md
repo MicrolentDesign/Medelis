@@ -285,9 +285,22 @@ Twelve reveals down one page is at the upper limit of tasteful. If it reads as b
 | Secondary button, stacked | 44px |
 | Cycle strip | ~64px |
 
-That totals roughly 590px of the 812 before gaps, which leaves room but not much. Two consequences: **the H1 must hold at three lines or fewer on a 375px screen**, which is a hard constraint on the options in §3.1 — the longest of them should be measured before being chosen. And the two CTAs stack rather than sitting side by side; full-width, 12px gap.
+**Measured against the built page** ([`../design/homepage.html`](../design/homepage.html)) at 375 × 812, rather than estimated:
 
-The cycle strip on mobile drops labels below 375px and keeps ticks only, or it will not fit legibly. Its `divider` variant is already label-free, so the component supports this without a new variant.
+| Element | Bottom edge |
+|---|---|
+| Nav | 77px |
+| Eyebrow (wraps to two lines at this width) | 157px |
+| H1 — four lines at 40 / 42 | 345px |
+| Lead — seven lines | 564px |
+| Both CTAs, stacked full-width | **716px** |
+| Cycle plot | 963px — below the fold |
+
+This supersedes the earlier three-line constraint on the H1. Four lines fits with 96px of headroom, because the estimate had wrongly counted the cycle strip into the above-fold stack. Keeping the plot below the fold is the better arrangement anyway: the hero text and both CTAs own the first screen, and the plot is the reward for the first scroll.
+
+The two consequences that do hold: the CTAs stack full-width with a 12px gap rather than sitting side by side, and **the hero eyebrow wraps at 375px**, so it needs a looser line-height than the design system's 1.2 or the two lines collide. The built page overrides it to 1.5 for the hero instance only.
+
+The cycle strip drops labels on the narrowest screens and keeps ticks only. Its `divider` variant is already label-free, so the component supports this without a new variant.
 
 ---
 

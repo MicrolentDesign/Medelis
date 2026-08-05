@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Medelis Healthcare — Homepage design v1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Medelis Healthcare — homepage design v1
+   Tokens are verbatim from docs/02-design-system.md §3.1.
+   Muted text uses slate-600 and nav/marker accents use orange-600,
+   which are the §3.5 recommendations — so this page passes AA as drawn.
+   ============================================================ */
+
+:root {
+  --indigo-50:#F0F1F8; --indigo-100:#DDDFEF; --indigo-200:#B9BDDC;
+  --indigo-400:#6169A5; --indigo-500:#3C4589; --indigo-700:#232A6B;
+  --indigo-800:#1A2052; --indigo-900:#12163A; --indigo-950:#0A0C21;
+  --teal-50:#EAF7F4; --teal-100:#CBEDE5; --teal-300:#5FC4AF;
+  --teal-500:#0E8F7A; --teal-600:#0C7867; --teal-700:#0B6053; --teal-800:#0A4C43;
+  --orange-50:#FEF4EA; --orange-500:#F58220; --orange-600:#DC6A0E; --orange-700:#B5510B;
+  --white:#FFFFFF; --slate-25:#FBFCFD; --slate-50:#F5F7FA; --slate-100:#EDF0F5;
+  --slate-200:#DDE2EB; --slate-300:#C2CAD8; --slate-600:#4E5B70;
+  --slate-800:#262E3C; --slate-900:#161C26;
+
+  --font-sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+
+  --text-display:clamp(2.5rem,1.6rem + 3.8vw,4.25rem);
+  --text-h1:clamp(2.125rem,1.6rem + 2.2vw,3.25rem);
+  --text-h2:clamp(1.75rem,1.5rem + 1.05vw,2.375rem);
+  --text-h3:clamp(1.375rem,1.28rem + 0.4vw,1.625rem);
+  --text-h4:clamp(1.125rem,1.08rem + 0.2vw,1.25rem);
+  --text-lead:clamp(1.125rem,1.05rem + 0.32vw,1.3125rem);
+  --text-body:clamp(1rem,0.98rem + 0.09vw,1.0625rem);
+  --text-stat:clamp(2.25rem,1.7rem + 2.3vw,3.25rem);
+
+  --section:clamp(4.5rem,3rem + 6.4vw,8rem);
+  --radius-sm:6px; --radius-md:8px; --radius-lg:12px;
+  --ease-out:cubic-bezier(0.22,1,0.36,1);
+  --hair:1px solid var(--slate-200);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--white);color:var(--slate-800);
+  font-family:var(--font-sans);font-size:var(--text-body);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{margin:0;color:var(--indigo-900);font-weight:500}
+p{margin:0}
+a{color:var(--teal-700);text-decoration:none}
+ul{margin:0;padding:0;list-style:none}
+svg{display:block}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+@media(min-width:640px){.wrap{padding:0 40px}}
+@media(min-width:1024px){.wrap{padding:0 64px}}
+
+.eyebrow{
+  font-family:var(--font-mono);font-size:12px;font-weight:500;line-height:1.2;
+  letter-spacing:0.12em;text-transform:uppercase;color:var(--teal-700);
+}
+.lead{font-size:var(--text-lead);line-height:1.55;letter-spacing:-0.005em;color:var(--slate-600);max-width:56ch}
+.muted{color:var(--slate-600)}
+.caption{font-size:13px;line-height:1.5;color:var(--slate-600)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{transform:none;transition:opacity .12s linear}
+  html{scroll-behavior:auto}
+  .plot path,.spine line,.spine circle{animation:none!important;stroke-dashoffset:0!important}
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;
+  border-radius:var(--radius-md);font-size:15px;font-weight:500;
+  border:1px solid transparent;cursor:pointer;transition:background .18s,border-color .18s,color .18s;
+}
+.btn .arw{transition:transform .14s var(--ease-out)}
+.btn:hover .arw{transform:translateX(3px)}
+.btn-pri{background:var(--indigo-700);color:#fff}
+.btn-pri:hover{background:var(--indigo-500)}
+.btn-sec{background:transparent;color:var(--indigo-700);border-color:var(--slate-300)}
+.btn-sec:hover{border-color:var(--indigo-700);background:var(--indigo-50)}
+.btn-inv{background:#fff;color:var(--indigo-700)}
+.btn-inv:hover{background:var(--indigo-50)}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.btn-ghost:hover{background:rgba(255,255,255,.08)}
+.btn-sm{height:44px;padding:0 20px;font-size:14px}
+.tlink{
+  display:inline-flex;align-items:center;gap:8px;color:var(--teal-700);
+  font-size:15px;font-weight:500;
+}
+.tlink .arw{transition:transform .14s var(--ease-out)}
+.tlink:hover .arw{transform:translateX(3px)}
+.tlink:hover{color:var(--teal-800)}
+:focus-visible{outline:2px solid var(--teal-600);outline-offset:2px}
+
+/* ---------- placeholder marker ---------- */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-mono);font-size:10px;font-weight:500;letter-spacing:0.1em;
+  text-transform:uppercase;color:#fff;background:var(--orange-700);
+  padding:4px 8px;border-radius:var(--radius-sm);white-space:nowrap;
+}
+.field{
+  display:flex;align-items:center;justify-content:center;
+  min-height:56px;border:1px dashed var(--slate-300);border-radius:var(--radius-md);
+  background:var(--slate-25);font-family:var(--font-mono);font-size:13px;
+  color:var(--slate-600);letter-spacing:0.04em;padding:0 12px;text-align:center;
+}
+
+/* ---------- nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:60;background:rgba(255,255,255,0);
+  border-bottom:1px solid transparent;transition:background .2s,border-color .2s,box-shadow .2s;
+}
+.nav.solid{background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+  border-bottom-color:var(--slate-200);box-shadow:0 1px 0 rgba(11,14,20,.06)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:76px;gap:32px}
+.logo{display:flex;flex-direction:column;line-height:1;text-decoration:none}
+.logo b{font-size:21px;font-weight:600;color:var(--indigo-700);letter-spacing:-0.02em}
+.logo span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.22em;
+  text-transform:uppercase;color:var(--slate-600);margin-top:3px}
+.nav ul{display:none;align-items:center;gap:30px}
+@media(min-width:1024px){.nav ul{display:flex}}
+.nav ul a{font-size:15px;color:var(--slate-800);position:relative;padding:4px 0;
+  display:inline-flex;align-items:center;gap:6px}
+.nav ul a .cv{color:var(--slate-600);transition:color .18s}
+.nav ul a:hover .cv{color:var(--indigo-700)}
+.nav ul a:hover{color:var(--indigo-700)}
+.nav ul a.on{color:var(--indigo-700);font-weight:500}
+.nav ul a.on::after{
+  content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--orange-600)
+}
+.nav .cta{display:none}
+@media(min-width:640px){.nav .cta{display:inline-flex}}
+.burger{display:grid;place-items:center;width:44px;height:44px;border:var(--hair);
+  border-radius:var(--radius-md);background:#fff;cursor:pointer}
+@media(min-width:1024px){.burger{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;padding-top:clamp(3rem,2rem + 5vw,7rem);padding-bottom:0}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 85% 0%,var(--indigo-50) 0%,rgba(240,241,248,0) 62%);
+}
+.hero-grid{position:relative;display:grid;gap:clamp(2.5rem,2rem + 3vw,4.5rem);align-items:center}
+@media(min-width:1024px){.hero-grid{grid-template-columns:1.05fr .95fr}}
+h1{
+  font-size:var(--text-display);line-height:1.05;letter-spacing:-0.03em;font-weight:600;
+  margin:20px 0 0;text-wrap:balance;
+}
+h1 .alt{color:var(--teal-600);display:block}
+.hero .lead{margin-top:24px}
+/* the hero eyebrow is the one that wraps at 375px — let two lines breathe */
+.hero .eyebrow{line-height:1.5}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+@media(max-width:479px){.hero-cta{flex-direction:column}.hero-cta .btn{width:100%;justify-content:center}}
+
+/* cycle plot */
+.plot{width:100%;height:auto}
+.plot .grid{stroke:var(--slate-200);stroke-width:1}
+.plot .phase{stroke:var(--slate-300);stroke-width:1;stroke-dasharray:3 4}
+.plot .curve{
+  fill:none;stroke:var(--indigo-700);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 1.6s var(--ease-out) .25s forwards;
+}
+.plot .band{fill:var(--teal-50)}
+.plot .lbl{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.12em;
+  fill:var(--slate-600);text-transform:uppercase}
+.plot .dot{fill:var(--orange-600)}
+@keyframes draw{to{stroke-dashoffset:0}}
+.plot-note{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+
+/* ---------- credibility strip (overlaps hero) ---------- */
+.strip-wrap{position:relative;margin-top:clamp(3rem,2rem + 3vw,5rem)}
+.strip{
+  border:var(--hair);border-radius:var(--radius-lg);background:#fff;
+  display:grid;grid-template-columns:1fr;overflow:hidden;
+}
+@media(min-width:640px){.strip{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.strip{grid-template-columns:repeat(4,1fr)}}
+.cell{padding:26px 24px;border-top:var(--hair)}
+.cell:first-child{border-top:0}
+@media(min-width:640px){
+  .cell{border-top:0;border-left:var(--hair)}
+  .cell:nth-child(1),.cell:nth-child(2){border-top:0}
+  .cell:nth-child(3),.cell:nth-child(4){border-top:var(--hair)}
+  .cell:nth-child(odd){border-left:0}
+}
+@media(min-width:1024px){
+  .cell{border-top:0;border-left:var(--hair)}
+  .cell:first-child{border-left:0}
+  .cell:nth-child(odd){border-left:var(--hair)}
+  .cell:nth-child(1){border-left:0}
+}
+.cell .k{font-family:var(--font-mono);font-size:12px;letter-spacing:0.06em;
+  text-transform:uppercase;color:var(--slate-600);margin-bottom:14px}
+.cell .u{font-family:var(--font-mono);font-size:12px;color:var(--slate-600);margin-top:10px}
+
+/* ---------- sections ---------- */
+section{padding:var(--section) 0}
+.tint{background:var(--slate-50)}
+.hd{display:grid;gap:24px;align-items:end;margin-bottom:clamp(2.5rem,2rem + 2vw,4rem)}
+@media(min-width:900px){.hd{grid-template-columns:1.15fr .85fr;gap:56px}}
+.hd h2{font-size:var(--text-h2);line-height:1.15;letter-spacing:-0.02em;margin-top:16px;text-wrap:balance}
+.hd .sup{display:flex;flex-direction:column;gap:18px;align-items:flex-start}
+
+/* divider strip */
+.div{padding:0}
+.div svg{width:100%;height:26px}
+.div line{stroke:var(--slate-200);stroke-width:1}
+.div .t{stroke:var(--slate-300);stroke-width:1}
+
+/* ---------- cards ---------- */
+.grid3{display:grid;gap:20px}
+@media(min-width:700px){.grid3{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.card{
+  background:#fff;border:var(--hair);border-radius:var(--radius-lg);padding:28px;
+  position:relative;transition:border-color .18s,background .18s;
+  display:flex;flex-direction:column;gap:14px;
+}
+.card:hover{border-color:var(--slate-300);background:var(--slate-25)}
+.card.svc::before{
+  content:"";position:absolute;top:-1px;left:-1px;right:-1px;height:3px;
+  background:var(--teal-500);border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+}
+.card h3{font-size:var(--text-h3);line-height:1.25;letter-spacing:-0.015em}
+.card p{font-size:15px;line-height:1.6;color:var(--slate-600)}
+.card .foot{margin-top:auto;padding-top:6px}
+
+/* ---------- how it works ---------- */
+.spine{position:relative;margin-top:8px}
+.spine svg{width:100%;height:64px}
+.spine .rail{stroke:var(--slate-200);stroke-width:1}
+.spine .tick{stroke:var(--slate-300);stroke-width:1}
+.spine .prog{stroke:var(--orange-600);stroke-width:2;stroke-linecap:round}
+.spine .mk{fill:var(--orange-600)}
+.steps{display:grid;gap:28px;margin-top:8px}
+@media(min-width:700px){.steps{grid-template-columns:1fr 1fr;gap:40px 32px}}
+@media(min-width:1024px){.steps{grid-template-columns:repeat(4,1fr);gap:32px}}
+.step .n{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:0.08em;color:var(--orange-700)}
+.step h4{font-size:var(--text-h4);line-height:1.35;margin:12px 0 10px}
+.step p{font-size:15px;line-height:1.6;color:var(--slate-600)}
+
+/* ---------- quality rows ---------- */
+.q-grid{display:grid;gap:clamp(2rem,1.5rem + 2vw,3.5rem)}
+@media(min-width:1024px){.q-grid{grid-template-columns:.8fr 1.2fr;gap:64px}}
+.certs{border-top:var(--hair)}
+.cert{display:grid;gap:6px 24px;padding:24px 0;border-bottom:var(--hair)}
+@media(min-width:620px){.cert{grid-template-columns:1fr auto;align-items:center}}
+.cert h4{font-size:var(--text-h4)}
+.cert .body{font-size:13px;color:var(--slate-600);margin-top:4px}
+.cert .num{font-family:var(--font-mono);font-size:14px;letter-spacing:0.02em;color:var(--indigo-700)}
+.cert .numwrap{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+/* ---------- industries ---------- */
+.grid4{display:grid;gap:20px}
+@media(min-width:640px){.grid4{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.grid4{grid-template-columns:repeat(4,1fr)}}
+.tile{
+  background:#fff;border:var(--hair);border-radius:var(--radius-lg);padding:26px;
+  display:flex;flex-direction:column;gap:12px;min-height:190px;
+  transition:border-color .18s,background .18s;
+}
+.tile:hover{border-color:var(--slate-300);background:var(--slate-25)}
+.tile h3{font-size:1.1875rem;line-height:1.3;letter-spacing:-0.01em}
+.tile p{font-size:14px;line-height:1.55;color:var(--slate-600)}
+.tile .foot{margin-top:auto}
+.ico{width:22px;height:22px;stroke:var(--teal-500);stroke-width:1.5;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- facility ---------- */
+.fac{display:grid;gap:0;border:var(--hair);border-radius:var(--radius-lg);overflow:hidden;background:#fff}
+@media(min-width:640px){.fac{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.fac{grid-template-columns:repeat(4,1fr)}}
+
+/* ---------- insights ---------- */
+.post{
+  background:#fff;border:var(--hair);border-radius:var(--radius-lg);padding:26px;
+  display:flex;flex-direction:column;gap:14px;transition:border-color .18s,background .18s;
+}
+.post:hover{border-color:var(--slate-300);background:var(--slate-25)}
+.post .date{font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--slate-600)}
+.post h3{font-size:1.1875rem;line-height:1.35;letter-spacing:-0.01em}
+.post .foot{margin-top:auto}
+
+/* ---------- faq ---------- */
+.faq{border-top:var(--hair)}
+.qa{border-bottom:var(--hair)}
+.qa button{
+  width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;
+  background:none;border:0;padding:24px 0;text-align:left;cursor:pointer;font:inherit;
+}
+.qa button h4{font-size:var(--text-h4);line-height:1.35;font-weight:500}
+.qa .pm{position:relative;flex:0 0 20px;height:20px;margin-top:4px;transition:transform .2s var(--ease-out)}
+.qa .pm::before,.qa .pm::after{
+  content:"";position:absolute;background:var(--slate-600);
+}
+.qa .pm::before{left:0;right:0;top:9.5px;height:1.5px}
+.qa .pm::after{top:0;bottom:0;left:9.5px;width:1.5px;transition:opacity .2s}
+.qa[open] .pm{transform:rotate(45deg)}
+.qa .ans{overflow:hidden;max-height:0;transition:max-height .24s var(--ease-out)}
+.qa .ans p{padding:0 0 24px;max-width:68ch;color:var(--slate-600)}
+
+/* ---------- quote cta ---------- */
+.cta-band{background:var(--indigo-700);border-bottom:1px solid rgba(255,255,255,.14)}
+.cta-band h2,.cta-band .eyebrow{color:#fff}
+.cta-band .eyebrow{color:var(--teal-300)}
+.cta-band p{color:var(--indigo-200);max-width:52ch}
+.cta-grid{display:grid;gap:36px;align-items:center}
+@media(min-width:900px){.cta-grid{grid-template-columns:1.1fr .9fr;gap:64px}}
+.cta-act{display:flex;flex-wrap:wrap;gap:12px}
+@media(max-width:479px){.cta-act{flex-direction:column}.cta-act .btn{width:100%;justify-content:center}}
+
+/* ---------- footer ---------- */
+footer{background:var(--indigo-900);color:var(--indigo-200);padding:clamp(3.5rem,3rem + 2vw,5rem) 0 0}
+.f-grid{display:grid;gap:40px}
+@media(min-width:700px){.f-grid{grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:48px}}
+footer .logo b{color:#fff}
+footer .logo span{color:var(--indigo-400)}
+footer h4{color:#fff;font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;
+  text-transform:uppercase;font-weight:500;margin-bottom:18px}
+footer li{margin-bottom:11px;font-size:15px}
+footer a{color:var(--indigo-200)}
+footer a:hover{color:#fff}
+footer .blurb{font-size:15px;line-height:1.6;max-width:34ch;margin-top:18px}
+.f-bar{margin-top:clamp(3rem,2.5rem + 2vw,4rem);border-top:1px solid rgba(255,255,255,.14);
+  padding:24px 0;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.f-bar,.f-bar a{font-size:13px;color:var(--indigo-400)}
+
+/* ---------- build notes ---------- */
+.notes{background:var(--slate-900);color:#C9D2E0;padding:56px 0}
+.notes h2{color:#fff;font-size:1.375rem;letter-spacing:-0.01em}
+.notes h3{color:#fff;font-family:var(--font-mono);font-size:11px;letter-spacing:0.14em;
+  text-transform:uppercase;margin:32px 0 12px}
+.notes p,.notes li{font-size:14.5px;line-height:1.65;color:#AAB6C8}
+.notes li{padding-left:18px;position:relative;margin-bottom:9px}
+.notes li::before{content:"";position:absolute;left:0;top:10px;width:6px;height:1px;background:#5C6B82}
+.notes code{font-family:var(--font-mono);font-size:13px;color:var(--teal-300)}
+.notes .cols{display:grid;gap:36px}
+@media(min-width:800px){.notes .cols{grid-template-columns:1fr 1fr;gap:56px}}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="#top">
+      <b>Medelis</b><span>Healthcare</span>
+    </a>
+    <ul>
+      <li><a href="#sterilize">Services <svg class="cv" width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
+      <li><a href="#industries">Industries <svg class="cv" width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
+      <li><a href="#quality" class="on">Quality</a></li>
+      <li><a href="#facility">Facility</a></li>
+      <li><a href="#insights">Resources</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+    <a class="btn btn-pri btn-sm cta" href="#quote">Request a quote</a>
+    <button class="burger" aria-label="Open menu">
+      <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="#262E3C" stroke-width="1.5">
+        <path d="M0 1h18M0 6h18M0 11h18"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 1 · HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow">Contract sterilization &middot; <span class="mono">[[CITY]]</span>, India</p>
+        <h1>Contract sterilization,<span class="alt">documented for audit.</span></h1>
+        <p class="lead">
+          Outsourcing a critical-path process means trusting someone else's paperwork.
+          Every batch we release carries its cycle record, indicator results, and
+          certificate &mdash; assembled the way your quality system expects to receive it.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-pri" href="#quote">Request a quote <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></a>
+          <a class="btn btn-sec" href="#">Download capability statement</a>
+        </div>
+      </div>
+
+      <div>
+        <!-- Illustrative cycle profile. Unlabelled by design: see docs/04 §8.1 -->
+        <svg class="plot" viewBox="0 0 480 300" role="img"
+             aria-label="Illustrative sterilization cycle profile across four process phases">
+          <rect class="band" x="176" y="30" width="148" height="196" opacity=".55"/>
+          <g class="grid">
+            <line x1="0" y1="30" x2="480" y2="30"/>
+            <line x1="0" y1="128" x2="480" y2="128"/>
+            <line x1="0" y1="226" x2="480" y2="226"/>
+          </g>
+          <g class="phase">
+            <line x1="112" y1="20" x2="112" y2="236"/>
+            <line x1="176" y1="20" x2="176" y2="236"/>
+            <line x1="324" y1="20" x2="324" y2="236"/>
+          </g>
+          <path class="curve" d="
+            M0,206
+            C34,200 66,178 100,166
+            C108,163 110,163 112,164
+            C124,172 132,214 146,220
+            C158,225 166,222 176,206
+            C190,183 196,64 216,58
+            L318,58
+            C334,58 340,96 356,124
+            C388,180 430,196 480,200"/>
+          <circle class="dot" cx="216" cy="58" r="4"/>
+          <circle class="dot" cx="318" cy="58" r="4"/>
+          <g class="lbl">
+            <text x="0" y="256">Precondition</text>
+            <text x="118" y="256">Vacuum</text>
+            <text x="182" y="256">Gas dwell</text>
+            <text x="330" y="256">Aeration</text>
+          </g>
+        </svg>
+        <div class="plot-note">
+          <span class="chip">Illustrative profile</span>
+          <span class="caption">Phase order is real. Durations and set points are withheld until the client confirms cycle parameters.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---- 2 · CREDIBILITY STRIP ---- -->
+    <div class="strip-wrap rv">
+      <div class="strip">
+        <div class="cell">
+          <p class="k">Certifications</p>
+          <div class="field">ISO &mdash; awaiting §1.2</div>
+        </div>
+        <div class="cell">
+          <p class="k">Years operating</p>
+          <div class="field">&mdash;</div>
+        </div>
+        <div class="cell">
+          <p class="k">Batches released</p>
+          <div class="field">&mdash;</div>
+        </div>
+        <div class="cell">
+          <p class="k">Devices sterilized</p>
+          <div class="field">&mdash;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · WHAT WE STERILIZE ============ -->
+<section class="tint" id="sterilize">
+  <div class="wrap">
+    <div class="hd rv">
+      <div>
+        <p class="eyebrow">What we sterilize</p>
+        <h2>Tell us the device. We will tell you the cycle.</h2>
+      </div>
+      <div class="sup">
+        <p class="muted">
+          Modality, material compatibility and typical product classes go here, one card per
+          process we operate. The card count follows the answer &mdash; a single-modality
+          facility gets a different treatment than four.
+        </p>
+        <span class="chip">Blocked &middot; context §1.1</span>
+      </div>
+    </div>
+    <div class="grid3">
+      <article class="card svc rv">
+        <p class="eyebrow mono">Modality 01</p>
+        <h3 class="muted" style="font-weight:400">Process name</h3>
+        <div class="field">Typical products &middot; materials &middot; packaging</div>
+        <div class="foot"><span class="caption">Links to <code>/services/[slug]</code></span></div>
+      </article>
+      <article class="card svc rv">
+        <p class="eyebrow mono">Modality 02</p>
+        <h3 class="muted" style="font-weight:400">Process name</h3>
+        <div class="field">Typical products &middot; materials &middot; packaging</div>
+        <div class="foot"><span class="caption">Links to <code>/services/[slug]</code></span></div>
+      </article>
+      <article class="card svc rv">
+        <p class="eyebrow mono">Modality 03</p>
+        <h3 class="muted" style="font-weight:400">Process name</h3>
+        <div class="field">Typical products &middot; materials &middot; packaging</div>
+        <div class="foot"><span class="caption">Links to <code>/services/[slug]</code></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---- cycle-strip divider ---- -->
+<div class="div wrap">
+  <svg viewBox="0 0 1200 26" preserveAspectRatio="none" aria-hidden="true">
+    <line x1="0" y1="13" x2="1200" y2="13"/>
+    <line class="t" x1="1" y1="5" x2="1" y2="21"/>
+    <line class="t" x1="300" y1="7" x2="300" y2="19"/>
+    <line class="t" x1="600" y1="7" x2="600" y2="19"/>
+    <line class="t" x1="900" y1="7" x2="900" y2="19"/>
+    <line class="t" x1="1199" y1="5" x2="1199" y2="21"/>
+  </svg>
+</div>
+
+<!-- ============ 4 · HOW IT WORKS ============ -->
+<section id="process">
+  <div class="wrap">
+    <div class="hd rv">
+      <div>
+        <p class="eyebrow">How it works</p>
+        <h2>Four stages. Every one of them leaves a record.</h2>
+      </div>
+      <div class="sup">
+        <p class="muted">
+          Handing over a critical-path step is the objection we hear first. The answer is
+          not reassurance, it is visibility &mdash; you know where the load is and what
+          document closes each stage.
+        </p>
+        <a class="tlink" href="#">See the full process
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></a>
+      </div>
+    </div>
+
+    <div class="spine rv">
+      <svg viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true">
+        <line class="rail" x1="0" y1="32" x2="1200" y2="32"/>
+        <line class="tick" x1="1" y1="20" x2="1" y2="44"/>
+        <line class="tick" x1="300" y1="22" x2="300" y2="42"/>
+        <line class="tick" x1="600" y1="22" x2="600" y2="42"/>
+        <line class="tick" x1="900" y1="22" x2="900" y2="42"/>
+        <line class="tick" x1="1199" y1="20" x2="1199" y2="44"/>
+        <line class="prog" id="prog" x1="0" y1="32" x2="0" y2="32"/>
+        <circle class="mk" id="mk" cx="0" cy="32" r="5"/>
+      </svg>
+    </div>
+
+    <div class="steps">
+      <div class="step rv">
+        <p class="n">01</p>
+        <h4>Enquiry &amp; spec review</h4>
+        <p>You send the device, material and packaging. We confirm compatibility and whether an existing validation covers it before quoting.</p>
+      </div>
+      <div class="step rv">
+        <p class="n">02</p>
+        <h4>Pickup &amp; preconditioning</h4>
+        <p>Collection from your site, goods-in check against the manifest, then conditioning to the temperature and humidity the cycle requires.</p>
+      </div>
+      <div class="step rv">
+        <p class="n">03</p>
+        <h4>Validated cycle</h4>
+        <p>The load runs on a documented cycle with biological and chemical indicators placed to the validated positions. Parameters are recorded throughout.</p>
+      </div>
+      <div class="step rv">
+        <p class="n">04</p>
+        <h4>Release with documentation</h4>
+        <p>Nothing ships on assumption. Indicator results are read and the batch is released with its cycle record and certificate attached.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · QUALITY & COMPLIANCE ============ -->
+<section id="quality" style="border-top:1px solid var(--slate-200)">
+  <div class="wrap">
+    <div class="q-grid">
+      <div class="rv">
+        <p class="eyebrow">Quality &amp; compliance</p>
+        <h2 style="font-size:var(--text-h2);line-height:1.15;letter-spacing:-0.02em;margin-top:16px">
+          Certificates with numbers on them.
+        </h2>
+        <p class="lead" style="margin-top:20px;font-size:var(--text-body)">
+          A certificate you cannot verify is a logo. Each one below carries its issuing
+          body, its number, and its validity window, because the only version of this
+          section worth publishing is the checkable one.
+        </p>
+        <div style="margin-top:28px">
+          <a class="tlink" href="#">Quality &amp; compliance in full
+            <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></a>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="certs">
+          <div class="cert">
+            <div>
+              <h4>ISO 11135 &mdash; ethylene oxide sterilization</h4>
+              <p class="body">Validation and routine control of the EO process</p>
+            </div>
+            <div class="numwrap"><span class="num">CERT &mdash;&mdash;&mdash;&mdash;</span><span class="chip">§1.2</span></div>
+          </div>
+          <div class="cert">
+            <div>
+              <h4>ISO 13485 &mdash; quality management</h4>
+              <p class="body">Medical device QMS, scope as certified</p>
+            </div>
+            <div class="numwrap"><span class="num">CERT &mdash;&mdash;&mdash;&mdash;</span><span class="chip">§1.2</span></div>
+          </div>
+          <div class="cert">
+            <div>
+              <h4>CDSCO registration</h4>
+              <p class="body">Central Drugs Standard Control Organisation</p>
+            </div>
+            <div class="numwrap"><span class="num">REG &mdash;&mdash;&mdash;&mdash;</span><span class="chip">§1.2</span></div>
+          </div>
+        </div>
+        <p class="caption" style="margin-top:18px">
+          Standards listed are the ones this business would be expected to hold. Confirm
+          which are actually certified, with numbers and validity dates, before publication.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · INDUSTRIES ============ -->
+<section class="tint" id="industries">
+  <div class="wrap">
+    <div class="hd rv">
+      <div>
+        <p class="eyebrow">Industries served</p>
+        <h2>Four buyers, four different objections.</h2>
+      </div>
+      <div class="sup">
+        <p class="muted">
+          A device manufacturer worries about their regulatory filing. A hospital worries
+          about turnaround. The pages are written separately because the questions are not
+          the same.
+        </p>
+      </div>
+    </div>
+    <div class="grid4">
+      <a class="tile rv" href="#">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg>
+        <h3>Medical device manufacturers</h3>
+        <p>Validation evidence that survives a notified-body audit and a CDSCO inspection.</p>
+        <span class="foot tlink">View sector
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+      <a class="tile rv" href="#">
+        <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M12 8v8M8 12h8"/></svg>
+        <h3>Hospitals &amp; CSSD</h3>
+        <p>Overflow and outsourced capacity when the department cannot absorb the load.</p>
+        <span class="foot tlink">View sector
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+      <a class="tile rv" href="#">
+        <svg class="ico" viewBox="0 0 24 24"><path d="M9 3h6v6l4 9a2 2 0 01-2 3H7a2 2 0 01-2-3l4-9V3zM9 9h6"/></svg>
+        <h3>Pharma &amp; laboratories</h3>
+        <p>Consumables, components and labware where bioburden control is the constraint.</p>
+        <span class="foot tlink">View sector
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+      <a class="tile rv" href="#">
+        <svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg>
+        <h3>Exporters</h3>
+        <p>Documentation packaged for FDA and CE expectations, not just for domestic filing.</p>
+        <span class="foot tlink">View sector
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7 · FACILITY ============ -->
+<section id="facility">
+  <div class="wrap">
+    <div class="hd rv">
+      <div>
+        <p class="eyebrow">Facility</p>
+        <h2>Specifications, on a page you can screenshot.</h2>
+      </div>
+      <div class="sup">
+        <p class="muted">
+          Procurement buyers put these numbers into an internal approval deck. Chamber
+          capacity, cleanroom class, aeration and quarantine, stated plainly.
+        </p>
+        <span class="chip">Blocked &middot; context §1.3</span>
+      </div>
+    </div>
+    <div class="fac rv">
+      <div class="cell"><p class="k">Chambers</p><div class="field">&mdash;</div></div>
+      <div class="cell"><p class="k">Capacity per cycle</p><div class="field">&mdash; m&sup3;</div></div>
+      <div class="cell"><p class="k">Cleanroom class</p><div class="field">ISO &mdash;</div></div>
+      <div class="cell"><p class="k">Aeration capacity</p><div class="field">&mdash;</div></div>
+    </div>
+    <p class="caption" style="margin-top:16px;max-width:68ch">
+      No photograph in this slot until the client supplies real facility imagery. Stock
+      photography beside Medelis's own capacity figures reads as a claim about this
+      facility &mdash; see <code>03-stack-and-setup.md</code> §5.1.
+    </p>
+  </div>
+</section>
+
+<!-- ============ 10 · INSIGHTS ============ -->
+<section class="tint" id="insights">
+  <div class="wrap">
+    <div class="hd rv">
+      <div>
+        <p class="eyebrow">Insights</p>
+        <h2>Written for the person who reads the protocol.</h2>
+      </div>
+      <div class="sup">
+        <p class="muted">
+          There is very little good Indian-market writing in this niche. That gap is the
+          cheapest competitive advantage available to us.
+        </p>
+        <a class="tlink" href="#">All insights
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></a>
+      </div>
+    </div>
+    <div class="grid3">
+      <a class="post rv" href="#">
+        <p class="date">Modality selection</p>
+        <h3>EtO vs gamma vs steam: choosing a modality for your device</h3>
+        <span class="foot tlink">Read
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+      <a class="post rv" href="#">
+        <p class="date">Standards</p>
+        <h3>What ISO 11135:2014 actually requires of a contract steriliser</h3>
+        <span class="foot tlink">Read
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+      <a class="post rv" href="#">
+        <p class="date">Validation</p>
+        <h3>IQ, OQ, PQ explained for device manufacturers</h3>
+        <span class="foot tlink">Read
+          <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11 · FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="q-grid">
+      <div class="rv">
+        <p class="eyebrow">Common questions</p>
+        <h2 style="font-size:var(--text-h2);line-height:1.15;letter-spacing:-0.02em;margin-top:16px">
+          The three we are asked before anything else.
+        </h2>
+        <p class="muted" style="margin-top:20px;max-width:44ch">
+          Three more depend on answers we do not have yet &mdash; turnaround, certifications
+          held, and whether testing is in-house. Three honest answers beat six evasive ones.
+        </p>
+        <div style="margin-top:28px">
+          <a class="tlink" href="#">Full FAQ
+            <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></a>
+        </div>
+      </div>
+    <div class="faq rv">
+      <details class="qa" open>
+        <summary style="list-style:none"><button type="button"><h4>How is a sterilization cycle validated?</h4><span class="pm"></span></button></summary>
+        <div class="ans"><p>In three documented stages. Installation qualification confirms the equipment is installed and operating to specification. Operational qualification establishes that the cycle delivers its parameters across the working range. Performance qualification demonstrates, with biological indicators in the hardest-to-reach positions of a real load, that the process achieves the required sterility assurance level. All three are re-established after any significant change to equipment, load configuration or packaging.</p></div>
+      </details>
+      <details class="qa">
+        <summary style="list-style:none"><button type="button"><h4>What is a half-cycle overkill approach?</h4><span class="pm"></span></button></summary>
+        <div class="ans"><p>A cycle designed so that half of its dwell time already achieves complete kill of a resistant biological indicator. The production cycle then runs double that exposure, which delivers a very large safety margin without needing to characterise the product's natural bioburden first. It is conservative by design &mdash; simpler to validate and defend, at the cost of a longer cycle and more process exposure for the device. Bioburden-based cycle design is the alternative where material sensitivity makes that trade unattractive.</p></div>
+      </details>
+      <details class="qa">
+        <summary style="list-style:none"><button type="button"><h4>What documentation accompanies a released batch?</h4><span class="pm"></span></button></summary>
+        <div class="ans"><p>At minimum the cycle record showing achieved parameters against the validated set points, the biological and chemical indicator results for that specific load, and a certificate of sterilization identifying the batch and the cycle applied. Traceability runs from your delivery manifest through to that certificate, so an auditor can follow one device back to one cycle. <strong>The exact document set Medelis issues needs confirming &mdash; context §1.</strong></p></div>
+      </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 12 · QUOTE CTA ============ -->
+<section class="cta-band" id="quote">
+  <div class="wrap">
+    <div class="cta-grid">
+      <div class="rv">
+        <p class="eyebrow">Request a quote</p>
+        <h2 style="font-size:var(--text-h2);line-height:1.15;letter-spacing:-0.02em;margin-top:16px">
+          Send us the device. We will send back a cycle and a timeline.
+        </h2>
+        <p style="margin-top:18px">
+          The form is longer than most. That is deliberate &mdash; it means the first reply
+          you get is a quote rather than a request for a discovery call.
+        </p>
+      </div>
+      <div class="rv">
+        <div class="cta-act">
+          <a class="btn btn-inv" href="#">Request a quote
+            <svg class="arw" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 5h11M8.5 1.5L12 5l-3.5 3.5"/></svg></a>
+          <a class="btn btn-ghost" href="#">WhatsApp</a>
+        </div>
+        <p class="mono" style="margin-top:22px;font-size:13px;letter-spacing:0.04em;color:var(--indigo-200)">
+          [[PHONE]] &nbsp;·&nbsp; [[WHATSAPP]] &nbsp;·&nbsp; [[EMAIL]]
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a class="logo" href="#top"><b>Medelis</b><span>Healthcare</span></a>
+        <p class="blurb">Contract sterilization for the healthcare and medical device sectors. Validated, documented, and released on schedule.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Sterilization</a></li>
+          <li><a href="#">Validation</a></li>
+          <li><a href="#">Testing</a></li>
+          <li><a href="#">Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Quality &amp; compliance</a></li>
+          <li><a href="#">Facility</a></li>
+          <li><a href="#">Insights</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="mono" style="font-size:13.5px;line-height:1.6">
+          <li>[[ADDRESS LINE 1]]</li>
+          <li>[[CITY, STATE, PIN]]</li>
+          <li>[[PHONE]]</li>
+          <li>[[EMAIL]]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bar">
+      <span>© 2026 Medelis Healthcare. All rights reserved.</span>
+      <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BUILD NOTES (not part of the site) ============ -->
+<aside class="notes">
+  <div class="wrap">
+    <h2>Build notes &mdash; not part of the page</h2>
+    <p style="margin-top:10px;max-width:70ch">Design v1, drawn against <code>02-design-system.md</code> tokens and the section order in <code>04-homepage-plan.md</code>. Four sections are finished content; the rest are structurally complete and waiting on facts.</p>
+    <div class="cols">
+      <div>
+        <h3>Finished &mdash; real content</h3>
+        <ul>
+          <li><strong>How it works.</strong> All four stages written. General validated-process practice, no client-specific claims.</li>
+          <li><strong>Industries.</strong> Four segments per context §5. Nothing here was blocked.</li>
+          <li><strong>Insights.</strong> Three real titles from the context §9 seed list.</li>
+          <li><strong>FAQ.</strong> Three answers written from general practice. IQ/OQ/PQ and half-cycle overkill need no client input at all.</li>
+        </ul>
+        <h3>Suppressed &mdash; deliberately absent</h3>
+        <ul>
+          <li><strong>Client logos.</strong> Needs six logos with written permission. We have zero. Per context §6 a short wall is worse than none.</li>
+          <li><strong>Testimonials.</strong> Needs attributed quotes &mdash; name, role, organisation. Unattributed is worthless to this audience.</li>
+          <li><strong>Facility photograph.</strong> Slot left empty rather than filled with stock.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Waiting on facts</h3>
+        <ul>
+          <li>Hero eyebrow city, and the H1's modality &mdash; the headline shown is the modality-agnostic option from <code>04</code> §3.1.</li>
+          <li>Credibility strip: all four values.</li>
+          <li>What we sterilize: modality list drives the card count.</li>
+          <li>Certification numbers. The standards named are the ones this business would be expected to hold, not confirmed holdings.</li>
+          <li>Facility specifications, phone, WhatsApp, address.</li>
+        </ul>
+        <h3>Decisions taken here</h3>
+        <ul>
+          <li><strong>Cycle profile replaces hero photography.</strong> Phase order is true; durations and set points are omitted, so it illustrates without specifying &mdash; <code>04</code> §8.1.</li>
+          <li><strong>Muted text is slate-600, nav underline and markers are orange-600.</strong> These are the §3.5 recommendations, so the page passes AA as drawn.</li>
+          <li><strong>Hairlines throughout, no card shadows.</strong> The overlapping stat panel gets its separation from a hairline and the section edge, not elevation.</li>
+          <li><strong>Type lockup stands in for the logo.</strong> The supplied JPEG has a baked background &mdash; see <code>brand/README.md</code>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script>
+// nav solidify
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('solid', window.scrollY > 60);
+onScroll(); addEventListener('scroll', onScroll, {passive:true});
+
+// reveals
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rv = document.querySelectorAll('.rv');
+if (reduce) { rv.forEach(el => el.classList.add('in')); }
+else {
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {rootMargin:'0px 0px -12% 0px'});
+  rv.forEach(el => io.observe(el));
+}
+
+// stagger cards / steps / tiles within a row
+document.querySelectorAll('.grid3, .steps, .grid4').forEach(row => {
+  [...row.children].forEach((c, i) => { if (i < 6) c.style.transitionDelay = (i * 60) + 'ms'; });
+});
+
+// process marker scrubbed to section progress
+const proc = document.getElementById('process');
+const prog = document.getElementById('prog');
+const mk = document.getElementById('mk');
+if (proc && prog && !reduce) {
+  const scrub = () => {
+    const r = proc.getBoundingClientRect();
+    const total = r.height + innerHeight;
+    let p = (innerHeight - r.top) / total;
+    p = Math.max(0, Math.min(1, p));
+    const x = p * 1200;
+    prog.setAttribute('x2', x);
+    mk.setAttribute('cx', x);
+  };
+  scrub(); addEventListener('scroll', scrub, {passive:true}); addEventListener('resize', scrub);
+}
+
+// accordion height transition
+document.querySelectorAll('.qa').forEach(d => {
+  const ans = d.querySelector('.ans');
+  const btn = d.querySelector('button');
+  const set = () => { ans.style.maxHeight = d.open ? ans.scrollHeight + 'px' : '0px'; };
+  requestAnimationFrame(set);
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const wasOpen = d.open;
+    if (wasOpen) { ans.style.maxHeight = '0px'; setTimeout(() => d.open = false, 200); }
+    else { d.open = true; requestAnimationFrame(set); }
+  });
+  addEventListener('resize', () => { if (d.open) set(); });
+});
+</script>
+</body>
+</html>
