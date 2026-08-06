@@ -419,7 +419,7 @@ footer .blurb{font-size:15px;line-height:1.6;max-width:34ch;margin-top:18px}
 <!-- ============ NAV ============ -->
 <header class="nav on-dark" id="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#top"><b>Medelis</b><span>Healthcare</span></a>
+    <a class="logo" href="#top"><img src="img/medelis-logo.png" alt="Medelis Healthcare" style="height:34px;width:auto;border-radius:4px;background:#fff;padding:2px 8px;display:inline-block;vertical-align:middle;"></a>
     <ul>
       <li><a href="#sterilize">Services <svg class="cv" width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
       <li><a href="#industries">Industries <svg class="cv" width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
@@ -812,7 +812,7 @@ footer .blurb{font-size:15px;line-height:1.6;max-width:34ch;margin-top:18px}
   <div class="wrap">
     <div class="f-grid">
       <div>
-        <a class="logo" href="#top"><b>Medelis</b><span>Healthcare</span></a>
+        <a class="logo" href="#top"><img src="img/medelis-logo.png" alt="Medelis Healthcare" style="height:34px;width:auto;border-radius:4px;background:#fff;padding:2px 8px;display:inline-block;vertical-align:middle;"></a>
         <p class="blurb">Contract sterilization for the healthcare and medical device sectors. Validated, documented, and released on schedule.</p>
       </div>
       <div><h4>Services</h4><ul>
@@ -831,52 +831,6 @@ footer .blurb{font-size:15px;line-height:1.6;max-width:34ch;margin-top:18px}
     </div>
   </div>
 </footer>
-
-<!-- ============ BUILD NOTES (not part of the site) ============ -->
-<aside class="notes">
-  <div class="wrap">
-    <h2>Build notes &mdash; not part of the page</h2>
-    <p style="margin-top:10px;max-width:70ch">Design v2. Revised on client direction: teal out of the interface, photography in, richer hero.</p>
-    <div class="cols">
-      <div>
-        <h3>Changed from v1</h3>
-        <ul>
-          <li><strong>Teal removed from the interface.</strong> It survives as a token definition referenced nowhere. Indigo anchors; orange is now the visible accent, which is warmer and comes from the logo.</li>
-          <li><strong>Links are indigo-700</strong> with an orange underline on hover. Previously teal-700.</li>
-          <li><strong>Eyebrows, step numbers, markers, the FAQ toggle and the card top edge</strong> moved to orange. Each eyebrow carries a short orange rule.</li>
-          <li><strong>Hero is a dark full-bleed photograph</strong> with the cycle profile drawn over it in a glass panel, rather than a white type-only panel.</li>
-          <li><strong>Stat panel now overlaps the hero</strong>, which only works because the hero went dark.</li>
-        </ul>
-        <h3>Contrast after the palette change</h3>
-        <ul>
-          <li>orange-700 on white 5.06:1 &mdash; eyebrows, step numbers. Passes AA.</li>
-          <li>indigo-700 on white 13.0:1 &mdash; links, headings, buttons.</li>
-          <li>orange-600 on white 3.44:1 &mdash; rules and markers only, never text.</li>
-          <li>orange-500 appears only as decorative shape over dark grounds.</li>
-          <li><code>scripts/check-contrast.mjs</code> updated to assert this palette.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Photography</h3>
-        <ul>
-          <li>Four placeholders, graded cool per §7 &mdash; desaturated, shadows cooled toward indigo. Baked at build time, so no green survives from the source frames.</li>
-          <li>Two candidates were <strong>rejected for green</strong> that survived grading; provenance and rejections are recorded in <code>design/img/MANIFEST.json</code>.</li>
-          <li>No identifiable faces, no third-party branding. Every image carries a ribbon; the facility band says explicitly that it is not Medelis's facility, because that slot sits beside capacity figures.</li>
-          <li>All four must be replaced with real facility photography or removed before production.</li>
-        </ul>
-        <h3>Still waiting on facts</h3>
-        <ul>
-          <li>Hero city and the H1's modality &mdash; the headline is the modality-agnostic option from <code>04</code> §3.1.</li>
-          <li>All four credibility figures; facility specifications; certificate numbers; phone, WhatsApp and address.</li>
-        </ul>
-        <h3>Still suppressed</h3>
-        <ul>
-          <li>Client logos &mdash; needs six with written permission. Testimonials &mdash; needs attributed quotes.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</aside>
 
 <script>
 const nav = document.getElementById('nav');
