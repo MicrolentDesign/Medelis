@@ -1,0 +1,87 @@
+{
+  "note": "Placeholder imagery for design review only. Every entry must be replaced with real Medelis facility photography or removed before production. See docs/03-stack-and-setup.md §5.",
+  "grade": "Baked per docs/02-design-system.md §7 — desaturated, shadows cooled toward indigo-800, midtones lifted. Applied at build time rather than as a CSS filter so the source green cast is removed for good. Regenerate with the script recorded in `pipeline`.",
+  "pipeline": "sharp: resize(fit=cover) -> modulate({saturation, brightness:1.05}) -> composite(indigo-800 @ soft-light) -> webp(q76)",
+  "addedBy": "Nishant",
+  "addedOn": "2026-08-06",
+  "images": [
+    {
+      "file": "hero.webp",
+      "slot": "home.hero",
+      "source": "unsplash",
+      "url": "https://unsplash.com/photos/photo-1748002388689-c62b45d5c28b",
+      "description": "Workers in protective suits inside a sterile laboratory corridor",
+      "licence": "Unsplash License",
+      "saturation": 0.14,
+      "replacementNeeded": true,
+      "checks": {
+        "identifiableFaces": false,
+        "thirdPartyBranding": false,
+        "impliesMedelisFacility": "Mitigated — carries the PLACEHOLDER ribbon and the page-level review bar."
+      }
+    },
+    {
+      "file": "facility.webp",
+      "slot": "home.facility",
+      "source": "unsplash",
+      "url": "https://unsplash.com/photos/photo-1771530789155-b1f03fbf82b5",
+      "description": "Empty modern warehouse interior, polished concrete floor",
+      "licence": "Unsplash License",
+      "saturation": 0.34,
+      "replacementNeeded": true,
+      "checks": {
+        "identifiableFaces": false,
+        "thirdPartyBranding": false,
+        "impliesMedelisFacility": "Highest risk slot on the page — this section sits beside capacity figures. Ribbon is mandatory here."
+      }
+    },
+    {
+      "file": "suited.webp",
+      "slot": "home.process",
+      "source": "unsplash",
+      "url": "https://unsplash.com/photos/photo-1770195957512-b45ce419c00c",
+      "description": "Two operators in protective suits at a control panel, seen through a barrier",
+      "licence": "Unsplash License",
+      "saturation": 0.30,
+      "replacementNeeded": true,
+      "checks": {
+        "identifiableFaces": false,
+        "thirdPartyBranding": false,
+        "impliesMedelisFacility": "Mitigated — ribbon plus review bar."
+      }
+    },
+    {
+      "file": "bay.webp",
+      "slot": "home.quality",
+      "source": "unsplash",
+      "url": "https://unsplash.com/photos/photo-1772305336606-989a457ffbae",
+      "description": "Empty industrial bay, polished floor, roof structure visible",
+      "licence": "Unsplash License",
+      "saturation": 0.34,
+      "replacementNeeded": true,
+      "checks": {
+        "identifiableFaces": false,
+        "thirdPartyBranding": false,
+        "impliesMedelisFacility": "Mitigated — ribbon plus review bar."
+      }
+    }
+  ],
+  "rejected": [
+    {
+      "url": "https://unsplash.com/photos/photo-1782803103081-f402f95e4378",
+      "reason": "Saturated green floor markings survive the grade. Client has asked for green out of the palette."
+    },
+    {
+      "url": "https://unsplash.com/photos/photo-1784821856280-401b76b03266",
+      "reason": "Faint green colour band in the background persists after grading."
+    },
+    {
+      "url": "https://unsplash.com/photos/photo-1781156215907-e3b8da4091b0",
+      "reason": "Dilapidated shed. Wrong register for a facility selling contamination control."
+    },
+    {
+      "url": "https://unsplash.com/photos/photo-1781156210760-7d33f6ccc893",
+      "reason": "Black and white, reads as a heritage factory."
+    }
+  ]
+}
