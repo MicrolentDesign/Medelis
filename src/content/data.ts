@@ -1,137 +1,211 @@
 import { HomepageData } from "@/lib/content/types";
 
 export const homepageContent: HomepageData = {
-  hero: {
-    eyebrow: "CONTRACT STERILIZATION · RAJASTHAN, INDIA",
-    h1: "Contract sterilization, validated to ISO 11135 and documented for audit.",
-    lead: "Industrial EtO sterilization services for medical device manufacturers. Full batch traceability, custom validation protocols, and audit-ready documentation.",
-    primaryCta: { label: "Request a quote", href: "/request-a-quote" },
-    secondaryCta: { label: "Download capability statement", href: "#capability" }
-  },
+  slides: [
+    {
+      id: "slide-1",
+      eyebrow: "Pharmaceutical Marketing & Distribution",
+      h1Prefix: "The Molecule You Need, Under a Brand You Can ",
+      h1Highlight: "Stock",
+      h1Suffix: ".",
+      lead: "Six therapeutic ranges built for Indian distributors, stockists and PCD partners. Search by composition rather than brand name, and send one enquiry for as many products as you need.",
+      primaryCta: { label: "Browse Products", href: "#featured" },
+      secondaryCta: { label: "PCD Partnership", href: "#franchise" },
+      imageSrc: "/images/hero_family.png",
+      imageAlt: "Happy healthy Indian multi-generational family outdoors"
+    },
+    {
+      id: "slide-2",
+      eyebrow: "Active Lifestyle & Fitness",
+      h1Prefix: "Empowering Health, Inspiring ",
+      h1Highlight: "Active Living",
+      h1Suffix: ".",
+      lead: "From daily metabolic health to active cardiovascular support, our high-potency molecules empower active living across every stage of life in India.",
+      primaryCta: { label: "Explore Products", href: "#featured" },
+      secondaryCta: { label: "PCD Partnership", href: "#franchise" },
+      imageSrc: "/images/hero_workout.png",
+      imageAlt: "Active Indian couple jogging together in a park"
+    },
+    {
+      id: "slide-3",
+      eyebrow: "Vitality & Healthy Aging",
+      h1Prefix: "Trusted Quality for Every ",
+      h1Highlight: "Indian Family",
+      h1Suffix: ".",
+      lead: "Consistent packing, verified efficacy disclaimers, and clear composition on every strip. One contact point that answers your stock demands promptly.",
+      primaryCta: { label: "View All Ranges", href: "#ranges" },
+      secondaryCta: { label: "Send Enquiry", href: "#enquiry" },
+      imageSrc: "/images/hero_lifestyle.png",
+      imageAlt: "Healthy active senior Indian couple smiling in a garden"
+    }
+  ],
   stats: [
-    { label: "ISO Standard", value: "11135", subtext: "Strict process compliance", sourceVerified: true },
-    { label: "Quality System", value: "13485", subtext: "ISO 13485:2016 aligned", sourceVerified: true },
-    { label: "Batch Traceability", value: "100%", subtext: "Complete physical & digital records", sourceVerified: true },
-    { label: "Audit Readiness", value: "Pass-ready", subtext: "Pre-formatted validation packs", sourceVerified: true }
-  ],
-  services: [
     {
-      slug: "eto-sterilization",
-      modality: "ETHYLENE OXIDE",
-      title: "Industrial EtO Sterilization",
-      description: "Low-temperature gaseous sterilization optimized for heat-sensitive medical devices, complex geometry tubing, and porous packaging.",
-      typicalProducts: ["Catheters", "Surgical drapes", "Syringes", "Implantable assemblies"],
-      materials: ["Tyvek®", "Polypropylene", "Polyurethane", "ABS"],
-      isoStandard: "ISO 11135:2014"
+      iconName: "users",
+      value: "6+",
+      label: "Therapeutic Ranges",
+      subtext: "Speciality focused"
     },
     {
-      slug: "validation-consultation",
-      modality: "PROTOCOL & TESTING",
-      title: "Sterilization Process Validation",
-      description: "Complete IQ/OQ/PQ protocol design, bioburden testing support, and residual analysis (EO/ECH) to satisfy regulatory submission demands.",
-      typicalProducts: ["New device launches", "Packaging redesigns", "Material changes"],
-      materials: ["All compatible polymers & metals"],
-      isoStandard: "ISO 10993-7 / ISO 11737"
+      iconName: "box",
+      value: "25+",
+      label: "Launch SKUs",
+      subtext: "High demand molecules"
     },
     {
-      slug: "batch-processing",
-      modality: "CONTRACT PROCESSING",
-      title: "Routine Batch Sterilization",
-      description: "Scheduled commercial batch processing with dedicated chamber cycles, parametric release data logging, and certificates of processing.",
-      typicalProducts: ["High-volume disposables", "Surgical kits", "Diagnostic cassettes"],
-      materials: ["Medical grade packaging"],
-      isoStandard: "ISO 11135 Annex B"
+      iconName: "shield",
+      value: "100%",
+      label: "Quality Assured",
+      subtext: "Batch consistent"
+    },
+    {
+      iconName: "map-pin",
+      value: "28+",
+      label: "States Network",
+      subtext: "District monopoly rights"
     }
   ],
-  industries: [
+  ranges: [
     {
-      slug: "surgical-instruments",
-      title: "Surgical Instruments & Kits",
-      subtitle: "Multi-component procedure trays & stainless assemblies",
-      description: "Gas penetration protocol design tailored for dense kit configurations and intricate lumens.",
-      keyRequirements: ["Lumen penetration studies", "Moisture control", "Zero residue compliance"]
+      slug: "cardiology",
+      title: "Cardiology Range",
+      description: "Antihypertensives, statins and antiplatelets for chronic cardiovascular care.",
+      productCount: "Product count pending",
+      iconName: "heart"
     },
     {
-      slug: "single-use-disposables",
-      title: "Single-Use Disposables",
-      subtitle: "High-volume IV sets, catheters & tubing",
-      description: "Streamlined batch turnarounds with rigid temperature and humidity phase monitoring.",
-      keyRequirements: ["High chamber utilization", "Packaging integrity retention", "Fast aeration cycles"]
+      slug: "neurology",
+      title: "Neurology Range",
+      description: "Antiepileptics, neuropathic and muscle relaxant combinations.",
+      productCount: "Product count pending",
+      iconName: "brain"
     },
     {
-      slug: "implants-orthopedics",
-      title: "Implants & Orthopedics",
-      subtitle: "Precision implants & sterile packaging",
-      description: "Ultra-low residue processing and rigorous bioburden validation to satisfy FDA & CE Mark submissions.",
-      keyRequirements: ["Sub-ppm EO residual limits", "Biological indicator challenge", "Full lot genealogy"]
+      slug: "diabetic",
+      title: "Diabetic Range",
+      description: "Oral antidiabetics and fixed-dose combinations for glycemic control.",
+      productCount: "Product count pending",
+      iconName: "activity"
     },
     {
-      slug: "diagnostic-devices",
-      title: "Diagnostic Devices & Microfluidics",
-      subtitle: "Sensitive diagnostic cassettes & cartridges",
-      description: "Controlled evacuation and nitrogen flush sequences to prevent microfluidic layer delamination.",
-      keyRequirements: ["Gentle pressure ramps", "Optical clarity preservation", "Seal integrity validation"]
+      slug: "gastrology",
+      title: "Gastrology Range",
+      description: "PPIs, prokinetics, enzymes and digestive probiotics.",
+      productCount: "Product count pending",
+      iconName: "droplet"
+    },
+    {
+      slug: "orthopaedic",
+      title: "Orthopaedic Range",
+      description: "Analgesics, NSAID combinations and joint & bone health.",
+      productCount: "Product count pending",
+      iconName: "bone"
+    },
+    {
+      slug: "general",
+      title: "General Range",
+      description: "Anti-infectives, multi-vitamins and everyday essentials.",
+      productCount: "Product count pending",
+      iconName: "plus-square"
     }
   ],
-  insights: [
+  featuredProducts: [
     {
-      slug: "iso-11135-overkill-vs-bioburden",
-      title: "ISO 11135 Validation: Overkill Approach vs. Bioburden/Biological Indicator Method",
-      excerpt: "A comparative technical breakdown of validation strategies under ISO 11135:2014, evaluating cycle development timelines and gas reduction efficiency.",
-      date: "2026-08-01",
-      readTime: "6 min read",
-      category: "VALIDATION PROTOCOLS",
-      author: "Regulatory Engineering Team",
-      isoReference: "ISO 11135:2014 §D.8",
-      published: true
+      id: "prod-1",
+      slug: "metoprolol-succinate-25mg",
+      brandName: "Metopro-25",
+      composition: "Metoprolol Succinate 25mg",
+      dosageForm: "Extended-Release Tablet",
+      packing: "10x10 Tablets Blister Pack",
+      rangeSlug: "cardiology",
+      rangeName: "Cardiology",
+      imageUrl: "/images/pack1.png",
+      description: "Extended-release Metoprolol Succinate formulation designed for 24-hour hypertension management and angina control.",
+      indications: ["Hypertension", "Angina Pectoris", "Heart Failure Management"],
+      storage: "Store below 25°C in a dry place. Protect from light."
     },
     {
-      slug: "eto-residuals-iso-10993-7",
-      title: "Managing Ethylene Oxide Residues to ISO 10993-7 Tolerances",
-      excerpt: "Understanding aeration kinetics, temperature influences, and degassing chamber dynamics for compliance with revised EO and ECH exposure limits.",
-      date: "2026-07-24",
-      readTime: "8 min read",
-      category: "COMPLIANCE & TESTING",
-      author: "QA & Chemistry Lab",
-      isoReference: "ISO 10993-7:2008",
-      published: true
+      id: "prod-2",
+      slug: "tolperisone-paracetamol",
+      brandName: "Tolper-P 150",
+      composition: "Tolperisone 150mg + Paracetamol 325mg",
+      dosageForm: "Film-Coated Tablet",
+      packing: "10x10 Tablets Blister Pack",
+      rangeSlug: "orthopaedic",
+      rangeName: "Orthopaedic",
+      imageUrl: "/images/pack2.png",
+      description: "Dual-action centrally acting muscle relaxant and analgesic combination for painful musculoskeletal spasms.",
+      indications: ["Acute Musculoskeletal Pain", "Spinal Muscle Spasms", "Post-Traumatic Pain"],
+      storage: "Store in a cool dry place away from direct sunlight."
     },
     {
-      slug: "packaging-compatibility-eto",
-      title: "Porous Packaging Selection for EtO Sterilization: Tyvek vs. Medical Paper",
-      excerpt: "Evaluating gas permeability, burst strength post-vacuum cycle, and microbial barrier integrity across standard medical device packaging formats.",
-      date: "2026-07-15",
-      readTime: "5 min read",
-      category: "PACKAGING & STERILITY",
-      author: "Packaging Engineering",
-      isoReference: "ISO 11607-1",
-      published: true
+      id: "prod-3",
+      slug: "glyci-triple-forte",
+      brandName: "Glyci-Triple Forte — a deliberately long brand name to test three-line wrap",
+      composition: "Metformin Hydrochloride 500mg + Glimepiride 1mg + Pioglitazone 15mg",
+      dosageForm: "Sustained-Release Tablet",
+      packing: "10x15 Tablets Blister Pack",
+      rangeSlug: "diabetic",
+      rangeName: "Diabetic",
+      imageUrl: "/images/pack3.png",
+      description: "Triple fixed-dose oral antidiabetic therapy combining insulin sensitizers and secretagogues for refractory Type 2 Diabetes.",
+      indications: ["Type 2 Diabetes Mellitus", "Insulin Resistance", "Glycemic Control"],
+      storage: "Store below 30°C. Keep out of reach of children."
     }
   ],
-  faqs: [
+  whyUs: [
     {
-      id: "faq-1",
-      question: "Which ISO standards govern Medelis contract sterilization processing?",
-      answer: "All processing and validation routines adhere to ISO 11135:2014 (Sterilization of health-care products — Ethylene oxide) under an ISO 13485:2016 certified Quality Management System framework.",
-      category: "compliance"
+      iconName: "shield-check",
+      title: "Monopoly Rights by District",
+      description: "One partner per territory, in writing, so you are not competing with your own supplier."
     },
     {
-      id: "faq-2",
-      question: "How is batch release documented and verified for regulatory audits?",
-      answer: "Every processed batch receives a Certificate of Sterilization accompanied by raw parameter charts (temperature, relative humidity, pressure, gas concentration phase, aeration logs) and Biological Indicator (BI) incubation test results.",
-      category: "process"
+      iconName: "package",
+      title: "Consistent Packing",
+      description: "Pack sizes and cartons stay fixed between batches, so your shelf and your billing do not change."
     },
     {
-      id: "faq-3",
-      question: "What packaging materials are compatible with EtO cycles?",
-      answer: "EtO requires at least one porous surface for gas ingress and egress. Standard choices include Tyvek® (1057B/1073B) sealed to flexible film, or medical-grade packaging paper. Non-porous foil-to-foil pouches are not suitable for EtO.",
-      category: "general"
+      iconName: "clock",
+      title: "Quoted, Not Queued",
+      description: "Enquiries come back with rates and availability within 1 working day, not a request for a call."
     },
     {
-      id: "faq-4",
-      question: "What is required to initiate a new sterilization validation protocol (IQ/OQ/PQ)?",
-      answer: "We begin with product family grouping, bioburden baseline assessment, and packaging challenge testing. Our validation team compiles the complete protocol according to ISO 11135 before cycle execution.",
-      category: "compliance"
+      iconName: "file-text",
+      title: "Composition-First Catalogue",
+      description: "Search by molecule and strength. You should not need our brand name to find our product."
     }
-  ]
+  ],
+  news: [
+    {
+      slug: "metformin-combinations-guide",
+      category: "Range Explainer",
+      title: "Choosing between metformin combinations for a diabetic range",
+      date: "10 AUG 2026",
+      readTime: "5 MIN READ",
+      imageUrl: "/images/hero_workout.png"
+    },
+    {
+      slug: "pcd-territory-checklist",
+      category: "Distribution",
+      title: "What a PCD partner should ask before signing a district territory",
+      date: "05 AUG 2026",
+      readTime: "6 MIN READ",
+      imageUrl: "/images/hero_family.png"
+    },
+    {
+      slug: "tolperisone-paracetamol-combination",
+      category: "Molecule Note",
+      title: "Tolperisone with paracetamol: where the muscle relaxant combination fits",
+      date: "28 JUL 2026",
+      readTime: "4 MIN READ",
+      imageUrl: "/images/hero_lifestyle.png"
+    }
+  ],
+  contact: {
+    phone: "+91 98290 00000",
+    whatsapp: "+91 98290 00000",
+    email: "info@medelishealthcare.com",
+    address: "Medelis Healthcare, Commercial Complex",
+    location: "Jodhpur, Rajasthan 342001"
+  }
 };

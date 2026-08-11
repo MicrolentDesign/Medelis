@@ -6,23 +6,22 @@ interface LogoProps {
 }
 
 export default function Logo({ variant = "light", className = "" }: LogoProps) {
-  const textColor = variant === "dark" ? "text-white" : "text-slate-900";
-  const markColor = variant === "dark" ? "text-orange-500" : "text-orange-700";
-  const subColor = variant === "dark" ? "text-slate-400" : "text-slate-600";
+  const isDark = variant === "dark";
 
   return (
-    <Link href="/" className={`inline-flex items-center gap-2.5 group ${className}`}>
+    <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
       {/* Brand Icon Mark */}
-      <div className="relative w-8 h-8 flex items-center justify-center rounded bg-indigo-950 border border-indigo-700/50 shadow-sm group-hover:border-orange-500 transition-colors">
-        <span className={`font-mono font-bold text-lg leading-none ${markColor}`}>M</span>
-        <div className="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-orange-500 ring-2 ring-indigo-950" />
+      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-xl shadow-sm transition-transform group-hover:scale-105 ${
+        isDark ? "bg-white text-[var(--color-brand-primary)]" : "bg-[var(--color-brand-primary)] text-white"
+      }`}>
+        M
       </div>
-      <div className="flex flex-col">
-        <span className={`font-sans font-bold text-lg tracking-tight leading-none ${textColor}`}>
-          MEDELIS
+      <div className="flex flex-col leading-none">
+        <span className={`font-extrabold text-xl tracking-tight ${isDark ? "text-white" : "text-[var(--color-brand-primary)]"}`}>
+          Medelis
         </span>
-        <span className={`font-mono text-[10px] tracking-widest uppercase mt-0.5 ${subColor}`}>
-          HEALTHCARE
+        <span className={`text-[9.5px] font-bold tracking-[0.22em] uppercase mt-1 ${isDark ? "text-[var(--color-brand-accent-light)]" : "text-[var(--ink600)]"}`}>
+          Healthcare
         </span>
       </div>
     </Link>

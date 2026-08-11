@@ -4,67 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Medelis Healthcare — Homepage design v3</title>
+<title>Medelis Healthcare — Homepage design v4</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   Medelis Healthcare — homepage design v3
-   Built against 02-design-system.md v2.0 and 04-homepage-plan.md v2.0.
+   Medelis Healthcare — homepage design v4
 
-   The business pivoted: pharmaceutical catalogue with enquiry, not
-   sterilization services. v2 of this file is void.
+   Changed from v3 on client direction:
+   - Palette repitched to the supplied blues. #0D47A1 primary,
+     #2196F3 accent, #F4F7FF canvas. Indigo and teal are gone.
+   - Imagery replaced. The v3 set was sterilization-era and the hero
+     read as an operating theatre. Now dispensary, stock and pack shots.
+   - Grade lightened from 14% to ~85% saturation. The heavy desaturation
+     was a large part of why the page read dull.
+   - Real pack shots in the product card trays, replacing the icon
+     placeholder.
 
-   The defining relationship (§3.1): tinted canvas, white cards
-   floating on it, soft blue-tinted shadows, no card borders.
-
-   Two §3.8 corrections are applied here so the page passes AA as
-   drawn — muted text is slate-600 not slate-500, and the "New"
-   pill uses orange-900 not orange-700 on orange-100.
+   The accent constraint that shapes everything: #2196F3 measures
+   3.12:1 on white and 2.92:1 on the canvas. It cannot carry text and
+   cannot be a state indicator on the canvas. It is a brightness
+   colour — glows, decorative fills, and icon glyphs on white cards
+   only. Every action and every text role uses #0D47A1, whose hover
+   brightens to #1976D2 and still clears AA for white text at 4.60:1.
    ============================================================ */
 
 :root {
-  /* surfaces — §3.1 */
-  --canvas:#EDF1F8; --canvas-deep:#E4EAF4; --card:#FFFFFF; --card-tint:#F7F9FC;
+  /* surfaces */
+  --canvas:#F4F7FF; --canvas-deep:#E8EFFC; --card:#FFFFFF; --card-tint:#F7FAFF;
 
-  /* indigo — §3.2 */
-  --indigo-50:#F0F2F9; --indigo-100:#DDE1F0; --indigo-200:#B9BFDF; --indigo-300:#8E96C6;
-  --indigo-400:#616BA8; --indigo-500:#3C468C; --indigo-600:#2B3578; --indigo-700:#232A6B;
-  --indigo-800:#1A2052; --indigo-900:#12163A;
+  /* blue — primary #0D47A1, accent #2196F3 */
+  --b50:#E3F2FD; --b100:#BBDEFB; --b200:#90CAF9; --b300:#64B5F6;
+  --b500:#2196F3; --b700:#1976D2; --b800:#1565C0; --b900:#0D47A1; --b950:#082F6B;
 
-  /* teal — §3.3 */
-  --teal-50:#EAF7F4; --teal-100:#CBEDE5; --teal-300:#5FC4AF; --teal-500:#0E8F7A;
-  --teal-600:#0C7867; --teal-700:#0B6053; --teal-800:#0A4C43;
+  /* blue-biased neutrals */
+  --ink900:#0F1B2D; --ink700:#33425C; --ink600:#4A5B75;
+  --ink400:#94A3BB; --ink200:#DCE4F2; --ink100:#EAF0FB;
 
-  /* orange — §3.4, plus orange-900 restored per §3.8 item 2 */
-  --orange-50:#FEF4EA; --orange-100:#FDE4CA; --orange-500:#F58220;
-  --orange-700:#B5510B; --orange-900:#743612;
-
-  /* slate — §3.5 */
-  --slate-50:#F5F7FA; --slate-100:#EDF0F5; --slate-200:#DDE2EB; --slate-300:#C2CAD8;
-  --slate-400:#93A0B4; --slate-500:#6B7A91; --slate-600:#4E5B70; --slate-800:#262E3C;
-  --slate-900:#161C26;
+  --amber:#8A4B0A;  /* placeholder markers only — meta UI, not brand */
+  --err:#B3261E;
 
   --font-sans:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --font-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
 
-  /* §4.2 */
-  --t-display:clamp(2.5rem,1.5rem + 4.4vw,4.5rem);
-  --t-h1:clamp(2.125rem,1.6rem + 2.2vw,3.25rem);
   --t-h2:clamp(1.75rem,1.35rem + 1.7vw,2.625rem);
   --t-h3:clamp(1.25rem,1.18rem + 0.3vw,1.5rem);
   --t-h4:clamp(1.0625rem,1.03rem + 0.16vw,1.1875rem);
   --t-lead:clamp(1.0625rem,1.02rem + 0.2vw,1.1875rem);
   --t-stat:clamp(2.25rem,1.6rem + 2.6vw,3.5rem);
 
-  /* §5 */
   --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:20px; --r-2xl:28px; --r-full:999px;
-  --sh-xs:0 1px 2px rgba(16,24,64,.04);
-  --sh-card:0 2px 8px rgba(16,24,64,.05),0 1px 2px rgba(16,24,64,.03);
-  --sh-hover:0 10px 28px rgba(16,24,64,.09),0 2px 6px rgba(16,24,64,.04);
-  --sh-float:0 16px 40px rgba(16,24,64,.10);
-  --sh-nav:0 1px 0 rgba(16,24,64,.05);
+  --sh-xs:0 1px 2px rgba(13,71,161,.06);
+  --sh-card:0 2px 10px rgba(13,71,161,.06),0 1px 2px rgba(13,71,161,.04);
+  --sh-hover:0 14px 34px rgba(13,71,161,.13),0 3px 8px rgba(13,71,161,.06);
+  --sh-float:0 18px 44px rgba(13,71,161,.15);
+  --sh-nav:0 1px 0 rgba(13,71,161,.07);
 
   --section:clamp(4.5rem,3rem + 6.4vw,8rem);
   --ease:cubic-bezier(0.22,1,0.36,1);
@@ -73,15 +68,13 @@
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{
-  margin:0;background:var(--canvas);color:var(--slate-600);
+  margin:0;background:var(--canvas);color:var(--ink600);
   font-family:var(--font-sans);font-size:16px;line-height:1.65;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-h1,h2,h3,h4{margin:0;color:var(--slate-900);font-weight:700;text-wrap:balance}
+h1,h2,h3,h4{margin:0;color:var(--ink900);font-weight:700;text-wrap:balance}
 h3,h4{font-weight:600}
-p{margin:0}
-ul{margin:0;padding:0;list-style:none}
-svg{display:block}
+p{margin:0} ul{margin:0;padding:0;list-style:none} svg{display:block}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
 .mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
@@ -90,139 +83,123 @@ a{text-decoration:none;color:inherit}
 @media(min-width:640px){.wrap{padding:0 40px}}
 @media(min-width:1024px){.wrap{padding:0 64px}}
 
-h1{font-size:var(--t-display);line-height:1.02;letter-spacing:-0.03em}
-h2{font-size:var(--t-h2);line-height:1.12;letter-spacing:-0.02em}
+h2{font-size:var(--t-h2);line-height:1.12;letter-spacing:-0.022em}
 h3{font-size:var(--t-h3);line-height:1.25;letter-spacing:-0.015em}
 h4{font-size:var(--t-h4);line-height:1.35;letter-spacing:-0.01em}
-.lead{font-size:var(--t-lead);line-height:1.6;color:var(--slate-600);max-width:54ch}
+.lead{font-size:var(--t-lead);line-height:1.6;color:var(--ink600);max-width:54ch}
 .body-sm{font-size:15px;line-height:1.6}
-/* §3.8 item 1: caption is slate-600, not slate-500 — 3.85:1 on canvas fails */
-.caption{font-size:13px;line-height:1.5;color:var(--slate-600)}
+.caption{font-size:13px;line-height:1.5;color:var(--ink600)}
+.hl{color:var(--b900)}
 
-/* ---------- pill badge · §7.2 ---------- */
+/* ---------- pill badge ---------- */
 .pill{
-  display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;
-  letter-spacing:0.02em;padding:6px 12px;border-radius:var(--r-full);
-  background:var(--teal-100);color:var(--teal-800);text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;
+  letter-spacing:.03em;padding:7px 13px;border-radius:var(--r-full);
+  background:var(--b50);color:var(--b900);text-transform:uppercase;
 }
-.pill.alt{background:var(--indigo-50);color:var(--indigo-700)}
-.pill.new{background:var(--orange-100);color:var(--orange-900)}
-.pill.inv{background:rgba(255,255,255,.14);color:#fff}
+.pill::before{content:"";width:6px;height:6px;border-radius:var(--r-full);background:var(--b500)}
+.pill.plain::before{display:none}
+.pill.inv{background:rgba(255,255,255,.16);color:#fff}
+.pill.inv::before{background:var(--b300)}
 
-/* ---------- circular arrow · §6 ---------- */
-.ca{
-  display:grid;place-items:center;border-radius:var(--r-full);flex:0 0 auto;
-  transition:background .2s,transform .16s var(--ease);
-}
-.ca svg{width:13px;height:13px;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.ca-32{width:32px;height:32px}
-.ca-28{width:28px;height:28px}
-.ca-36{width:36px;height:36px}
-.ca-on-btn{background:#fff}          .ca-on-btn svg{stroke:var(--indigo-700)}
-.ca-on-btn-alt{background:var(--indigo-50)} .ca-on-btn-alt svg{stroke:var(--indigo-700)}
-.ca-on-card{background:var(--card-tint)}    .ca-on-card svg{stroke:var(--indigo-700)}
-.ca-inv{background:rgba(255,255,255,.2)}    .ca-inv svg{stroke:#fff}
+/* ---------- circular arrow ---------- */
+.ca{display:grid;place-items:center;border-radius:var(--r-full);flex:0 0 auto;
+  transition:background .2s,transform .16s var(--ease)}
+.ca svg{width:13px;height:13px;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.ca-28{width:28px;height:28px} .ca-32{width:32px;height:32px} .ca-36{width:36px;height:36px}
+.ca-btn{background:#fff}            .ca-btn svg{stroke:var(--b900)}
+.ca-btn-alt{background:var(--b50)}  .ca-btn-alt svg{stroke:var(--b900)}
+.ca-card{background:var(--b50)}     .ca-card svg{stroke:var(--b900)}
+.ca-inv{background:rgba(255,255,255,.22)} .ca-inv svg{stroke:#fff}
 .btn:hover .ca,.tile:hover .ca,.ncard:hover .ca{transform:translate(2px,-2px)}
-.tile:hover .ca-on-card,.ncard:hover .ca-on-card{background:var(--indigo-700)}
-.tile:hover .ca-on-card svg,.ncard:hover .ca-on-card svg{stroke:#fff}
+.tile:hover .ca-card,.ncard:hover .ca-card{background:var(--b900)}
+.tile:hover .ca-card svg,.ncard:hover .ca-card svg{stroke:#fff}
 
-/* ---------- buttons · §7.1 — pills ---------- */
-.btn{
-  display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 8px 0 26px;
-  border-radius:var(--r-full);font-size:15px;font-weight:600;font-family:inherit;
-  border:0;cursor:pointer;transition:background .2s,color .2s,box-shadow .2s;
-}
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 8px 0 26px;
+  border-radius:var(--r-full);font-size:15px;font-weight:700;font-family:inherit;
+  border:0;cursor:pointer;transition:background .2s,box-shadow .2s,color .2s}
 .btn-md{height:48px;padding:0 6px 0 22px;font-size:14.5px}
-.btn-pri{background:var(--indigo-700);color:#fff}
-.btn-pri:hover{background:var(--indigo-500)}
-.btn-sec{background:#fff;color:var(--indigo-700);box-shadow:var(--sh-xs)}
-.btn-sec:hover{background:var(--indigo-50)}
-.btn-inv{background:#fff;color:var(--indigo-700)}
-.btn-inv:hover{background:var(--indigo-50)}
-.btn-ghost{background:rgba(255,255,255,.1);color:#fff}
-.btn-ghost:hover{background:rgba(255,255,255,.18)}
+.btn-pri{background:var(--b900);color:#fff;box-shadow:0 6px 18px rgba(13,71,161,.24)}
+.btn-pri:hover{background:var(--b700);box-shadow:0 10px 26px rgba(25,118,210,.34)}
+.btn-sec{background:#fff;color:var(--b900);box-shadow:var(--sh-xs)}
+.btn-sec:hover{background:var(--b50)}
+.btn-inv{background:#fff;color:var(--b900)}
+.btn-inv:hover{background:var(--b50)}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.2)}
 .btn-block{width:100%;justify-content:space-between}
-/* tertiary — plain arrow, no circle, per §6 */
-.tlink{
-  display:inline-flex;align-items:center;gap:8px;color:var(--teal-700);
-  font-size:15px;font-weight:600;
-}
-.tlink svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none;
+.tlink{display:inline-flex;align-items:center;gap:8px;color:var(--b900);font-size:15px;font-weight:700}
+.tlink svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none;
   stroke-linecap:round;stroke-linejoin:round;transition:transform .16s var(--ease)}
-.tlink:hover{color:var(--teal-800)}
 .tlink:hover svg{transform:translate(2px,-2px)}
-:focus-visible{outline:2px solid var(--teal-600);outline-offset:2px}
+:focus-visible{outline:2px solid var(--b900);outline-offset:2px}
 
 /* ---------- cards ---------- */
 .card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card)}
 .lift{transition:transform .2s var(--ease),box-shadow .2s}
-.lift:hover{transform:translateY(-2px);box-shadow:var(--sh-hover)}
+.lift:hover{transform:translateY(-3px);box-shadow:var(--sh-hover)}
 
 /* ---------- placeholder markers ---------- */
-.chip{
-  display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:10px;
+.chip{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:10px;
   font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#fff;
-  background:var(--orange-900);padding:4px 9px;border-radius:var(--r-sm);white-space:nowrap;
-}
-.field{
-  display:flex;align-items:center;justify-content:center;min-height:48px;
-  border:1px dashed var(--slate-300);border-radius:var(--r-md);background:var(--card-tint);
-  font-family:var(--font-mono);font-size:12.5px;color:var(--slate-600);
-  letter-spacing:.04em;padding:0 12px;text-align:center;
-}
-.ribbon{
-  position:absolute;left:12px;bottom:12px;z-index:3;font-family:var(--font-mono);
+  background:var(--amber);padding:4px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.field{display:flex;align-items:center;justify-content:center;min-height:48px;
+  border:1px dashed var(--ink400);border-radius:var(--r-md);background:var(--card-tint);
+  font-family:var(--font-mono);font-size:12.5px;color:var(--ink600);
+  letter-spacing:.04em;padding:0 12px;text-align:center}
+.ribbon{position:absolute;left:12px;bottom:12px;z-index:3;font-family:var(--font-mono);
   font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#fff;
-  background:rgba(18,22,58,.76);backdrop-filter:blur(6px);padding:5px 9px;
-  border-radius:var(--r-sm);
-}
+  background:rgba(8,47,107,.78);backdrop-filter:blur(6px);padding:5px 9px;border-radius:var(--r-sm)}
 
-/* ---------- reveal · §9 ---------- */
+/* ---------- reveal ---------- */
 .rv{opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .rv{transform:none;transition:opacity .12s linear}
-  .lift:hover{transform:none}
+  .lift:hover,.tile:hover,.pcard:hover,.ncard:hover{transform:none}
+  .media img{transition:none}
 }
 
-/* ---------- utility bar + nav · §7.10 ---------- */
-.util{background:var(--indigo-700);color:#fff}
-.util-in{display:flex;align-items:center;justify-content:space-between;gap:20px;
-  height:36px;font-size:13px}
-.util a{color:rgba(255,255,255,.9)}
-.util a:hover{color:#fff}
-.util .l{display:flex;align-items:center;gap:22px}
+/* ---------- utility bar + nav ---------- */
+.util{background:var(--b900);color:#fff}
+.util-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:38px;font-size:13px}
+.util a{color:rgba(255,255,255,.92)} .util a:hover{color:#fff}
 .util .r{display:none}
 @media(min-width:900px){.util .r{display:flex;align-items:center;gap:22px}}
-.util-ic{width:13px;height:13px;stroke:var(--teal-300);stroke-width:1.7;fill:none;
+.util-ic{width:13px;height:13px;stroke:var(--b300);stroke-width:1.8;fill:none;
   stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:-2px;margin-right:7px}
 
-.nav{position:sticky;top:0;z-index:60;background:#fff;transition:box-shadow .25s}
+.nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);transition:box-shadow .25s}
 .nav.solid{box-shadow:var(--sh-nav)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:76px;gap:24px}
 .logo{display:flex;flex-direction:column;line-height:1}
-.logo b{font-size:21px;font-weight:700;letter-spacing:-0.03em;color:var(--indigo-700)}
-.logo span{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--slate-600);margin-top:4px}
+.logo b{font-size:22px;font-weight:800;letter-spacing:-0.035em;color:var(--b900)}
+.logo span{font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink600);margin-top:4px}
 .nav ul{display:none;align-items:center;gap:26px}
 @media(min-width:1100px){.nav ul{display:flex}}
-.nav ul a{font-size:15px;font-weight:500;color:var(--slate-600);position:relative;
-  padding:4px 0;display:inline-flex;align-items:center;gap:5px}
-.nav ul a:hover{color:var(--indigo-700)}
-.nav ul a.on{color:var(--indigo-700);font-weight:600}
-.nav ul a.on::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;
-  background:var(--teal-500);border-radius:2px}
+.nav ul a{font-size:15px;font-weight:500;color:var(--ink600);position:relative;padding:4px 0;
+  display:inline-flex;align-items:center;gap:5px;transition:color .18s}
+.nav ul a:hover,.nav ul a.on{color:var(--b900)}
+.nav ul a.on{font-weight:700}
+.nav ul a.on::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:3px;
+  background:var(--b500);border-radius:3px}
 .nav-r{display:flex;align-items:center;gap:10px}
 .icb{display:grid;place-items:center;width:44px;height:44px;border-radius:var(--r-full);
-  background:var(--card-tint);position:relative}
-.icb:hover{background:var(--indigo-50)}
-.icb svg{width:19px;height:19px;stroke:var(--indigo-700);stroke-width:1.6;fill:none;
+  background:var(--b50);position:relative;transition:background .18s}
+.icb:hover{background:var(--b100)}
+.icb svg{width:19px;height:19px;stroke:var(--b900);stroke-width:1.8;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
-.icb .cnt{position:absolute;top:4px;right:4px;min-width:17px;height:17px;padding:0 4px;
-  border-radius:var(--r-full);background:var(--teal-500);color:#fff;font-size:10px;
-  font-weight:700;display:grid;place-items:center;line-height:1}
+.icb .cnt{position:absolute;top:3px;right:3px;min-width:18px;height:18px;padding:0 4px;
+  border-radius:var(--r-full);background:var(--b700);color:#fff;font-size:10px;font-weight:700;
+  display:grid;place-items:center;line-height:1;box-shadow:0 0 0 2px #fff}
 .nav .btn{display:none}
 @media(min-width:640px){.nav .btn{display:inline-flex}}
+.burger{display:grid;place-items:center;width:44px;height:44px;border-radius:var(--r-full);
+  border:0;background:var(--b50);cursor:pointer}
+.burger svg{width:18px;height:12px;stroke:var(--b900);stroke-width:1.8;fill:none;stroke-linecap:round}
 @media(min-width:1100px){.burger{display:none}}
 
 /* ---------- sections ---------- */
@@ -232,221 +209,224 @@ section{padding:var(--section) 0}
 @media(min-width:900px){.hd{grid-template-columns:1.1fr .9fr;gap:56px}}
 .hd h2{margin-top:16px}
 
+/* shared media container */
+.media{position:relative;border-radius:var(--r-xl);overflow:hidden;background:var(--b50)}
+.media img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.media.zoom:hover img{transform:scale(1.05)}
+.media.r43{aspect-ratio:4/3} .media.r32{aspect-ratio:3/2} .media.r1610{aspect-ratio:16/10}
+
 /* ---------- 1 · hero ---------- */
-.hero{padding-top:clamp(2rem,1.5rem + 2vw,3.5rem);padding-bottom:0}
-.hero-card{
-  background:var(--card);border-radius:var(--r-2xl);box-shadow:var(--sh-card);
-  overflow:hidden;display:grid;
-}
-@media(min-width:1024px){.hero-card{grid-template-columns:1.04fr .96fr;align-items:center}}
-.hero-txt{padding:clamp(2rem,1.5rem + 3vw,3.75rem)}
-/* §4.2's display token is tuned for a full-bleed H1. This hero is a split
-   card, so the effective measure is roughly half — cap it lower or it eats
-   five lines and swamps the CTAs. */
-.hero-txt h1{margin:18px 0 0;font-size:clamp(2.125rem,1.5rem + 2.6vw,3.25rem)}
+.hero{padding-top:clamp(2rem,1.5rem + 2vw,3.25rem);padding-bottom:0;position:relative}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(70% 60% at 78% 8%,rgba(33,150,243,.20) 0%,rgba(33,150,243,0) 62%)}
+.hero-card{position:relative;background:var(--card);border-radius:var(--r-2xl);
+  box-shadow:var(--sh-card);overflow:hidden;display:grid}
+@media(min-width:1024px){.hero-card{grid-template-columns:1.02fr .98fr;align-items:stretch}}
+.hero-txt{padding:clamp(2rem,1.5rem + 3vw,3.75rem);display:flex;flex-direction:column;justify-content:center}
+.hero-txt h1{margin:18px 0 0;font-size:clamp(2.125rem,1.5rem + 2.6vw,3.25rem);
+  line-height:1.04;letter-spacing:-0.032em;font-weight:800}
 .hero-txt .lead{margin-top:20px}
 .hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 @media(max-width:479px){.hero-cta{flex-direction:column;align-items:stretch}
   .hero-cta .btn{justify-content:space-between}}
-.hero-media{position:relative;min-height:340px;
-  /* arch top — §8 permits this once per page */
-  border-radius:var(--r-2xl) var(--r-2xl) 0 0;overflow:hidden;margin:0 20px 0;}
-/* §8 permits an arch top once per page — large radius on BOTH top corners,
-   squarer at the base. A single rounded corner reads as a mistake. */
-@media(min-width:1024px){.hero-media{margin:20px 20px 20px 0;
-  border-radius:120px 120px var(--r-xl) var(--r-xl);min-height:520px}}
+.hero-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;
+  padding-top:24px;border-top:1px solid var(--ink200)}
+.hero-trust span{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;
+  font-weight:500;color:var(--ink700)}
+.hero-trust svg{width:16px;height:16px;stroke:var(--b500);stroke-width:2.1;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;flex:0 0 16px}
+.hero-media{position:relative;min-height:320px;overflow:hidden;
+  border-radius:var(--r-2xl) var(--r-2xl) 0 0;margin:0 18px}
+@media(min-width:1024px){.hero-media{margin:18px 18px 18px 0;
+  border-radius:120px 120px var(--r-xl) var(--r-xl);min-height:100%}}
 .hero-media img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.hero-dots{display:flex;gap:7px;margin-top:28px}
-.hero-dots i{width:8px;height:8px;border-radius:var(--r-full);background:var(--slate-300);display:block}
-.hero-dots i.on{width:26px;background:var(--indigo-700)}
+/* floating stat card overlapping the image — depth, and it earns its place */
+.hero-float{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;z-index:4;
+  background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-float);
+  padding:14px 18px;display:flex;align-items:center;gap:14px;white-space:nowrap}
+@media(min-width:1024px){.hero-float{left:auto;right:26px;transform:none;bottom:26px}}
+.hero-float .n{font-size:1.75rem;font-weight:800;letter-spacing:-0.03em;color:var(--b900);line-height:1}
+.hero-float .t{font-size:12px;font-weight:600;color:var(--ink600);line-height:1.35}
+.hero-dots{display:flex;gap:7px;margin-top:26px}
+.hero-dots i{width:8px;height:8px;border-radius:var(--r-full);background:var(--ink200);display:block}
+.hero-dots i.on{width:26px;background:var(--b500)}
 
-/* ---------- 2 · range tiles · §7.4 ---------- */
+/* ---------- 2 · range tiles ---------- */
 .grid3{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
 @media(min-width:1024px){.grid3{grid-template-columns:repeat(3,1fr)}}
-.tile{
-  background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);
-  padding:26px;display:flex;flex-direction:column;gap:12px;min-height:206px;
-  transition:transform .2s var(--ease),box-shadow .2s;
-}
-.tile:hover{transform:translateY(-2px);box-shadow:var(--sh-hover)}
+.tile{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);padding:26px;
+  display:flex;flex-direction:column;gap:12px;min-height:212px;
+  transition:transform .2s var(--ease),box-shadow .2s}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--sh-hover)}
 .tile-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.tile-ic{width:44px;height:44px;border-radius:var(--r-md);background:var(--teal-50);
-  display:grid;place-items:center}
-.tile-ic svg{width:21px;height:21px;stroke:var(--teal-500);stroke-width:1.6;fill:none;
-  stroke-linecap:round;stroke-linejoin:round}
-.tile h3{margin-top:2px}
-.tile .foot{margin-top:auto;display:flex;align-items:center;gap:10px}
-/* one anchor tile in indigo, per §7.4 */
-.tile.anchor{background:var(--indigo-700)}
+.tile-ic{width:48px;height:48px;border-radius:var(--r-md);background:var(--b50);
+  display:grid;place-items:center;transition:background .2s}
+.tile-ic svg{width:22px;height:22px;stroke:var(--b900);stroke-width:1.8;fill:none;
+  stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s}
+.tile:hover .tile-ic{background:var(--b900)}
+.tile:hover .tile-ic svg{stroke:#fff}
+.tile .foot{margin-top:auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tile.anchor{background:var(--b900)}
 .tile.anchor h3{color:#fff}
-.tile.anchor .body-sm,.tile.anchor .caption{color:var(--indigo-200)}
-.tile.anchor .tile-ic{background:rgba(255,255,255,.12)}
-.tile.anchor .tile-ic svg{stroke:var(--teal-300)}
-.tile.anchor .ca-on-card{background:rgba(255,255,255,.18)}
-.tile.anchor .ca-on-card svg{stroke:#fff}
-.tile.anchor:hover .ca-on-card{background:#fff}
-.tile.anchor:hover .ca-on-card svg{stroke:var(--indigo-700)}
+.tile.anchor .body-sm,.tile.anchor .caption{color:var(--b100)}
+.tile.anchor .tile-ic{background:rgba(255,255,255,.14)}
+.tile.anchor .tile-ic svg{stroke:#fff}
+.tile.anchor .ca-card{background:rgba(255,255,255,.2)}
+.tile.anchor .ca-card svg{stroke:#fff}
+.tile.anchor:hover .tile-ic{background:#fff}
+.tile.anchor:hover .tile-ic svg{stroke:var(--b900)}
+.tile.anchor:hover .ca-card{background:#fff}
+.tile.anchor:hover .ca-card svg{stroke:var(--b900)}
 
-/* ---------- 3 · about + stats · §7.9 ---------- */
+/* ---------- 3 · about + stats ---------- */
 .about{display:grid;gap:clamp(2rem,1.5rem + 2vw,3.5rem)}
-@media(min-width:1024px){.about{grid-template-columns:1fr 1fr;gap:64px;align-items:center}}
+@media(min-width:1024px){.about{grid-template-columns:1fr 1fr;gap:60px;align-items:center}}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .stat{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);padding:22px}
 @media(min-width:1024px){.stat:nth-child(2),.stat:nth-child(3){margin-top:22px}}
 .stat-top{display:flex;justify-content:flex-end;margin-bottom:12px}
-.stat .v{font-size:var(--t-stat);font-weight:700;line-height:1;letter-spacing:-0.03em;
-  color:var(--indigo-700)}
+.stat .v{font-size:var(--t-stat);font-weight:800;line-height:1;letter-spacing:-0.035em;color:var(--b900)}
 .stat .c{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--slate-600);margin-top:10px}
+  text-transform:uppercase;color:var(--ink600);margin-top:10px}
 
-/* ---------- 4 · product card · §7.3 ---------- */
+/* ---------- 4 · product cards ---------- */
 .pgrid{display:grid;gap:20px;grid-template-columns:repeat(2,1fr)}
 @media(min-width:1024px){.pgrid{grid-template-columns:repeat(3,1fr)}}
-.pcard{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);
-  padding:18px;display:flex;flex-direction:column;gap:12px;
-  transition:transform .2s var(--ease),box-shadow .2s}
-.pcard:hover{transform:translateY(-2px);box-shadow:var(--sh-hover)}
+.pcard{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);padding:18px;
+  display:flex;flex-direction:column;gap:12px;transition:transform .2s var(--ease),box-shadow .2s}
+.pcard:hover{transform:translateY(-3px);box-shadow:var(--sh-hover)}
 .tray{position:relative;background:var(--card-tint);border-radius:var(--r-md);
-  aspect-ratio:4/3;display:grid;place-items:center;padding:20px}
-.tray .add{position:absolute;top:10px;right:10px;width:34px;height:34px;
-  border-radius:var(--r-full);background:#fff;box-shadow:var(--sh-xs);display:grid;
-  place-items:center;border:0;cursor:pointer}
-.tray .add svg{width:15px;height:15px;stroke:var(--indigo-700);stroke-width:2;fill:none;
-  stroke-linecap:round}
-.tray .add:hover{background:var(--indigo-50)}
-.packph{display:grid;place-items:center;gap:8px;text-align:center}
-.packph svg{width:38px;height:38px;stroke:var(--slate-400);stroke-width:1.3;fill:none;
+  aspect-ratio:4/3;overflow:hidden}
+.tray img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.pcard:hover .tray img{transform:scale(1.05)}
+.tray .add{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:var(--r-full);
+  background:#fff;box-shadow:var(--sh-xs);display:grid;place-items:center;border:0;cursor:pointer;z-index:2}
+.tray .add svg{width:15px;height:15px;stroke:var(--b900);stroke-width:2.2;fill:none;stroke-linecap:round}
+.tray .add:hover{background:var(--b50)}
+.tray .ph{position:absolute;inset:0;display:grid;place-items:center;gap:8px;text-align:center;
+  background:var(--card-tint)}
+.tray .ph svg{width:38px;height:38px;stroke:var(--ink400);stroke-width:1.4;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
-.packph span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--slate-600)}
+.tray .ph span{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink600)}
 .pcard h3{font-size:1.125rem;line-height:1.3;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-/* the composition strip — §4.3. sans, not mono. */
-.comp{
-  background:var(--indigo-50);color:var(--indigo-700);border-radius:var(--r-sm);
-  padding:6px 10px;font-size:15px;font-weight:500;line-height:1.45;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-}
-.pmeta{font-size:13px;color:var(--slate-600)}
+/* the composition strip — sans, never mono */
+.comp{background:var(--b50);color:var(--b900);border-radius:var(--r-sm);padding:7px 11px;
+  font-size:15px;font-weight:500;line-height:1.45;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pmeta{font-size:13px;color:var(--ink600)}
 .pcard .foot{margin-top:auto;padding-top:4px}
 
 /* ---------- 5 · why choose us ---------- */
-.wgrid{display:grid;gap:20px;grid-template-columns:1fr}
-@media(min-width:640px){.wgrid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1100px){.wgrid{grid-template-columns:repeat(4,1fr)}}
+.why{display:grid;gap:clamp(2rem,1.5rem + 2vw,3.5rem)}
+@media(min-width:1024px){.why{grid-template-columns:.92fr 1.08fr;gap:60px;align-items:center}}
+.wlist{display:grid;gap:14px}
 .wcard{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);
-  padding:26px;display:flex;flex-direction:column;gap:12px}
-.wic{width:46px;height:46px;border-radius:var(--r-full);background:var(--indigo-50);
-  display:grid;place-items:center}
-.wic svg{width:21px;height:21px;stroke:var(--indigo-700);stroke-width:1.6;fill:none;
+  padding:22px;display:flex;gap:16px;align-items:flex-start}
+.wic{width:46px;height:46px;border-radius:var(--r-full);background:var(--b50);
+  display:grid;place-items:center;flex:0 0 46px}
+.wic svg{width:21px;height:21px;stroke:var(--b900);stroke-width:1.9;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
 
 /* ---------- 7 · franchise band ---------- */
-.band{background:var(--indigo-700);border-radius:var(--r-2xl);overflow:hidden;position:relative}
+.band{background:var(--b900);border-radius:var(--r-2xl);overflow:hidden;position:relative}
 .band::after{content:"";position:absolute;inset:0;
-  background:radial-gradient(80% 120% at 88% 10%,rgba(95,196,175,.18) 0%,rgba(95,196,175,0) 62%)}
+  background:radial-gradient(70% 130% at 86% 6%,rgba(33,150,243,.42) 0%,rgba(33,150,243,0) 60%)}
 .band-in{position:relative;padding:clamp(2.25rem,1.75rem + 3vw,4rem);display:grid;gap:28px;align-items:center}
 @media(min-width:900px){.band-in{grid-template-columns:1.15fr .85fr;gap:56px}}
 .band h2{color:#fff;margin-top:16px}
-.band p{color:var(--indigo-200);margin-top:14px;max-width:46ch}
+.band p{color:var(--b100);margin-top:14px;max-width:46ch}
 .band-r{display:flex;flex-wrap:wrap;gap:12px}
 @media(min-width:900px){.band-r{justify-content:flex-end}}
 
 /* ---------- 8 · news ---------- */
-.ncard{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);
-  padding:16px;display:flex;flex-direction:column;gap:14px;
-  transition:transform .2s var(--ease),box-shadow .2s}
-.ncard:hover{transform:translateY(-2px);box-shadow:var(--sh-hover)}
-.nimg{position:relative;border-radius:var(--r-md);overflow:hidden;aspect-ratio:16/10;background:var(--card-tint)}
-.nimg img{width:100%;height:100%;object-fit:cover}
+.ncard{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);padding:16px;
+  display:flex;flex-direction:column;gap:14px;transition:transform .2s var(--ease),box-shadow .2s}
+.ncard:hover{transform:translateY(-3px);box-shadow:var(--sh-hover)}
 .ncard .b{padding:0 8px 8px;display:flex;flex-direction:column;gap:10px;flex:1}
 .ncard h3{font-size:1.0625rem;line-height:1.35}
 .ncard .foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ndate{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--b900);font-weight:500}
 
 /* ---------- 11 · enquiry ---------- */
 .enq{display:grid;gap:clamp(2rem,1.5rem + 2vw,3.5rem)}
-@media(min-width:1024px){.enq{grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}}
+@media(min-width:1024px){.enq{grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}}
 .form{background:var(--card);border-radius:var(--r-xl);box-shadow:var(--sh-card);
   padding:clamp(1.5rem,1.25rem + 1.5vw,2.25rem)}
 .frow{display:grid;gap:14px;margin-bottom:14px}
 @media(min-width:560px){.frow.two{grid-template-columns:1fr 1fr}}
 .fi{position:relative;display:flex;align-items:center}
-.fi svg{position:absolute;left:15px;width:17px;height:17px;stroke:var(--slate-500);
-  stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
-.fi input,.fi textarea{
-  width:100%;font-family:inherit;font-size:15px;color:var(--slate-800);
-  background:#fff;border:1px solid var(--slate-200);border-radius:var(--r-md);
-  padding:0 16px 0 44px;height:50px;transition:border-color .18s;
-}
-.fi textarea{padding:14px 16px 14px 44px;height:112px;resize:vertical;line-height:1.55}
-.fi textarea + svg,.fi svg.ta{top:16px}
-.fi input::placeholder,.fi textarea::placeholder{color:var(--slate-600);opacity:1}
-.fi input:focus,.fi textarea:focus{border-color:var(--teal-600);outline:none;
-  box-shadow:0 0 0 2px rgba(12,120,103,.18)}
+.fi > svg{position:absolute;left:15px;width:17px;height:17px;stroke:var(--ink600);
+  stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.fi > svg.ta{top:16px}
+.fi input,.fi textarea{width:100%;font-family:inherit;font-size:15px;color:var(--ink900);
+  background:#fff;border:1px solid var(--ink200);border-radius:var(--r-md);
+  padding:0 16px 0 44px;height:50px;transition:border-color .18s,box-shadow .18s}
+.fi textarea{padding:14px 16px 14px 44px;height:110px;resize:vertical;line-height:1.55}
+.fi input::placeholder,.fi textarea::placeholder{color:var(--ink600);opacity:1}
+.fi input:focus,.fi textarea:focus{border-color:var(--b700);outline:none;
+  box-shadow:0 0 0 3px rgba(33,150,243,.22)}
 .contact-l{display:flex;flex-direction:column;gap:14px;margin-top:26px}
 .crow{display:flex;align-items:center;gap:14px}
-.crow .ci{width:44px;height:44px;border-radius:var(--r-full);background:#fff;
-  box-shadow:var(--sh-xs);display:grid;place-items:center;flex:0 0 44px}
-.crow .ci svg{width:18px;height:18px;stroke:var(--teal-600);stroke-width:1.7;fill:none;
+.crow .ci{width:46px;height:46px;border-radius:var(--r-full);background:#fff;
+  box-shadow:var(--sh-xs);display:grid;place-items:center;flex:0 0 46px}
+.crow .ci svg{width:19px;height:19px;stroke:var(--b900);stroke-width:1.9;fill:none;
   stroke-linecap:round;stroke-linejoin:round}
-.crow .k{font-size:12.5px;color:var(--slate-600)}
-.crow .v{font-size:15px;font-weight:600;color:var(--slate-900)}
+.crow .k{font-size:12.5px;color:var(--ink600)}
+.crow .v{font-size:15px;font-weight:700;color:var(--ink900)}
 
 /* ---------- hidden-section notes ---------- */
-.hidden-note{
-  background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);
-  padding:22px 24px;display:flex;gap:16px;align-items:flex-start;
-  border-left:3px solid var(--orange-900);
-}
+.hidden-note{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-card);
+  padding:22px 24px;border-left:3px solid var(--amber)}
 .hidden-note h4{font-size:15px;margin-bottom:5px}
 .hn-grid{display:grid;gap:14px}
 @media(min-width:900px){.hn-grid{grid-template-columns:1fr 1fr}}
 
-/* ---------- footer · §7.12 ---------- */
-footer{background:var(--indigo-900);color:var(--indigo-200);padding:clamp(3.25rem,2.75rem + 2vw,4.5rem) 0 0}
+/* ---------- footer ---------- */
+footer{background:var(--b950);color:var(--b100);padding:clamp(3.25rem,2.75rem + 2vw,4.5rem) 0 0}
 .f-grid{display:grid;gap:36px}
 @media(min-width:700px){.f-grid{grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:44px}}
-footer .logo b{color:#fff}
-footer .logo span{color:var(--indigo-400)}
+footer .logo b{color:#fff} footer .logo span{color:var(--b300)}
 footer .blurb{font-size:14.5px;line-height:1.6;max-width:32ch;margin-top:16px}
-footer h4{color:#fff;font-size:12.5px;font-weight:600;letter-spacing:.12em;
+footer h4{color:#fff;font-size:12.5px;font-weight:700;letter-spacing:.12em;
   text-transform:uppercase;margin-bottom:16px}
 footer li{margin-bottom:10px;font-size:14.5px}
 footer a:hover{color:#fff}
-.f-news{display:flex;gap:8px;margin-top:14px}
-.f-news input{flex:1;min-width:0;height:46px;border-radius:var(--r-full);border:0;
-  padding:0 18px;font-family:inherit;font-size:14px;background:rgba(255,255,255,.1);color:#fff}
-.f-news input::placeholder{color:var(--indigo-300)}
-.f-news button{width:46px;height:46px;border-radius:var(--r-full);border:0;background:var(--teal-500);
+.f-news{display:flex;gap:8px;margin-top:16px}
+.f-news input{flex:1;min-width:0;height:46px;border-radius:var(--r-full);border:0;padding:0 18px;
+  font-family:inherit;font-size:14px;background:rgba(255,255,255,.12);color:#fff}
+.f-news input::placeholder{color:var(--b200)}
+.f-news button{width:46px;height:46px;border-radius:var(--r-full);border:0;background:var(--b500);
   display:grid;place-items:center;cursor:pointer;flex:0 0 46px}
-.f-news button svg{width:14px;height:14px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.f-bar{margin-top:clamp(2.5rem,2rem + 2vw,3.5rem);border-top:1px solid rgba(255,255,255,.12);
+.f-news button svg{width:14px;height:14px;stroke:#fff;stroke-width:2.2;fill:none;
+  stroke-linecap:round;stroke-linejoin:round}
+.f-bar{margin-top:clamp(2.5rem,2rem + 2vw,3.5rem);border-top:1px solid rgba(255,255,255,.14);
   padding:22px 0;display:flex;flex-wrap:wrap;gap:8px 22px;justify-content:space-between}
-.f-bar,.f-bar a{font-size:13px;color:var(--indigo-400)}
-.disc{font-size:12.5px;color:var(--indigo-400);max-width:88ch;padding-bottom:22px;line-height:1.55}
+.f-bar,.f-bar a{font-size:13px;color:var(--b200)}
+.disc{font-size:12.5px;color:var(--b200);max-width:88ch;padding-bottom:22px;line-height:1.55}
 
 /* ---------- build notes ---------- */
-.notes{background:#0B0E14;color:#A7B3C6;padding:56px 0}
+.notes{background:#06122A;color:#AFC3DE;padding:56px 0}
 .notes h2{color:#fff;font-size:1.375rem}
-.notes h3{color:#fff;font-size:11px;font-weight:600;letter-spacing:.16em;
+.notes h3{color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;
   text-transform:uppercase;margin:30px 0 12px}
-.notes p,.notes li{font-size:14.5px;line-height:1.65;color:#A7B3C6}
+.notes p,.notes li{font-size:14.5px;line-height:1.65;color:#AFC3DE}
 .notes li{padding-left:18px;position:relative;margin-bottom:9px}
-.notes li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:1px;background:var(--teal-500)}
-.notes code{font-family:var(--font-mono);font-size:13px;color:var(--teal-300)}
-.notes strong{color:#E6EBF2;font-weight:600}
+.notes li::before{content:"";position:absolute;left:0;top:10px;width:7px;height:1px;background:var(--b500)}
+.notes code{font-family:var(--font-mono);font-size:13px;color:var(--b300)}
+.notes strong{color:#E4EDF9;font-weight:700}
 .notes .cols{display:grid;gap:32px}
 @media(min-width:800px){.notes .cols{grid-template-columns:1fr 1fr;gap:52px}}
 </style>
 </head>
 <body>
 
-<!-- ============ UTILITY BAR + NAV · §7.10 ============ -->
+<!-- ============ UTILITY BAR + NAV ============ -->
 <div class="util">
   <div class="wrap util-in">
-    <div class="l">
-      <span><svg class="util-ic" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Jodhpur, Rajasthan</span>
-    </div>
+    <span><svg class="util-ic" viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Jodhpur, Rajasthan</span>
     <div class="r">
       <a href="tel:"><svg class="util-ic" viewBox="0 0 24 24"><path d="M5 3h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"/></svg>[[PHONE]]</a>
       <a href="mailto:"><svg class="util-ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>info@medelishealthcare.com</a>
@@ -459,21 +439,20 @@ footer a:hover{color:#fff}
     <a class="logo" href="#top"><b>Medelis</b><span>Healthcare</span></a>
     <ul>
       <li><a href="#top" class="on">Home</a></li>
-      <li><a href="#about">About <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
-      <li><a href="#ranges">Products <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
+      <li><a href="#about">About <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
+      <li><a href="#ranges">Products <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
       <li><a href="#news">Latest news</a></li>
-      <li><a href="#">Gallery <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
-      <li><a href="#">More <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
+      <li><a href="#">Gallery <svg width="9" height="6" viewBox="0 0 9 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1.5L4.5 5 8 1.5"/></svg></a></li>
       <li><a href="#enquiry">Contact</a></li>
     </ul>
     <div class="nav-r">
       <a class="icb" href="#" aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/></svg></a>
       <a class="icb" href="#" aria-label="Enquiry list, 2 items">
         <svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>
-        <span class="cnt">2</span>
-      </a>
+        <span class="cnt">2</span></a>
       <a class="btn btn-pri btn-md" href="#enquiry">Send enquiry
-        <span class="ca ca-28 ca-on-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
+        <span class="ca ca-28 ca-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
+      <button class="burger" aria-label="Open menu"><svg viewBox="0 0 18 12"><path d="M0 1h18M0 6h18M0 11h18"/></svg></button>
     </div>
   </div>
 </header>
@@ -486,7 +465,7 @@ footer a:hover{color:#fff}
     <div class="hero-card">
       <div class="hero-txt">
         <span class="pill">Pharmaceutical marketing &amp; distribution</span>
-        <h1>The molecule you need, under a brand you can stock.</h1>
+        <h1>The molecule you need, under a brand you can <span class="hl">stock</span>.</h1>
         <p class="lead">
           Six therapeutic ranges built for Indian distributors, stockists and PCD partners.
           Search by composition rather than brand name, and send one enquiry for as many
@@ -494,17 +473,24 @@ footer a:hover{color:#fff}
         </p>
         <div class="hero-cta">
           <a class="btn btn-pri" href="#ranges">Browse products
-            <span class="ca ca-32 ca-on-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
+            <span class="ca ca-32 ca-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
           <a class="btn btn-sec" href="#franchise">Business opportunity
-            <span class="ca ca-32 ca-on-btn-alt"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
+            <span class="ca ca-32 ca-btn-alt"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
         </div>
-        <div class="hero-dots" role="tablist" aria-label="Hero slides">
-          <i class="on"></i><i></i><i></i>
+        <div class="hero-trust">
+          <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Monopoly rights by district</span>
+          <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>No minimum order to enquire</span>
+          <span><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>Quoted within one working day</span>
         </div>
+        <div class="hero-dots" role="tablist" aria-label="Hero slides"><i class="on"></i><i></i><i></i></div>
       </div>
       <div class="hero-media">
-        <img src="img/hero.webp" alt="Placeholder: pharmaceutical production and packaging environment" width="1800" height="1150">
+        <img src="img/hero.webp" alt="Placeholder: dispensary drawer cabinets" width="1500" height="1150">
         <span class="ribbon">Placeholder</span>
+        <div class="hero-float">
+          <span class="n mono">6</span>
+          <span class="t">Therapeutic<br>ranges</span>
+        </div>
       </div>
     </div>
   </div>
@@ -519,111 +505,83 @@ footer a:hover{color:#fff}
         <h2>Six ranges. Start where your demand is.</h2>
       </div>
       <div>
-        <p class="body-sm">
-          Launching with six super-speciality ranges rather than eighteen thin ones. A range
-          publishes only once it holds at least three products, so nothing here is an empty
-          shelf.
-        </p>
+        <p class="body-sm">Launching with six super-speciality ranges rather than eighteen thin
+          ones. A range publishes only once it holds at least three products, so nothing here
+          is an empty shelf.</p>
         <p style="margin-top:16px"><a class="tlink" href="#">View all products
           <svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></a></p>
       </div>
     </div>
-
     <div class="grid3">
-      <a class="tile rv" href="#">
-        <div class="tile-top">
-          <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9.5A3.9 3.9 0 0112 8a3.9 3.9 0 017 2.5C19 15.6 12 20 12 20z"/></svg></span>
-          <span class="ca ca-36 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-        </div>
-        <h3>Cardiology Range</h3>
-        <p class="body-sm">Antihypertensives, statins and antiplatelets.</p>
-        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div>
-      </a>
-      <a class="tile rv" href="#">
-        <div class="tile-top">
-          <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M9 3a3 3 0 013 3v12a3 3 0 01-6 0 3 3 0 01-1-5.8A3 3 0 016 6a3 3 0 013-3zM15 3a3 3 0 00-3 3v12a3 3 0 006 0 3 3 0 001-5.8A3 3 0 0018 6a3 3 0 00-3-3z"/></svg></span>
-          <span class="ca ca-36 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-        </div>
-        <h3>Neurology Range</h3>
-        <p class="body-sm">Antiepileptics, neuropathic and muscle relaxant combinations.</p>
-        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div>
-      </a>
-      <a class="tile rv anchor" href="#">
-        <div class="tile-top">
-          <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></span>
-          <span class="ca ca-36 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-        </div>
-        <h3>Diabetic Range</h3>
-        <p class="body-sm">Oral antidiabetics and fixed-dose combinations.</p>
-        <div class="foot"><span class="caption">Product count pending</span></div>
-      </a>
-      <a class="tile rv" href="#">
-        <div class="tile-top">
-          <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M7 3v6a5 5 0 0010 0V3M9 21h6M12 14v7"/></svg></span>
-          <span class="ca ca-36 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-        </div>
-        <h3>Gastrology Range</h3>
-        <p class="body-sm">PPIs, prokinetics, enzymes and probiotics.</p>
-        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div>
-      </a>
-      <a class="tile rv" href="#">
-        <div class="tile-top">
-          <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M8 4l3 3-4 4-3-3zM16 20l-3-3 4-4 3 3zM11 7l6 6"/></svg></span>
-          <span class="ca ca-36 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-        </div>
-        <h3>Orthopaedic Range</h3>
-        <p class="body-sm">Analgesics, NSAID combinations and bone health.</p>
-        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div>
-      </a>
-      <a class="tile rv" href="#">
-        <div class="tile-top">
-          <span class="tile-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 9v6M9 12h6"/></svg></span>
-          <span class="ca ca-36 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-        </div>
-        <h3>General Range</h3>
-        <p class="body-sm">Anti-infectives, vitamins and everyday essentials.</p>
-        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div>
-      </a>
+      <a class="tile rv" href="#"><div class="tile-top">
+        <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9.5A3.9 3.9 0 0112 8a3.9 3.9 0 017 2.5C19 15.6 12 20 12 20z"/></svg></span>
+        <span class="ca ca-36 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
+        <h3>Cardiology Range</h3><p class="body-sm">Antihypertensives, statins and antiplatelets.</p>
+        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div></a>
+
+      <a class="tile rv" href="#"><div class="tile-top">
+        <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M9 3a3 3 0 013 3v12a3 3 0 01-6 0 3 3 0 01-1-5.8A3 3 0 016 6a3 3 0 013-3zM15 3a3 3 0 00-3 3v12a3 3 0 006 0 3 3 0 001-5.8A3 3 0 0018 6a3 3 0 00-3-3z"/></svg></span>
+        <span class="ca ca-36 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
+        <h3>Neurology Range</h3><p class="body-sm">Antiepileptics, neuropathic and muscle relaxant combinations.</p>
+        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div></a>
+
+      <a class="tile rv anchor" href="#"><div class="tile-top">
+        <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <span class="ca ca-36 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
+        <h3>Diabetic Range</h3><p class="body-sm">Oral antidiabetics and fixed-dose combinations.</p>
+        <div class="foot"><span class="caption">Product count pending</span></div></a>
+
+      <a class="tile rv" href="#"><div class="tile-top">
+        <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M7 3v6a5 5 0 0010 0V3M9 21h6M12 14v7"/></svg></span>
+        <span class="ca ca-36 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
+        <h3>Gastrology Range</h3><p class="body-sm">PPIs, prokinetics, enzymes and probiotics.</p>
+        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div></a>
+
+      <a class="tile rv" href="#"><div class="tile-top">
+        <span class="tile-ic"><svg viewBox="0 0 24 24"><path d="M8 4l3 3-4 4-3-3zM16 20l-3-3 4-4 3 3zM11 7l6 6"/></svg></span>
+        <span class="ca ca-36 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
+        <h3>Orthopaedic Range</h3><p class="body-sm">Analgesics, NSAID combinations and bone health.</p>
+        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div></a>
+
+      <a class="tile rv" href="#"><div class="tile-top">
+        <span class="tile-ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 9v6M9 12h6"/></svg></span>
+        <span class="ca ca-36 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
+        <h3>General Range</h3><p class="body-sm">Anti-infectives, vitamins and everyday essentials.</p>
+        <div class="foot"><span class="caption">Product count pending</span><span class="chip">§3</span></div></a>
     </div>
   </div>
 </section>
 
-<!-- ============ 3 · ABOUT INTRO ============ -->
+<!-- ============ 3 · ABOUT ============ -->
 <section class="deep" id="about">
   <div class="wrap">
     <div class="about">
       <div class="rv">
-        <span class="pill alt">About Medelis</span>
+        <span class="pill">About Medelis</span>
         <h2 style="margin-top:16px">A distribution partner, not another catalogue.</h2>
-        <p class="lead" style="margin-top:18px">
-          Medelis Healthcare is a pharmaceutical marketing and distribution company working
-          with distributors, stockists and PCD partners across India.
-        </p>
-        <p class="body-sm" style="margin-top:14px;max-width:52ch">
-          We keep the range deliberately tight and the paperwork straightforward: clear
-          composition on every product, consistent packing, and one point of contact who
-          answers. Enquiries are quoted, not queued.
-        </p>
+        <p class="lead" style="margin-top:18px">Medelis Healthcare is a pharmaceutical marketing
+          and distribution company working with distributors, stockists and PCD partners across
+          India.</p>
+        <p class="body-sm" style="margin-top:14px;max-width:52ch">We keep the range deliberately
+          tight and the paperwork straightforward: clear composition on every product, consistent
+          packing, and one point of contact who answers.</p>
+        <div class="stats" style="margin-top:30px">
+          <div class="stat"><div class="stat-top"><span class="pill plain">Since</span></div>
+            <div class="field">&mdash;</div><p class="c">Year established</p></div>
+          <div class="stat"><div class="stat-top"><span class="pill plain">Range</span></div>
+            <div class="v mono">6</div><p class="c">Therapeutic ranges</p></div>
+          <div class="stat"><div class="stat-top"><span class="pill plain">Catalogue</span></div>
+            <div class="v mono">25</div><p class="c">Products at launch</p></div>
+          <div class="stat"><div class="stat-top"><span class="pill plain">Reach</span></div>
+            <div class="field">&mdash;</div><p class="c">States served</p></div>
+        </div>
         <p style="margin-top:26px"><a class="tlink" href="#">Read more about us
           <svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></a></p>
       </div>
-
-      <div class="stats rv">
-        <div class="stat">
-          <div class="stat-top"><span class="pill alt">Since</span></div>
-          <div class="field">&mdash;</div><p class="c">Year established</p>
-        </div>
-        <div class="stat">
-          <div class="stat-top"><span class="pill alt">Range</span></div>
-          <div class="v mono">6</div><p class="c">Therapeutic ranges</p>
-        </div>
-        <div class="stat">
-          <div class="stat-top"><span class="pill alt">Catalogue</span></div>
-          <div class="v mono">25</div><p class="c">Products at launch</p>
-        </div>
-        <div class="stat">
-          <div class="stat-top"><span class="pill alt">Reach</span></div>
-          <div class="field">&mdash;</div><p class="c">States served</p>
+      <div class="rv">
+        <div class="media r43 zoom">
+          <img src="img/shelf.webp" alt="Placeholder: pharmaceutical bottles on shelving" loading="lazy" width="1100" height="700">
+          <span class="ribbon">Placeholder</span>
         </div>
       </div>
     </div>
@@ -639,60 +597,58 @@ footer a:hover{color:#fff}
         <h2>Six of twenty-five, searchable by molecule.</h2>
       </div>
       <div>
-        <p class="body-sm">
-          Every card carries its full composition, because that is what a distributor
-          actually searches for. Brand names, codes and pack shots below are structural
-          placeholders &mdash; real records replace them without a rebuild.
-        </p>
+        <p class="body-sm">Every card carries its full composition, because that is what a
+          distributor actually searches for. Brand names and pack shots below are structural
+          placeholders &mdash; real records replace them without a rebuild.</p>
         <p style="margin-top:16px"><span class="chip">Sample data &middot; not Medelis products</span></p>
       </div>
     </div>
-
     <div class="pgrid">
       <article class="pcard rv">
         <div class="tray">
+          <img src="img/pack1.webp" alt="Placeholder pack shot: unbranded blister strip" width="900" height="700">
           <button class="add" aria-label="Add to enquiry list"><svg viewBox="0 0 14 14"><path d="M7 2v10M2 7h10"/></svg></button>
-          <span class="packph"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M4 11h16M9 7V4h6v3"/></svg><span>Pack shot</span></span>
+          <span class="ribbon">Placeholder</span>
         </div>
-        <span class="pill alt">Cardiology</span>
+        <span class="pill plain">Cardiology</span>
         <h3>[[Brand name]]</h3>
         <p class="comp">Metoprolol Succinate 25mg</p>
         <p class="pmeta">Tablet &nbsp;·&nbsp; 10x10 Tablets</p>
         <div class="foot"><a class="btn btn-pri btn-md btn-block" href="#enquiry">Send enquiry
-          <span class="ca ca-28 ca-on-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a></div>
+          <span class="ca ca-28 ca-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a></div>
       </article>
 
       <article class="pcard rv">
         <div class="tray">
+          <img src="img/pack2.webp" alt="Placeholder pack shot: unbranded tablets and bottle" width="900" height="700">
           <button class="add" aria-label="Add to enquiry list"><svg viewBox="0 0 14 14"><path d="M7 2v10M2 7h10"/></svg></button>
-          <span class="packph"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M4 11h16M9 7V4h6v3"/></svg><span>Pack shot</span></span>
+          <span class="ribbon">Placeholder</span>
         </div>
-        <span class="pill alt">Orthopaedic</span>
+        <span class="pill plain">Orthopaedic</span>
         <h3>[[Brand name]]</h3>
         <p class="comp">Tolperisone 150mg + Paracetamol 325mg</p>
         <p class="pmeta">Tablet &nbsp;·&nbsp; 10x10 Tablets</p>
         <div class="foot"><a class="btn btn-pri btn-md btn-block" href="#enquiry">Send enquiry
-          <span class="ca ca-28 ca-on-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a></div>
+          <span class="ca ca-28 ca-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a></div>
       </article>
 
       <article class="pcard rv">
         <div class="tray">
+          <span class="ph"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M4 11h16M9 7V4h6v3"/></svg><span>No pack shot</span></span>
           <button class="add" aria-label="Add to enquiry list"><svg viewBox="0 0 14 14"><path d="M7 2v10M2 7h10"/></svg></button>
-          <span class="packph"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="2"/><path d="M4 11h16M9 7V4h6v3"/></svg><span>Pack shot</span></span>
         </div>
-        <span class="pill alt">Diabetic</span>
+        <span class="pill plain">Diabetic</span>
         <h3>[[Brand name]] &mdash; a deliberately long brand name to test three-line wrap</h3>
         <p class="comp">Metformin Hydrochloride 500mg + Glimepiride 1mg + Pioglitazone 15mg</p>
         <p class="pmeta">Tablet &nbsp;·&nbsp; 10x15 Tablets</p>
         <div class="foot"><a class="btn btn-pri btn-md btn-block" href="#enquiry">Send enquiry
-          <span class="ca ca-28 ca-on-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a></div>
+          <span class="ca ca-28 ca-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a></div>
       </article>
     </div>
-    <p class="caption" style="margin-top:18px;max-width:76ch">
-      Three cards shown rather than six, and deliberately uneven: one carries a 66-character
-      composition and a three-line brand name, which is the §7.3 stress case. Note the row
-      does not stretch to fill &mdash; per design system §10, an incomplete row is correct and
-      the orphan is never centred.
+    <p class="caption" style="margin-top:18px;max-width:78ch">
+      Three cards, deliberately uneven. Card three is the §7.3 survival case &mdash; missing pack
+      shot, a 66-character composition and a three-line brand name &mdash; and all three still
+      render at equal height. The row is left un-stretched with no centred orphan, per §10.
     </p>
   </div>
 </section>
@@ -700,36 +656,28 @@ footer a:hover{color:#fff}
 <!-- ============ 5 · WHY CHOOSE US ============ -->
 <section class="deep">
   <div class="wrap">
-    <div class="hd rv">
-      <div>
+    <div class="why">
+      <div class="rv">
+        <div class="media r32 zoom">
+          <img src="img/dist.webp" alt="Placeholder: stock shelving of medicine cartons" loading="lazy" width="1100" height="700">
+          <span class="ribbon">Placeholder</span>
+        </div>
+      </div>
+      <div class="rv">
         <span class="pill">Why Medelis</span>
-        <h2>What a distributor actually asks about.</h2>
-      </div>
-      <div><p class="body-sm">
-        No "customer focus". The four things that decide whether a stockist places a repeat
-        order.
-      </p></div>
-    </div>
-    <div class="wgrid">
-      <div class="wcard rv">
-        <span class="wic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9.5 12l2 2 3.5-3.5"/></svg></span>
-        <h4>Monopoly rights by district</h4>
-        <p class="body-sm">One partner per territory, in writing, so you are not competing with your own supplier.</p>
-      </div>
-      <div class="wcard rv">
-        <span class="wic"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM4 7l2-3h12l2 3M9 12h6"/></svg></span>
-        <h4>Consistent packing</h4>
-        <p class="body-sm">Pack sizes and cartons stay fixed between batches, so your shelf and your billing do not change.</p>
-      </div>
-      <div class="wcard rv">
-        <span class="wic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
-        <h4>Quoted, not queued</h4>
-        <p class="body-sm">Enquiries come back with rates and availability, not a request for a call to discuss them.</p>
-      </div>
-      <div class="wcard rv">
-        <span class="wic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4"/></svg></span>
-        <h4>Composition-first catalogue</h4>
-        <p class="body-sm">Search by molecule and strength. You should not need our brand name to find our product.</p>
+        <h2 style="margin-top:16px">What a distributor actually asks about.</h2>
+        <p class="body-sm" style="margin-top:14px;max-width:48ch">No "customer focus". The four
+          things that decide whether a stockist places a repeat order.</p>
+        <div class="wlist" style="margin-top:24px">
+          <div class="wcard"><span class="wic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9.5 12l2 2 3.5-3.5"/></svg></span>
+            <div><h4>Monopoly rights by district</h4><p class="body-sm">One partner per territory, in writing, so you are not competing with your own supplier.</p></div></div>
+          <div class="wcard"><span class="wic"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM4 7l2-3h12l2 3M9 12h6"/></svg></span>
+            <div><h4>Consistent packing</h4><p class="body-sm">Pack sizes and cartons stay fixed between batches, so your shelf and your billing do not change.</p></div></div>
+          <div class="wcard"><span class="wic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+            <div><h4>Quoted, not queued</h4><p class="body-sm">Enquiries come back with rates and availability, not a request for a call to discuss them.</p></div></div>
+          <div class="wcard"><span class="wic"><svg viewBox="0 0 24 24"><path d="M3 7l9-4 9 4-9 4-9-4zM3 12l9 4 9-4M3 17l9 4 9-4"/></svg></span>
+            <div><h4>Composition-first catalogue</h4><p class="body-sm">Search by molecule and strength. You should not need our brand name to find our product.</p></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -744,11 +692,11 @@ footer a:hover{color:#fff}
           <span class="pill inv">Business opportunity</span>
           <h2>PCD and franchise partnerships, district by district.</h2>
           <p>Promotional support, monopoly rights and the full range on offer. Tell us your
-             territory and current business, and we will tell you what is available.</p>
+            territory and current business, and we will tell you what is available.</p>
         </div>
         <div class="band-r">
           <a class="btn btn-inv" href="#">Apply for a franchise
-            <span class="ca ca-32 ca-on-btn-alt"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
+            <span class="ca ca-32 ca-btn-alt"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
           <a class="btn btn-ghost" href="#">WhatsApp
             <span class="ca ca-32 ca-inv"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
         </div>
@@ -761,78 +709,57 @@ footer a:hover{color:#fff}
 <section id="news">
   <div class="wrap">
     <div class="hd rv">
+      <div><span class="pill">Latest news</span><h2>Molecule and range explainers.</h2></div>
       <div>
-        <span class="pill">Latest news</span>
-        <h2>Molecule and range explainers.</h2>
-      </div>
-      <div>
-        <p class="body-sm">
-          With 25 product pages, this section carries most of the site's indexable surface.
-          It is also the only homepage section we can fill without waiting on the client.
-        </p>
+        <p class="body-sm">With 25 product pages, this section carries most of the site's
+          indexable surface. It is also the only homepage section we can fill without waiting
+          on the client.</p>
         <p style="margin-top:16px"><a class="tlink" href="#">All news
           <svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></a></p>
       </div>
     </div>
     <div class="grid3">
       <a class="ncard rv" href="#">
-        <div class="nimg"><img src="img/bay.webp" alt="Placeholder: warehouse interior" loading="lazy" width="1200" height="800"><span class="ribbon">Placeholder</span></div>
-        <div class="b">
-          <span class="caption mono">Range explainer</span>
+        <div class="media r1610"><img src="img/retail.webp" alt="Placeholder: pharmacy interior" loading="lazy" width="1100" height="700"><span class="ribbon">Placeholder</span></div>
+        <div class="b"><span class="ndate">Range explainer</span>
           <h3>Choosing between metformin combinations for a diabetic range</h3>
           <div class="foot"><span class="tlink">Read<svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-            <span class="ca ca-32 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
-        </div>
-      </a>
+            <span class="ca ca-32 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div></div></a>
       <a class="ncard rv" href="#">
-        <div class="nimg"><img src="img/suited.webp" alt="Placeholder: production environment" loading="lazy" width="1200" height="900"><span class="ribbon">Placeholder</span></div>
-        <div class="b">
-          <span class="caption mono">Distribution</span>
+        <div class="media r1610"><img src="img/dist.webp" alt="Placeholder: stock shelving" loading="lazy" width="1100" height="700"><span class="ribbon">Placeholder</span></div>
+        <div class="b"><span class="ndate">Distribution</span>
           <h3>What a PCD partner should ask before signing a territory</h3>
           <div class="foot"><span class="tlink">Read<svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-            <span class="ca ca-32 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
-        </div>
-      </a>
+            <span class="ca ca-32 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div></div></a>
       <a class="ncard rv" href="#">
-        <div class="nimg"><img src="img/facility.webp" alt="Placeholder: industrial hall" loading="lazy" width="1800" height="772"><span class="ribbon">Placeholder</span></div>
-        <div class="b">
-          <span class="caption mono">Molecule note</span>
+        <div class="media r1610"><img src="img/pack1.webp" alt="Placeholder: blister strip" loading="lazy" width="900" height="700"><span class="ribbon">Placeholder</span></div>
+        <div class="b"><span class="ndate">Molecule note</span>
           <h3>Tolperisone with paracetamol: where the combination fits</h3>
           <div class="foot"><span class="tlink">Read<svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span>
-            <span class="ca ca-32 ca-on-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div>
-        </div>
-      </a>
+            <span class="ca ca-32 ca-card"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></div></div></a>
     </div>
   </div>
 </section>
 
-<!-- ============ 11 · ENQUIRY CTA ============ -->
+<!-- ============ 11 · ENQUIRY ============ -->
 <section class="deep" id="enquiry">
   <div class="wrap">
     <div class="enq">
       <div class="rv">
         <span class="pill">Contact</span>
         <h2 style="margin-top:16px">Tell us the molecule. We will tell you what we carry.</h2>
-        <p class="body-sm" style="margin-top:16px;max-width:44ch">
-          One enquiry, as many products as you need. If you already have a list, add products
-          as you browse and send them together.
-        </p>
+        <p class="body-sm" style="margin-top:16px;max-width:44ch">One enquiry, as many products
+          as you need. If you already have a list, add products as you browse and send them
+          together.</p>
         <div class="contact-l">
-          <div class="crow">
-            <span class="ci"><svg viewBox="0 0 24 24"><path d="M5 3h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"/></svg></span>
-            <span><span class="k">Phone</span><br><span class="v mono">[[PHONE]]</span></span>
-          </div>
-          <div class="crow">
-            <span class="ci"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-11.8 7L4 20l1.1-4A8 8 0 1120 12z"/></svg></span>
-            <span><span class="k">WhatsApp</span><br><span class="v mono">[[WHATSAPP]]</span></span>
-          </div>
-          <div class="crow">
-            <span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
-            <span><span class="k">Email</span><br><span class="v">info@medelishealthcare.com</span></span>
-          </div>
+          <div class="crow"><span class="ci"><svg viewBox="0 0 24 24"><path d="M5 3h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"/></svg></span>
+            <span><span class="k">Phone</span><br><span class="v mono">[[PHONE]]</span></span></div>
+          <div class="crow"><span class="ci"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 01-11.8 7L4 20l1.1-4A8 8 0 1120 12z"/></svg></span>
+            <span><span class="k">WhatsApp</span><br><span class="v mono">[[WHATSAPP]]</span></span></div>
+          <div class="crow"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+            <span><span class="k">Email</span><br><span class="v">info@medelishealthcare.com</span></span></div>
         </div>
       </div>
-
       <div class="form rv">
         <div class="frow two">
           <span class="fi"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
@@ -846,61 +773,46 @@ footer a:hover{color:#fff}
           <span class="fi"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
             <input type="email" placeholder="Email address" aria-label="Email address"></span>
         </div>
-        <div class="frow">
-          <span class="fi"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-            <input type="text" placeholder="City and state" aria-label="City and state"></span>
-        </div>
-        <div class="frow">
-          <span class="fi"><svg class="ta" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z"/></svg>
-            <textarea placeholder="Which molecules or ranges are you looking for?" aria-label="Message"></textarea></span>
-        </div>
+        <div class="frow"><span class="fi"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          <input type="text" placeholder="City and state" aria-label="City and state"></span></div>
+        <div class="frow"><span class="fi"><svg class="ta" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z"/></svg>
+          <textarea placeholder="Which molecules or ranges are you looking for?" aria-label="Message"></textarea></span></div>
         <a class="btn btn-pri btn-block" href="#">Send enquiry
-          <span class="ca ca-32 ca-on-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
+          <span class="ca ca-32 ca-btn"><svg viewBox="0 0 14 14"><path d="M3.5 10.5l7-7M5 3.5h5.5V9"/></svg></span></a>
         <p class="caption" style="margin-top:14px">Protected by Turnstile. We reply within one working day.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SECTIONS THAT HIDE AT LAUNCH ============ -->
+<!-- ============ SECTIONS HIDDEN AT LAUNCH ============ -->
 <section style="padding-top:0">
   <div class="wrap">
     <div class="hd rv" style="margin-bottom:24px">
-      <div>
-        <span class="pill new">Hidden at launch</span>
-        <h2 style="font-size:var(--t-h3)">Four sections are absent by design.</h2>
-      </div>
+      <div><span class="pill">Hidden at launch</span>
+        <h2 style="font-size:var(--t-h3)">Four sections are absent by design.</h2></div>
       <div><p class="body-sm">Not gaps. Each switches itself on when the client supplies content
-        &mdash; <code>if (!data) return null</code>. Shown here so the short page is not read as
-        an unfinished one.</p></div>
+        &mdash; <code>if (!data) return null</code>. Shown here so a short page is not read as an
+        unfinished one.</p></div>
     </div>
     <div class="hn-grid">
-      <div class="hidden-note rv">
-        <div><h4>6 &middot; Certifications</h4><p class="body-sm">Context §10 forbids attributing
-          WHO-GMP, ISO or UKAS to Medelis &mdash; they belong to the reference company. Component
-          built, ships empty.</p></div>
-      </div>
-      <div class="hidden-note rv">
-        <div><h4>9 &middot; Customers &amp; testimonials</h4><p class="body-sm">Needs six logos with
-          permission, and quotes attributed to a name, firm and city. Unattributed is worth
-          nothing to a distributor.</p></div>
-      </div>
-      <div class="hidden-note rv">
-        <div><h4>10 &middot; Gallery strip</h4><p class="body-sm">Needs real photography. Stock
-          imagery presented as Medelis's own premises is the one thing not worth risking.</p></div>
-      </div>
-      <div class="hidden-note rv">
-        <div><h4>4 &middot; Featured products</h4><p class="body-sm">Rendered above with structural
-          placeholders only. Six real records replace them &mdash; product data is the critical
-          path for the whole build.</p></div>
-      </div>
+      <div class="hidden-note rv"><h4>6 &middot; Certifications</h4><p class="body-sm">Context §10
+        forbids attributing WHO-GMP, ISO or UKAS to Medelis &mdash; they belong to the reference
+        company. Component built, ships empty.</p></div>
+      <div class="hidden-note rv"><h4>9 &middot; Customers &amp; testimonials</h4><p class="body-sm">Needs
+        six logos with permission, and quotes attributed to a name, firm and city.</p></div>
+      <div class="hidden-note rv"><h4>10 &middot; Gallery strip</h4><p class="body-sm">Needs real
+        photography. Stock imagery presented as Medelis's own premises is not worth the risk.</p></div>
+      <div class="hidden-note rv"><h4>4 &middot; Featured products</h4><p class="body-sm">Rendered
+        above with structural placeholders only. Product data is the critical path for the whole
+        build.</p></div>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ============ FOOTER · §7.12 ============ -->
+<!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
     <div class="f-grid">
@@ -929,10 +841,10 @@ footer a:hover{color:#fff}
       <span>© 2026 Medelis Healthcare. All rights reserved.</span>
       <span><a href="#">Privacy</a> &nbsp;·&nbsp; <a href="#">Terms</a> &nbsp;·&nbsp; <a href="#">Disclaimer</a></span>
     </div>
-    <p class="disc">Information on this site is intended for distributors, stockists and
-      healthcare professionals. It is not medical advice and not an advertisement for any
-      prescription medicine. Prescription products are to be dispensed only against a
-      registered practitioner's prescription.</p>
+    <p class="disc">Information on this site is intended for distributors, stockists and healthcare
+      professionals. It is not medical advice and not an advertisement for any prescription
+      medicine. Prescription products are to be dispensed only against a registered
+      practitioner's prescription.</p>
   </div>
 </footer>
 
@@ -940,44 +852,32 @@ footer a:hover{color:#fff}
 <aside class="notes">
   <div class="wrap">
     <h2>Build notes &mdash; not part of the page</h2>
-    <p style="margin-top:10px;max-width:74ch">Design v3, rebuilt against
-      <code>02-design-system.md</code> v2.0 and <code>04-homepage-plan.md</code> v2.0. The
-      business pivoted from sterilization services to a pharmaceutical catalogue, so v2 of
-      this page is void, not amended.</p>
+    <p style="margin-top:10px;max-width:74ch">Design v4. Palette repitched to the supplied blues
+      and the imagery replaced.</p>
     <div class="cols">
       <div>
-        <h3>The system inverted</h3>
+        <h3>Palette — and one constraint worth knowing</h3>
         <ul>
-          <li><strong>Tinted canvas, white cards.</strong> The page ground is <code>#EDF1F8</code>, never white. This is §3.1's defining relationship and everything else follows it.</li>
-          <li><strong>Shadows replace hairlines.</strong> No card has a border. Blue-tinted elevation only.</li>
-          <li><strong>Buttons are pills</strong> with a circular ↗ badge. Radius up to 16&ndash;28px.</li>
-          <li><strong>Plus Jakarta Sans</strong>, headings at 700, body at 400 in <code>slate-600</code>. Mono restricted to product codes and stat captions.</li>
-          <li><strong>Pill badges replace mono eyebrows.</strong> The only uppercase on the page.</li>
-          <li><strong>Teal is back</strong> as the accent, per §3.3 &mdash; see the open question opposite.</li>
-        </ul>
-        <h3>Signature element</h3>
-        <ul>
-          <li>The <strong>composition strip</strong> replaces the dead cycle strip. Sans on <code>indigo-50</code>, two-line clamp, identical everywhere a product appears. §4.3 forbids mono here and the long combination on card three shows why.</li>
+          <li><strong>#0D47A1 carries everything that is text or action.</strong> 8.63:1 on white, 8.05:1 on the canvas. Buttons, links, headings, pill text, composition strips.</li>
+          <li><strong>#2196F3 cannot carry text.</strong> It measures 3.12:1 on white and 2.92:1 on the canvas, so it fails AA for text and fails 1.4.11 as a state indicator on the canvas. It is used as a brightness colour only &mdash; the hero and band glows, the pill dot, the nav underline on the white nav, the newsletter button, icon accents.</li>
+          <li><strong>Primary buttons brighten to #1976D2 on hover</strong> (4.60:1 with white text, still AA). That gives the palette its lift on interaction without breaking contrast.</li>
+          <li>Neutrals are blue-biased rather than grey, so they belong to the palette instead of sitting next to it. Body is <code>#4A5B75</code> at 6.44:1 on the canvas.</li>
+          <li>Indigo and teal are gone entirely. Green has now been removed twice; this palette settles it.</li>
         </ul>
       </div>
       <div>
-        <h3>§3.8 corrections applied</h3>
+        <h3>Imagery</h3>
         <ul>
-          <li><strong>Muted text is <code>slate-600</code>, not <code>slate-500</code>.</strong> As specified it measures 3.85:1 on the tinted canvas and fails AA &mdash; and it is what packing lines, stat captions and product counts are all set in.</li>
-          <li><strong>The "New launch" pill uses <code>orange-900</code></strong> (7.52:1) rather than <code>orange-700</code> on <code>orange-100</code> (4.13:1, fails at 12px). <code>orange-900</code> restored to the ramp.</li>
-          <li>§3.7's published ratios were re-measured; seven of nine were off, though every verdict held. Corrected in the doc.</li>
+          <li><strong>The operating-theatre hero is gone.</strong> The whole v3 set was sterilization-era. Replaced with a dispensary, stock shelving, a retail pharmacy and two unbranded pack shots.</li>
+          <li><strong>The grade was the other half of "dull".</strong> v3 desaturated to 14%; this is ~85% per §8, with lifted midtones. Pack shots sit near natural because they have to read as real product.</li>
+          <li>Two candidates were <strong>rejected for third-party branding</strong> &mdash; one with "SANDOZ" and drug names legible, one a retail shelf of Advil and Panadol. One rejected for green capsules on a lilac ground. All recorded in <code>design/img/MANIFEST.json</code>.</li>
+          <li>The warm orange of the blister pack is the only non-blue thing on the page, and it is doing real work &mdash; a blue-on-blue palette goes monotone without it.</li>
         </ul>
-        <h3>Deliberate stress cases</h3>
+        <h3>Still open</h3>
         <ul>
-          <li>Three product cards, not six, and an incomplete row left un-stretched with no centred orphan &mdash; §10.</li>
-          <li>Card three carries a 66-character composition and a three-line brand name, the §7.3 survival test.</li>
-          <li>Pack shots are absent, so the neutral placeholder state is what renders.</li>
-        </ul>
-        <h3>Open</h3>
-        <ul>
-          <li><strong>Green.</strong> You asked for it out on 5 Aug; §3.3 reinstates teal as the accent on the strength of the Medvita reference. Both cannot hold. It is a token change now and a repaint across 28 routes later.</li>
+          <li><strong>The logo still cannot be placed.</strong> The supplied PNG has the pale-blue plate and purple keyline baked in, and that purple now clashes with the blue system. Nav and footer use a type lockup. Vector still needed.</li>
           <li>Product data, WhatsApp number, year established, states served, product counts.</li>
-          <li>Nav label: "Products" vs "Medicines" &mdash; client's call.</li>
+          <li>Design system §3 still documents the indigo/teal palette &mdash; it needs amending to match this build.</li>
         </ul>
       </div>
     </div>
@@ -985,21 +885,21 @@ footer a:hover{color:#fff}
 </aside>
 
 <script>
-const nav = document.getElementById('nav');
-const onScroll = () => nav.classList.toggle('solid', window.scrollY > 60);
-onScroll(); addEventListener('scroll', onScroll, {passive:true});
+const nav=document.getElementById('nav');
+const onScroll=()=>nav.classList.toggle('solid',window.scrollY>60);
+onScroll(); addEventListener('scroll',onScroll,{passive:true});
 
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const rv = document.querySelectorAll('.rv');
-if (reduce) { rv.forEach(el => el.classList.add('in')); }
-else {
-  const io = new IntersectionObserver((es) => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-  }, {rootMargin:'0px 0px -10% 0px'});
-  rv.forEach(el => io.observe(el));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rv=document.querySelectorAll('.rv');
+if(reduce){rv.forEach(el=>el.classList.add('in'));}
+else{
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},
+    {rootMargin:'0px 0px -10% 0px'});
+  rv.forEach(el=>io.observe(el));
 }
-document.querySelectorAll('.grid3,.pgrid,.wgrid,.hn-grid').forEach(row => {
-  [...row.children].forEach((c,i) => { if (i < 6) c.style.transitionDelay = (i*60)+'ms'; });
+document.querySelectorAll('.grid3,.pgrid,.hn-grid').forEach(row=>{
+  [...row.children].forEach((c,i)=>{if(i<6)c.style.transitionDelay=(i*60)+'ms';});
 });
 </script>
 </body>

@@ -1,58 +1,74 @@
-export interface ServiceItem {
-  slug: string;
-  modality: string;
-  title: string;
-  description: string;
-  typicalProducts: string[];
-  materials: string[];
-  isoStandard: string;
+export interface HeroSlide {
+  id: string;
+  eyebrow: string;
+  h1Prefix: string;
+  h1Highlight: string;
+  h1Suffix: string;
+  lead: string;
+  primaryCta: { label: string; href: string };
+  secondaryCta: { label: string; href: string };
+  imageSrc: string;
+  imageAlt: string;
 }
 
-export interface IndustryItem {
-  slug: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  keyRequirements: string[];
+export interface StatItem {
+  iconName: string;
+  value: string;
+  label: string;
+  subtext?: string;
 }
 
-export interface InsightItem {
+export interface RangeItem {
   slug: string;
   title: string;
-  excerpt: string;
+  description: string;
+  productCount: string;
+  iconName: string;
+}
+
+export interface ProductItem {
+  id: string;
+  slug: string;
+  brandName: string;
+  composition: string;
+  dosageForm: string;
+  packing: string;
+  rangeSlug: string;
+  rangeName: string;
+  imageUrl: string;
+  description?: string;
+  indications?: string[];
+  storage?: string;
+  isTestCard?: boolean;
+}
+
+export interface WhyUsItem {
+  iconName: string;
+  title: string;
+  description: string;
+}
+
+export interface NewsItem {
+  slug: string;
+  category: string;
+  title: string;
   date: string;
   readTime: string;
-  category: string;
-  author: string;
-  isoReference?: string;
-  published: boolean;
-}
-
-export interface CredibilityStat {
-  label: string;
-  value: string;
-  subtext?: string;
-  sourceVerified: boolean;
-}
-
-export interface FaqItem {
-  id: string;
-  question: string;
-  answer: string;
-  category: "compliance" | "process" | "logistics" | "general";
+  imageUrl: string;
 }
 
 export interface HomepageData {
-  hero: {
-    eyebrow: string;
-    h1: string;
-    lead: string;
-    primaryCta: { label: string; href: string };
-    secondaryCta: { label: string; href: string };
+  slides: HeroSlide[];
+  stats: StatItem[];
+  ranges: RangeItem[];
+  featuredProducts: ProductItem[];
+  whyUs: WhyUsItem[];
+  news: NewsItem[];
+  contact: {
+    phone: string;
+    whatsapp: string;
+    email: string;
+    address: string;
+    location: string;
   };
-  stats: CredibilityStat[];
-  services: ServiceItem[];
-  industries: IndustryItem[];
-  insights: InsightItem[];
-  faqs: FaqItem[];
 }

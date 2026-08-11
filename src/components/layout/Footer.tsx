@@ -3,111 +3,87 @@ import Logo from "@/components/brand/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-indigo-950 text-indigo-200 pt-16 pb-12 border-t border-indigo-900">
+    <footer className="bg-[var(--color-brand-dark)] text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-12">
-          {/* Brand Col */}
-          <div className="space-y-4 md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-white/10">
+          {/* Col 1: Brand & Blurb */}
+          <div className="lg:col-span-2 flex flex-col gap-4">
             <Logo variant="dark" />
-            <p className="text-sm text-indigo-300 leading-relaxed max-w-sm">
-              Industrial Ethylene Oxide contract sterilization services built for medical device regulatory & quality audit compliance.
+            <p className="text-white/80 text-sm leading-relaxed max-w-sm mt-2">
+              Pharmaceutical marketing and distribution. Six therapeutic ranges, supplied to distributors, stockists and PCD partners across India.
             </p>
-            <div className="pt-2">
-              <span className="inline-block font-mono text-[11px] uppercase tracking-wider text-orange-400 bg-orange-950/60 border border-orange-800/60 px-2.5 py-1 rounded">
-                ISO 11135 Compliant
-              </span>
+            {/* Newsletter input */}
+            <div className="mt-4 flex items-center gap-2 max-w-sm">
+              <input
+                suppressHydrationWarning
+                type="email"
+                placeholder="Enter your email"
+                className="bg-white/10 text-white placeholder-white/50 text-sm rounded-full px-4 py-2.5 outline-none flex-1 border border-white/15 focus:border-[var(--color-brand-accent)]"
+              />
+              <button
+                aria-label="Subscribe"
+                className="w-10 h-10 rounded-full bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-hover)] text-white flex items-center justify-center flex-shrink-0 transition-colors"
+              >
+                <svg className="w-4 h-4 stroke-current stroke-2 fill-none" viewBox="0 0 14 14">
+                  <path d="M3.5 10.5l7-7M5 3.5h5.5V9" />
+                </svg>
+              </button>
             </div>
           </div>
 
-          {/* Navigation Col 1 */}
-          <div className="space-y-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-white font-semibold">
-              Services & Quality
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="#services" className="hover:text-white transition-colors">
-                  EtO Sterilization
-                </Link>
-              </li>
-              <li>
-                <Link href="#quality" className="hover:text-white transition-colors">
-                  Validation Protocols (IQ/OQ/PQ)
-                </Link>
-              </li>
-              <li>
-                <Link href="#how-it-works" className="hover:text-white transition-colors">
-                  Batch Release Documentation
-                </Link>
-              </li>
-              <li>
-                <Link href="#quality" className="hover:text-white transition-colors">
-                  Bioburden & Residual Testing
-                </Link>
-              </li>
+          {/* Col 2: Products */}
+          <div className="flex flex-col gap-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-accent-light)]">Products</h4>
+            <ul className="flex flex-col gap-2 text-sm text-white/80">
+              <li><Link href="#ranges" className="hover:text-white transition-colors">Cardiology</Link></li>
+              <li><Link href="#ranges" className="hover:text-white transition-colors">Neurology</Link></li>
+              <li><Link href="#ranges" className="hover:text-white transition-colors">Diabetic</Link></li>
+              <li><Link href="#ranges" className="hover:text-white transition-colors">Gastrology</Link></li>
+              <li><Link href="#ranges" className="hover:text-white transition-colors">Orthopaedic</Link></li>
+              <li><Link href="#ranges" className="hover:text-white transition-colors">General</Link></li>
             </ul>
           </div>
 
-          {/* Navigation Col 2 */}
-          <div className="space-y-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-white font-semibold">
-              Target Industries
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="#industries" className="hover:text-white transition-colors">
-                  Surgical Instruments & Kits
-                </Link>
-              </li>
-              <li>
-                <Link href="#industries" className="hover:text-white transition-colors">
-                  Single-Use Disposables
-                </Link>
-              </li>
-              <li>
-                <Link href="#industries" className="hover:text-white transition-colors">
-                  Implants & Orthopedics
-                </Link>
-              </li>
-              <li>
-                <Link href="#industries" className="hover:text-white transition-colors">
-                  Diagnostic Devices
-                </Link>
-              </li>
+          {/* Col 3: Company */}
+          <div className="flex flex-col gap-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-accent-light)]">Company</h4>
+            <ul className="flex flex-col gap-2 text-sm text-white/80">
+              <li><Link href="#about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="#why-us" className="hover:text-white transition-colors">Why Choose Us</Link></li>
+              <li><Link href="#franchise" className="hover:text-white transition-colors">Business Opportunity</Link></li>
+              <li><Link href="#news" className="hover:text-white transition-colors">Latest News</Link></li>
+              <li><Link href="#enquiry" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Contact / Office Col */}
-          <div className="space-y-3">
-            <h4 className="font-mono text-xs uppercase tracking-widest text-white font-semibold">
-              Facility Location
-            </h4>
-            <div className="text-sm text-indigo-300 space-y-1">
-              <p className="font-medium text-white">Medelis Healthcare Facility</p>
-              <p>Industrial Park Zone</p>
-              <p>Rajasthan, India</p>
-              <p className="pt-2 font-mono text-xs text-indigo-400">
-                Email: quality@medelishealthcare.com
-              </p>
-            </div>
+          {/* Col 4: Contact */}
+          <div className="flex flex-col gap-3">
+            <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-accent-light)]">Contact</h4>
+            <ul className="flex flex-col gap-2 text-sm text-white/80">
+              <li>Medelis Healthcare</li>
+              <li>Jodhpur, Rajasthan, India</li>
+              <li className="font-mono text-xs text-[var(--color-brand-accent-light)]">+91 98290 00000</li>
+              <li className="text-xs">info@medelishealthcare.com</li>
+            </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-indigo-900/80 flex flex-col sm:flex-row items-center justify-between text-xs text-indigo-400 gap-4">
-          <p>© {new Date().getFullYear()} Medelis Healthcare. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <Link href="#" className="hover:text-indigo-200">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="hover:text-indigo-200">
-              Quality Commitment
-            </Link>
-            <Link href="#" className="hover:text-indigo-200">
-              Site Notice
-            </Link>
+        {/* Legal Bar */}
+        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 border-b border-white/10">
+          <span>© 2026 Medelis Healthcare. All rights reserved.</span>
+          <div className="flex items-center gap-4">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <span>·</span>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <span>·</span>
+            <a href="#" className="hover:text-white transition-colors">Disclaimer</a>
           </div>
         </div>
+
+        {/* Rx Disclaimer */}
+        <p className="pt-6 text-[11.5px] text-white/50 leading-relaxed max-w-4xl">
+          Information on this site is intended for distributors, stockists and healthcare professionals. It is not medical advice and not an advertisement for any prescription medicine. Prescription products are to be dispensed only against a registered medical practitioner&apos;s prescription.
+        </p>
       </div>
     </footer>
   );

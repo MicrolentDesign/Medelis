@@ -1,45 +1,41 @@
 import { getHomepageData } from "@/lib/content";
 import Hero from "@/components/sections/Hero";
-import CredibilityStrip from "@/components/sections/CredibilityStrip";
-import ServicesGrid from "@/components/sections/ServicesGrid";
-import HowItWorks from "@/components/sections/HowItWorks";
-import QualityBlock from "@/components/sections/QualityBlock";
-import IndustriesGrid from "@/components/sections/IndustriesGrid";
-import InsightsPreview from "@/components/sections/InsightsPreview";
-import FaqSection from "@/components/sections/FaqSection";
-import QuoteCta from "@/components/sections/QuoteCta";
+import FeaturedProducts from "@/components/sections/FeaturedProducts";
+import RangeGrid from "@/components/sections/RangeGrid";
+import AboutSection from "@/components/sections/AboutSection";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import FranchiseBand from "@/components/sections/FranchiseBand";
+import NewsSection from "@/components/sections/NewsSection";
+import EnquirySection from "@/components/sections/EnquirySection";
 
 export default async function HomePage() {
   const data = await getHomepageData();
 
   return (
     <>
-      {/* 1. Hero */}
-      <Hero data={data.hero} />
+      {/* 1. Full-Bleed Edge-to-Edge Hero Slider & Floating Stats Bar */}
+      <Hero slides={data.slides} stats={data.stats} />
 
-      {/* 2. Credibility Strip (self-suppressing if < 3 verified stats) */}
-      <CredibilityStrip stats={data.stats} />
+      {/* 2. Featured Products Showcase (Moved UP right under Hero to drive business) */}
+      <FeaturedProducts products={data.featuredProducts} />
 
-      {/* 3. What We Sterilize (Services Grid) */}
-      <ServicesGrid services={data.services} />
+      {/* 3. Therapeutic Range Tiles (Plain white default -> Deep blue hover) */}
+      <RangeGrid ranges={data.ranges} />
 
-      {/* 4. Process Flow (How It Works) */}
-      <HowItWorks />
+      {/* 4. About Medelis Healthcare */}
+      <AboutSection />
 
-      {/* 5. Quality & Compliance */}
-      <QualityBlock />
+      {/* 5. Why Choose Us (Distributor Operational Benefits) */}
+      <WhyChooseUs items={data.whyUs} />
 
-      {/* 6. Target Industries */}
-      <IndustriesGrid industries={data.industries} />
+      {/* 6. PCD & Franchise Partnership Opportunity Band */}
+      <FranchiseBand />
 
-      {/* 7. Technical Insights Preview */}
-      <InsightsPreview insights={data.insights} />
+      {/* 7. Latest News & Molecule Knowledge Base */}
+      <NewsSection news={data.news} />
 
-      {/* 8. Technical FAQ */}
-      <FaqSection faqs={data.faqs} />
-
-      {/* 9. Quote CTA */}
-      <QuoteCta />
+      {/* 8. Commercial Enquiry Section */}
+      <EnquirySection contact={data.contact} />
     </>
   );
 }

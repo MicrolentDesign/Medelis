@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { EnquiryCartProvider } from "@/context/EnquiryCartContext";
+import EnquiryModal from "@/components/modals/EnquiryModal";
+import CartDrawer from "@/components/modals/CartDrawer";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 const geistMono = Geist_Mono({
@@ -15,9 +19,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Medelis Healthcare | ISO 11135 Contract Sterilization Services",
-  description: "B2B Ethylene Oxide (EtO) contract sterilization services for medical device manufacturers in India. Validated to ISO 11135 and ISO 13485.",
-  keywords: ["contract sterilization", "ethylene oxide sterilization", "EtO sterilization", "medical device sterilization", "ISO 11135", "ISO 13485"],
+  title: "Medelis Healthcare | Pharmaceutical Marketing & Distribution India",
+  description: "Pharmaceutical product catalogue for Indian distributors, stockists, and PCD partners. Search by molecule and composition across 6 therapeutic ranges.",
+  keywords: ["pharmaceutical distributor India", "PCD pharma franchise", "medicine catalogue", "therapeutic ranges", "pharma stockist", "Medelis Healthcare"],
 };
 
 export default function RootLayout({
@@ -27,10 +31,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-slate-800`}>
-        <Header />
-        <main id="top">{children}</main>
-        <Footer />
+      <body className={`${jakarta.variable} ${geistMono.variable} antialiased bg-[var(--canvas)] text-[var(--ink600)] min-h-screen flex flex-col`}>
+        <EnquiryCartProvider>
+          <Header />
+          <main id="top" className="flex-1">{children}</main>
+          <Footer />
+          <EnquiryModal />
+          <CartDrawer />
+        </EnquiryCartProvider>
       </body>
     </html>
   );

@@ -1,87 +1,95 @@
 {
-  "note": "Placeholder imagery for design review only. Every entry must be replaced with real Medelis facility photography or removed before production. See docs/03-stack-and-setup.md §5.",
-  "grade": "Baked per docs/02-design-system.md §7 — desaturated, shadows cooled toward indigo-800, midtones lifted. Applied at build time rather than as a CSS filter so the source green cast is removed for good. Regenerate with the script recorded in `pipeline`.",
-  "pipeline": "sharp: resize(fit=cover) -> modulate({saturation, brightness:1.05}) -> composite(indigo-800 @ soft-light) -> webp(q76)",
+  "note": "Placeholder imagery for design review only. Every entry must be replaced with real Medelis photography, or removed, before production. See docs/03-stack-and-setup.md §5.",
+  "revision": "v3 — 2026-08-11. The v2 set was sterilization-era (cleanrooms, gowned operators, an empty warehouse) and read as an operating theatre, which is wrong for a pharmaceutical marketing and distribution company. Replaced entirely with dispensary, stock and pack-shot imagery.",
+  "grade": "Per docs/02-design-system.md §8: slight desaturation (~85%), lifted midtones, shadows cooled toward the new primary #0D47A1. Deliberately much lighter than the v2 grade, which desaturated to 14% and was a large part of why the page read dull.",
+  "pipeline": "sharp: resize(fit=cover) -> modulate({saturation, brightness}) -> composite(#0D47A1 @ soft-light, low opacity) -> linear(1.04,-6) -> webp(q80)",
   "addedBy": "Nishant",
-  "addedOn": "2026-08-06",
+  "addedOn": "2026-08-11",
   "images": [
     {
       "file": "hero.webp",
       "slot": "home.hero",
       "source": "unsplash",
-      "url": "https://unsplash.com/photos/photo-1748002388689-c62b45d5c28b",
-      "description": "Workers in protective suits inside a sterile laboratory corridor",
-      "licence": "Unsplash License",
-      "saturation": 0.14,
-      "replacementNeeded": true,
-      "checks": {
-        "identifiableFaces": false,
-        "thirdPartyBranding": false,
-        "impliesMedelisFacility": "Mitigated — carries the PLACEHOLDER ribbon and the page-level review bar."
-      }
+      "url": "https://unsplash.com/photos/photo-1549964336-67d7d7d74ac2",
+      "description": "Curved dispensary drawer cabinets in perspective",
+      "saturation": 0.72,
+      "why": "Reads unmistakably as a pharmacy dispensary, has real depth, and carries no branding at all — which matters most in the page's most scrutinised slot.",
+      "checks": { "identifiableFaces": false, "thirdPartyBranding": false }
     },
     {
-      "file": "facility.webp",
-      "slot": "home.facility",
+      "file": "dist.webp",
+      "slot": "home.whyChooseUs",
       "source": "unsplash",
-      "url": "https://unsplash.com/photos/photo-1771530789155-b1f03fbf82b5",
-      "description": "Empty modern warehouse interior, polished concrete floor",
-      "licence": "Unsplash License",
-      "saturation": 0.34,
-      "replacementNeeded": true,
-      "checks": {
-        "identifiableFaces": false,
-        "thirdPartyBranding": false,
-        "impliesMedelisFacility": "Highest risk slot on the page — this section sits beside capacity figures. Ribbon is mandatory here."
-      }
+      "url": "https://unsplash.com/photos/photo-1642055514517-7b52288890ec",
+      "description": "Stock shelving filled with medicine cartons",
+      "saturation": 0.82,
+      "why": "Says 'we hold stock', which is the single thing a distributor most wants to see. Carton text is present but illegible at display size.",
+      "checks": { "identifiableFaces": false, "thirdPartyBranding": "not legible at display size" }
     },
     {
-      "file": "suited.webp",
-      "slot": "home.process",
+      "file": "shelf.webp",
+      "slot": "home.about",
       "source": "unsplash",
-      "url": "https://unsplash.com/photos/photo-1770195957512-b45ce419c00c",
-      "description": "Two operators in protective suits at a control panel, seen through a barrier",
-      "licence": "Unsplash License",
-      "saturation": 0.30,
-      "replacementNeeded": true,
-      "checks": {
-        "identifiableFaces": false,
-        "thirdPartyBranding": false,
-        "impliesMedelisFacility": "Mitigated — ribbon plus review bar."
-      }
+      "url": "https://unsplash.com/photos/photo-1671108503276-1d3d5ab23a3a",
+      "description": "White pharmaceutical bottles with coloured caps on clean shelving",
+      "saturation": 0.88,
+      "checks": { "identifiableFaces": false, "thirdPartyBranding": false }
     },
     {
-      "file": "bay.webp",
-      "slot": "home.quality",
+      "file": "retail.webp",
+      "slot": "home.news",
       "source": "unsplash",
-      "url": "https://unsplash.com/photos/photo-1772305336606-989a457ffbae",
-      "description": "Empty industrial bay, polished floor, roof structure visible",
-      "licence": "Unsplash License",
-      "saturation": 0.34,
-      "replacementNeeded": true,
-      "checks": {
-        "identifiableFaces": false,
-        "thirdPartyBranding": false,
-        "impliesMedelisFacility": "Mitigated — ribbon plus review bar."
-      }
+      "url": "https://unsplash.com/photos/photo-1576602976047-174e57a47881",
+      "description": "Bright retail pharmacy interior",
+      "saturation": 0.82,
+      "checks": { "identifiableFaces": false, "thirdPartyBranding": "not legible at display size" }
+    },
+    {
+      "file": "pack1.webp",
+      "slot": "home.featured.tray",
+      "source": "unsplash",
+      "url": "https://unsplash.com/photos/photo-1631980838902-e1eea9c12c67",
+      "description": "Unbranded blister strip of orange tablets, close crop",
+      "saturation": 0.98,
+      "why": "Graded closest to natural because a pack shot has to read as real product. The warm orange is also the one thing on the page that isn't blue, which stops the palette going monotone.",
+      "checks": { "identifiableFaces": false, "thirdPartyBranding": false }
+    },
+    {
+      "file": "pack2.webp",
+      "slot": "home.featured.tray",
+      "source": "unsplash",
+      "url": "https://unsplash.com/photos/photo-1631980837306-accb9a02568b",
+      "description": "Amber bottle with unbranded white tablets",
+      "saturation": 0.96,
+      "checks": { "identifiableFaces": false, "thirdPartyBranding": false }
     }
   ],
   "rejected": [
     {
-      "url": "https://unsplash.com/photos/photo-1782803103081-f402f95e4378",
-      "reason": "Saturated green floor markings survive the grade. Client has asked for green out of the palette."
+      "url": "https://unsplash.com/photos/photo-1696861308115-54a5e5a134b0",
+      "reason": "Third-party branding clearly legible — 'SANDOZ' and named drug labels. Breaches §5.1 rule 3."
     },
     {
-      "url": "https://unsplash.com/photos/photo-1784821856280-401b76b03266",
-      "reason": "Faint green colour band in the background persists after grading."
+      "url": "https://unsplash.com/photos/photo-1597121870960-7b5391b88b84",
+      "reason": "Retail shelf with Advil, Panadol and Benadryl packaging plus price tags. Breaches §5.1 rule 3."
     },
     {
-      "url": "https://unsplash.com/photos/photo-1781156215907-e3b8da4091b0",
-      "reason": "Dilapidated shed. Wrong register for a facility selling contamination control."
+      "url": "https://unsplash.com/photos/photo-1631980839248-1a84a60c66ac",
+      "reason": "Green capsules on a lilac ground. Client has ruled out both green and purple."
     },
     {
-      "url": "https://unsplash.com/photos/photo-1781156210760-7d33f6ccc893",
-      "reason": "Black and white, reads as a heritage factory."
+      "url": "https://unsplash.com/photos/photo-1762328494465-274a63177884",
+      "reason": "Hand in frame; adds a person to what should be a product shot."
     }
-  ]
+  ],
+  "logo": {
+    "file": "medelis-logo.png",
+    "status": "Not usable in the interface as supplied, and not the vector asset requested in brand/README.md.",
+    "problems": [
+      "Still raster, and still has the pale-blue plate and purple keyline baked into the pixels, so it cannot sit on the canvas or on a dark band without a visible box.",
+      "Its purple keyline and red wordmark now clash directly with the #0D47A1 / #2196F3 system — and purple is specifically what the client asked to move away from."
+    ],
+    "currentTreatment": "The nav and footer use a type lockup instead. Replace once vector artwork arrives and the plate can be stripped.",
+    "stillRequired": "Vector source (.ai / .eps / .svg), or a transparent PNG at 3000px with the mark and wordmark on separate layers."
+  }
 }
