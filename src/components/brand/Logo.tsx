@@ -9,16 +9,16 @@ export default function Logo({ variant = "light", className = "" }: LogoProps) {
   const isDark = variant === "dark";
 
   return (
-    <Link href="/" className={`inline-flex items-center gap-2.5 group ${className}`}>
-      {/* Standalone Brand Emblem Icon (No container box) */}
+    <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
+      {/* Standalone Brand Emblem Icon - Height matched to combined height of Medelis + Healthcare */}
       <img
         src="/images/logo_emblem.png"
         alt="Medelis Healthcare emblem"
-        className="h-9 w-auto object-contain transition-transform group-hover:scale-105 flex-shrink-0"
+        className="h-11 w-auto object-contain transition-transform group-hover:scale-105 flex-shrink-0"
       />
 
       {/* Official Brand Wordmark Logo Image */}
-      <div className="flex flex-col leading-none">
+      <div className="flex flex-col justify-center leading-none">
         <img
           src="/images/medelis_wordmark.png"
           alt="Medelis"
@@ -26,7 +26,7 @@ export default function Logo({ variant = "light", className = "" }: LogoProps) {
             isDark ? "brightness-0 invert" : ""
           }`}
         />
-        <span className={`text-[9px] font-bold tracking-[0.22em] uppercase mt-0.5 ${isDark ? "text-[var(--color-brand-accent-light)]" : "text-[var(--ink600)]"}`}>
+        <span className={`text-[9.5px] font-bold tracking-[0.22em] uppercase mt-1 ${isDark ? "text-[var(--color-brand-accent-light)]" : "text-[var(--ink600)]"}`}>
           Healthcare
         </span>
       </div>
