@@ -1,4 +1,5 @@
 import { HomepageData } from "@/lib/content/types";
+import { getAssetUrl } from "@/utils/assets";
 
 export const homepageContent: HomepageData = {
   slides: [
@@ -11,7 +12,7 @@ export const homepageContent: HomepageData = {
       lead: "Six therapeutic ranges built for Indian distributors, stockists and PCD partners. Search by composition rather than brand name, and send one enquiry for as many products as you need.",
       primaryCta: { label: "Browse Products", href: "#featured" },
       secondaryCta: { label: "PCD Partnership", href: "#franchise" },
-      imageSrc: "/images/hero_family.png",
+      imageSrc: getAssetUrl("/images/hero_family.png"),
       imageAlt: "Happy healthy Indian multi-generational family outdoors"
     },
     {
@@ -23,7 +24,7 @@ export const homepageContent: HomepageData = {
       lead: "From daily metabolic health to active cardiovascular support, our high-potency molecules empower active living across every stage of life in India.",
       primaryCta: { label: "Explore Products", href: "#featured" },
       secondaryCta: { label: "PCD Partnership", href: "#franchise" },
-      imageSrc: "/images/hero_workout.png",
+      imageSrc: getAssetUrl("/images/hero_workout.png"),
       imageAlt: "Active Indian couple jogging together in a park"
     },
     {
@@ -35,7 +36,7 @@ export const homepageContent: HomepageData = {
       lead: "Consistent packing, verified efficacy disclaimers, and clear composition on every strip. One contact point that answers your stock demands promptly.",
       primaryCta: { label: "View All Ranges", href: "#ranges" },
       secondaryCta: { label: "Send Enquiry", href: "#enquiry" },
-      imageSrc: "/images/hero_lifestyle.png",
+      imageSrc: getAssetUrl("/images/hero_lifestyle.png"),
       imageAlt: "Healthy active senior Indian couple smiling in a garden"
     }
   ],
@@ -50,62 +51,62 @@ export const homepageContent: HomepageData = {
       iconName: "box",
       value: "25+",
       label: "Launch SKUs",
-      subtext: "High demand molecules"
+      subtext: "Formulations ready"
     },
     {
-      iconName: "shield",
+      iconName: "award",
       value: "100%",
       label: "Quality Assured",
-      subtext: "Batch consistent"
+      subtext: "WHO-GMP manufacturing"
     },
     {
-      iconName: "map-pin",
+      iconName: "globe",
       value: "28+",
       label: "States Network",
-      subtext: "District monopoly rights"
+      subtext: "Pan-India presence"
     }
   ],
   ranges: [
     {
       slug: "cardiology",
       title: "Cardiology Range",
-      description: "Antihypertensives, statins and antiplatelets for chronic cardiovascular care.",
-      productCount: "Product count pending",
+      description: "Antihypertensives, lipid-lowering agents and angina management formulations.",
+      productCount: "6 Products",
       iconName: "heart"
     },
     {
-      slug: "neurology",
-      title: "Neurology Range",
-      description: "Antiepileptics, neuropathic and muscle relaxant combinations.",
-      productCount: "Product count pending",
-      iconName: "brain"
-    },
-    {
       slug: "diabetic",
-      title: "Diabetic Range",
-      description: "Oral antidiabetics and fixed-dose combinations for glycemic control.",
-      productCount: "Product count pending",
+      title: "Diabetic Care",
+      description: "Oral hypoglycaemic fixed-dose combinations for glycemic control.",
+      productCount: "5 Products",
       iconName: "activity"
     },
     {
-      slug: "gastrology",
-      title: "Gastrology Range",
-      description: "PPIs, prokinetics, enzymes and digestive probiotics.",
-      productCount: "Product count pending",
-      iconName: "droplet"
+      slug: "neurology",
+      title: "Neurology",
+      description: "Neuroprotective agents, neuropathic pain relievers and anti-epileptics.",
+      productCount: "4 Products",
+      iconName: "brain"
     },
     {
       slug: "orthopaedic",
       title: "Orthopaedic Range",
-      description: "Analgesics, NSAID combinations and joint & bone health.",
-      productCount: "Product count pending",
+      description: "Muscle relaxants, NSAID combinations and joint inflammation support.",
+      productCount: "4 Products",
       iconName: "bone"
     },
     {
+      slug: "gastrology",
+      title: "Gastrology",
+      description: "Proton pump inhibitors, prokinetics and anti-reflux formulations.",
+      productCount: "4 Products",
+      iconName: "shield"
+    },
+    {
       slug: "general",
-      title: "General Range",
-      description: "Anti-infectives, multi-vitamins and everyday essentials.",
-      productCount: "Product count pending",
+      title: "General Medicine",
+      description: "Broad-spectrum anti-infectives, vitamins, minerals and analgesics.",
+      productCount: "6 Products",
       iconName: "plus-square"
     }
   ],
@@ -119,7 +120,7 @@ export const homepageContent: HomepageData = {
       packing: "10x10 Tablets Blister Pack",
       rangeSlug: "cardiology",
       rangeName: "Cardiology",
-      imageUrl: "/images/pack1.png",
+      imageUrl: getAssetUrl("/images/pack1.png"),
       description: "Extended-release Metoprolol Succinate formulation designed for 24-hour hypertension management and angina control.",
       indications: ["Hypertension", "Angina Pectoris", "Heart Failure Management"],
       storage: "Store below 25°C in a dry place. Protect from light."
@@ -133,7 +134,7 @@ export const homepageContent: HomepageData = {
       packing: "10x10 Tablets Blister Pack",
       rangeSlug: "orthopaedic",
       rangeName: "Orthopaedic",
-      imageUrl: "/images/pack2.png",
+      imageUrl: getAssetUrl("/images/pack2.png"),
       description: "Dual-action centrally acting muscle relaxant and analgesic combination for painful musculoskeletal spasms.",
       indications: ["Acute Musculoskeletal Pain", "Spinal Muscle Spasms", "Post-Traumatic Pain"],
       storage: "Store in a cool dry place away from direct sunlight."
@@ -147,7 +148,7 @@ export const homepageContent: HomepageData = {
       packing: "10x15 Tablets Blister Pack",
       rangeSlug: "diabetic",
       rangeName: "Diabetic",
-      imageUrl: "/images/pack3.png",
+      imageUrl: getAssetUrl("/images/pack3.png"),
       description: "Triple fixed-dose oral antidiabetic therapy combining insulin sensitizers and secretagogues for refractory Type 2 Diabetes.",
       indications: ["Type 2 Diabetes Mellitus", "Insulin Resistance", "Glycemic Control"],
       storage: "Store below 30°C. Keep out of reach of children."
@@ -182,7 +183,7 @@ export const homepageContent: HomepageData = {
       title: "Choosing between metformin combinations for a diabetic range",
       date: "10 AUG 2026",
       readTime: "5 MIN READ",
-      imageUrl: "/images/hero_workout.png"
+      imageUrl: getAssetUrl("/images/hero_workout.png")
     },
     {
       slug: "pcd-territory-checklist",
@@ -190,7 +191,7 @@ export const homepageContent: HomepageData = {
       title: "What a PCD partner should ask before signing a district territory",
       date: "05 AUG 2026",
       readTime: "6 MIN READ",
-      imageUrl: "/images/hero_family.png"
+      imageUrl: getAssetUrl("/images/hero_family.png")
     },
     {
       slug: "tolperisone-paracetamol-combination",
@@ -198,7 +199,7 @@ export const homepageContent: HomepageData = {
       title: "Tolperisone with paracetamol: where the muscle relaxant combination fits",
       date: "28 JUL 2026",
       readTime: "4 MIN READ",
-      imageUrl: "/images/hero_lifestyle.png"
+      imageUrl: getAssetUrl("/images/hero_lifestyle.png")
     }
   ],
   contact: {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getAssetUrl } from "@/utils/assets";
 
 interface LogoProps {
   variant?: "light" | "dark";
@@ -10,9 +11,9 @@ export default function Logo({ variant = "light", className = "" }: LogoProps) {
 
   return (
     <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
-      {/* Standalone Brand Emblem Icon - Height matched to combined height of Medelis + Healthcare */}
+      {/* Standalone Brand Emblem Icon */}
       <img
-        src="/images/logo_emblem.png"
+        src={getAssetUrl("/images/logo_emblem.png")}
         alt="Medelis Healthcare emblem"
         className="h-11 w-auto object-contain transition-transform group-hover:scale-105 flex-shrink-0"
       />
@@ -20,7 +21,7 @@ export default function Logo({ variant = "light", className = "" }: LogoProps) {
       {/* Official Brand Wordmark Logo Image */}
       <div className="flex flex-col justify-center leading-none">
         <img
-          src="/images/medelis_wordmark.png"
+          src={getAssetUrl("/images/medelis_wordmark.png")}
           alt="Medelis"
           className={`h-7 w-auto object-contain ${
             isDark ? "brightness-0 invert" : ""
