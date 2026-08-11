@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "deploy": "NEXT_PUBLIC_BASE_PATH=/Medelis next build && touch out/.nojekyll && gh-pages -d out -b gh-pages",
+    "deploy": "NEXT_PUBLIC_BASE_PATH=/Medelis next build && touch out/.nojekyll && gh-pages -d out -b gh-pages --dotfiles",
     "start": "next start",
     "lint": "next lint",
     "check-contrast": "node scripts/check-contrast.mjs"

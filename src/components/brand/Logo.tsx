@@ -10,20 +10,19 @@ export default function Logo({ variant = "light", className = "" }: LogoProps) {
   const isDark = variant === "dark";
 
   return (
-    <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
-      {/* Standalone Brand Emblem Icon */}
-      <img
-        src={getAssetUrl("/images/logo_emblem.png")}
-        alt="Medelis Healthcare emblem"
-        className="h-11 w-auto object-contain transition-transform group-hover:scale-105 flex-shrink-0"
-      />
-
-      {/* Official Brand Wordmark Logo Image */}
+    <Link
+      href="/"
+      aria-label="Medelis Healthcare — home"
+      className={`inline-flex items-center group ${className}`}
+    >
+      {/* Wordmark only. The multi-colour emblem was dropped — its green and
+          orange sit outside the blue system and read as a different brand
+          next to it. */}
       <div className="flex flex-col justify-center leading-none">
         <img
           src={getAssetUrl("/images/medelis_wordmark.png")}
           alt="Medelis"
-          className={`h-7 w-auto object-contain ${
+          className={`h-7 sm:h-8 w-auto object-contain transition-transform group-hover:scale-[1.02] ${
             isDark ? "brightness-0 invert" : ""
           }`}
         />

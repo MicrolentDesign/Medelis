@@ -59,7 +59,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
                     <button
                       onClick={() => addToCart(p)}
                       aria-label="Add to Enquiry Cart"
-                      className={`absolute top-3 right-3 px-3 py-1.5 rounded-full shadow-md text-xs font-bold flex items-center gap-1.5 transition-all ${
+                      className={`absolute top-3 right-3 px-3.5 min-h-11 rounded-full shadow-md text-xs font-bold flex items-center gap-1.5 transition-all ${
                         inCart
                           ? "bg-[var(--b900)] text-white"
                           : "bg-white text-[var(--b900)] hover:bg-[var(--b50)]"

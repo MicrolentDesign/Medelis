@@ -14,6 +14,11 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH || repo || (isProd ? "/Medeli
 const nextConfig = {
   reactStrictMode: true,
   output: "export",
+  // Emit every route as dir/index.html. On GitHub Pages this makes /products/
+  // and /products/[slug]/ resolve (they 404 without it), and it fixes the
+  // router's RSC prefetch for the home route, which otherwise requests
+  // /Medelis.txt instead of /Medelis/index.txt.
+  trailingSlash: true,
   basePath: basePath,
   assetPrefix: basePath ? `${basePath}/` : undefined,
   env: {

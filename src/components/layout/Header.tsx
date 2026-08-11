@@ -88,7 +88,7 @@ export default function Header() {
           {/* Right Controls */}
           <div className="flex items-center gap-3">
             {/* Search Icon */}
-            <button aria-label="Search" className="w-10 h-10 rounded-full bg-[var(--b50)] text-[var(--color-brand-primary)] hover:bg-[var(--b100)] flex items-center justify-center transition-colors">
+            <button aria-label="Search" className="w-11 h-11 rounded-full bg-[var(--b50)] text-[var(--color-brand-primary)] hover:bg-[var(--b100)] flex items-center justify-center transition-colors">
               <svg className="w-4.5 h-4.5 stroke-current stroke-[2] fill-none" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="7" />
                 <path d="M16.5 16.5L21 21" />
@@ -99,7 +99,7 @@ export default function Header() {
             <button
               onClick={() => setIsCartOpen(true)}
               aria-label={`Enquiry Cart with ${cartItems.length} items`}
-              className="relative w-10 h-10 rounded-full bg-[var(--b50)] text-[var(--color-brand-primary)] hover:bg-[var(--b100)] flex items-center justify-center transition-colors"
+              className="relative w-11 h-11 rounded-full bg-[var(--b50)] text-[var(--color-brand-primary)] hover:bg-[var(--b100)] flex items-center justify-center transition-colors"
             >
               <svg className="w-5 h-5 stroke-current stroke-[2] fill-none" viewBox="0 0 24 24">
                 <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
@@ -123,7 +123,7 @@ export default function Header() {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden w-10 h-10 rounded-full bg-[var(--b50)] text-[var(--color-brand-primary)] flex items-center justify-center"
+              className="lg:hidden w-11 h-11 rounded-full bg-[var(--b50)] text-[var(--color-brand-primary)] flex items-center justify-center"
               aria-label="Toggle Menu"
             >
               <svg className="w-5 h-5 stroke-current stroke-[2]" viewBox="0 0 24 24" fill="none">

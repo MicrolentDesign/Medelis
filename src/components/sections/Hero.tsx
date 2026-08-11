@@ -94,18 +94,25 @@ export default function Hero({ slides, stats }: HeroProps) {
             </div>
 
             {/* Slide Navigation Indicator Dots */}
-            <div className="flex items-center gap-2 pt-1 sm:pt-2">
+            {/* The dot stays visually small; the button carries a 44x44 hit
+                area so it meets the touch-target floor in 01-project-context §9. */}
+            <div className="flex items-center -ml-2.5 pt-1 sm:pt-2">
               {slides.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCurrentSlide(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
-                  className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
-                    idx === currentSlide
-                      ? "w-6 sm:w-8 bg-[#64B5F6]"
-                      : "w-2 sm:w-2.5 bg-white/40 hover:bg-white/70"
-                  }`}
-                />
+                  aria-current={idx === currentSlide ? "true" : undefined}
+                  className="w-11 h-11 flex items-center justify-center group/dot"
+                >
+                  <span
+                    className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 block ${
+                      idx === currentSlide
+                        ? "w-6 sm:w-8 bg-[#64B5F6]"
+                        : "w-2 sm:w-2.5 bg-white/40 group-hover/dot:bg-white/70"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           </div>

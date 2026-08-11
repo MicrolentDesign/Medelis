@@ -54,13 +54,13 @@ export const homepageContent: HomepageData = {
       subtext: "Formulations ready"
     },
     {
-      iconName: "award",
+      iconName: "shield",
       value: "100%",
       label: "Quality Assured",
       subtext: "WHO-GMP manufacturing"
     },
     {
-      iconName: "globe",
+      iconName: "map-pin",
       value: "28+",
       label: "States Network",
       subtext: "Pan-India presence"
