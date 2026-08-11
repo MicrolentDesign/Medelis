@@ -10,11 +10,13 @@ export default function Logo({ variant = "light", className = "" }: LogoProps) {
 
   return (
     <Link href="/" className={`inline-flex items-center gap-3 group ${className}`}>
-      {/* Brand Icon Mark */}
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-extrabold text-xl shadow-sm transition-transform group-hover:scale-105 ${
-        isDark ? "bg-white text-[var(--color-brand-primary)]" : "bg-[var(--color-brand-primary)] text-white"
-      }`}>
-        M
+      {/* Official Brand Emblem Icon */}
+      <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center p-1 shadow-sm transition-transform group-hover:scale-105 border border-slate-100 overflow-hidden">
+        <img
+          src="/images/logo_emblem.png"
+          alt="Medelis Healthcare logo emblem"
+          className="w-full h-full object-contain"
+        />
       </div>
       <div className="flex flex-col leading-none">
         <span className={`font-extrabold text-xl tracking-tight ${isDark ? "text-white" : "text-[var(--color-brand-primary)]"}`}>

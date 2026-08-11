@@ -22,6 +22,11 @@ export const metadata: Metadata = {
   title: "Medelis Healthcare | Pharmaceutical Marketing & Distribution India",
   description: "Pharmaceutical product catalogue for Indian distributors, stockists, and PCD partners. Search by molecule and composition across 6 therapeutic ranges.",
   keywords: ["pharmaceutical distributor India", "PCD pharma franchise", "medicine catalogue", "therapeutic ranges", "pharma stockist", "Medelis Healthcare"],
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
