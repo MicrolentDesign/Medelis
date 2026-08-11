@@ -4,7 +4,30 @@
 **Last updated:** 5 August 2026
 **Audience:** whoever runs Claude Code on this repo, plus DPS for infra.
 
-Companion documents: [`01-context.md`](01-context.md), [`02-design-system.md`](02-design-system.md).
+Companion documents: [`01-project-context.md`](01-project-context.md), [`02-design-system.md`](02-design-system.md).
+
+---
+
+## 0. Pivot deltas — read before using anything below
+
+The project changed on 11 August 2026 from contract sterilization services to a
+**pharmaceutical product catalogue with enquiry**. Most of this document survives intact;
+these parts do not.
+
+| Section | Status |
+|---|---|
+| §1 Stack table | **Stands.** Next.js, Tailwind v4, Lenis, GSAP, RHF + Zod, Turnstile, Resend, Vercel |
+| §1 CMS decision | **Superseded.** The admin panel is now Phase 2 — `01-project-context.md` §11. This phase builds the public site against `/content` + `lib/content`, which is still the swap point |
+| §2 Folder structure | **Superseded** by the 28 routes in `01-project-context.md` §5. Services and industries routes are gone; products, categories, product detail, search, about sub-pages, news, gallery, franchise and enquiry-list replace them |
+| §3 Token block | **Superseded** — see §3 below, rewritten for the v2.0 surfaces, Plus Jakarta Sans, shadows and pill radius |
+| §4.1–4.3 Motion setup | **Stands.** Lenis + GSAP provider, `Reveal`, reduced-motion fallback all unchanged |
+| §4.4 Cycle strip | **Dead.** See §4.4 below |
+| §5 Placeholder imagery | **Stands**, with one addition: pack shots. See §5.6 |
+| §6 Preview + auth | **Stands**, including the `/_ds` guard in §11 |
+| §7 Forms | **Stands.** Enquiry routes replace quote/consultation routes; same shape |
+| §8 Performance budget | **Stands.** Note the map on `/contact` loads on interaction only — `01-project-context.md` §8.6 |
+| Content model | **Superseded** by `01-project-context.md` §4 |
+| Rendering strategy | **Simplified.** Full static generation at 25 SKUs. No ISR until the catalogue passes a few hundred products |
 
 ---
 
@@ -163,8 +186,14 @@ All tokens live in `src/app/globals.css`. There is no `tailwind.config.js` in v4
   --color-slate-900: #161C26;
   --color-slate-950: #0B0E14;
 
+  /* ---- Surfaces — the defining relationship, design system §3.1 ---- */
+  --color-canvas:      #EDF1F8;   /* page background. never white */
+  --color-canvas-deep: #E4EAF4;
+  --color-card:        #FFFFFF;
+  --color-card-tint:   #F7F9FC;
+
   /* ---- Type ---- */
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
 
   --text-display:   clamp(2.5rem, 1.6rem + 3.8vw, 4.25rem);
@@ -180,11 +209,21 @@ All tokens live in `src/app/globals.css`. There is no `tailwind.config.js` in v4
   --spacing-section:    clamp(4.5rem, 3rem + 6.4vw, 8rem);
   --spacing-section-lg: clamp(6rem, 4rem + 8.5vw, 10rem);
 
-  /* ---- Radius ---- */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
+  /* ---- Radius — design system §5. buttons are pills ---- */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-2xl:  28px;
+  --radius-full: 999px;
+
+  /* ---- Elevation — shadows carry the system now. blue-tinted, never grey ---- */
+  --shadow-xs:    0 1px 2px rgba(16,24,64,0.04);
+  --shadow-card:  0 2px 8px rgba(16,24,64,0.05), 0 1px 2px rgba(16,24,64,0.03);
+  --shadow-hover: 0 10px 28px rgba(16,24,64,0.09), 0 2px 6px rgba(16,24,64,0.04);
+  --shadow-float: 0 16px 40px rgba(16,24,64,0.10);
+  --shadow-sheet: 0 -8px 32px rgba(16,24,64,0.12);
+  --shadow-nav:   0 1px 0 rgba(16,24,64,0.05);
 
   /* ---- Motion ---- */
   --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
@@ -238,19 +277,33 @@ Self-host via `next/font` — no external request, no layout shift, no Google Fo
 
 ```ts
 // src/app/layout.tsx
-import { GeistSans } from "geist/font/sans";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { GeistMono } from "geist/font/mono";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${GeistMono.variable}`}>
       <body>{children}</body>
     </html>
   );
 }
 ```
 
-`npm i geist`. The package exposes `--font-geist-sans` and `--font-geist-mono`, which the `@theme` block above already references.
+`npm i geist` still, for the mono. Plus Jakarta Sans comes through `next/font/google`,
+which self-hosts it at build time — no runtime request to Google, so the privacy point
+above still holds.
+
+Design system §4.1 names **Satoshi** as the alternate if the client wants more character.
+It is on Fontshare, not Google, so it would need `next/font/local` and the woff2 files
+committed to the repo. Worth knowing before offering it as a swap: it is a different
+integration, not a one-line change.
 
 ---
 
@@ -382,15 +435,25 @@ Wrap children in `<StaggerGroup>` for lists — it maps a 60ms increment onto it
 
 The JS guards in the components above matter more than this CSS, because GSAP writes inline styles that CSS cannot override. Both layers are needed.
 
-### 4.4 The cycle strip
+### 4.4 The cycle strip is dead
 
-Single component, three variants (`hero` | `process` | `divider`), built as inline SVG so the stroke can be animated and the tick positions can be data-driven.
+It belonged to the sterilization brief. Delete any component built against it.
 
-- Draw-on: `stroke-dasharray` set to path length, `stroke-dashoffset` animated to 0 over 1200ms `ease-out`. Fires once on mount, hero only.
-- Process variant: the orange marker's `x` is scrubbed to `ScrollTrigger` progress across the section, `scrub: 0.5`.
-- Divider variant: static, no animation, `slate-200` stroke, no labels.
+Two presentational primitives replace it, and both are built once and reused everywhere:
 
-Tick positions come from a `stages` prop — an array of `{ label, duration }` — so the strip is proportional to real cycle times. Get the real numbers from the client; until then use the placeholder values in the design system doc and mark them clearly as placeholder in review.
+**`CompositionStrip`** — design system §4.3. Sans, `body-sm`, weight 500, `indigo-700`, on
+an `indigo-50` or `card-tint` fill at `radius-sm`. Props: `composition`, `clamp` (2 on
+cards, unset on the product page). No animation. It appears on every product card, every
+search result and under every product H1, so it is the highest-traffic component in the
+system and it is worth being fussy about the padding.
+
+**`CircularArrow`** — design system §6. Props `size` (`28` | `32` | `36`) and `variant`
+(`on-button` | `on-card` | `inverse`). On buttons it is a white circle with an
+`indigo-700` ↗; on card corners it is `card-tint` with an `indigo-700` ↗ that fills
+`indigo-700` with a white ↗ on card hover. Hover translates the arrow 2px up-right over
+160ms. Never on tertiary text links — those get a plain 14px arrow.
+
+Neither needs GSAP. Both are server components.
 
 ---
 

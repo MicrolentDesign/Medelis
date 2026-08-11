@@ -1,368 +1,321 @@
 # Medelis Healthcare — Homepage Plan
 
-**Version:** 1.0
-**Last updated:** 5 August 2026
-**Status:** Structure is buildable now. Copy is not — see §2.
+**Version:** 2.0 — supersedes v1.0 entirely. v1.0 planned a sterilization services
+homepage and is void.
+**Last updated:** 11 August 2026
 
-Turns [`01-context.md`](01-context.md) §6's twelve-section order into a build specification. Reads against [`02-design-system.md`](02-design-system.md) for components and [`03-stack-and-setup.md`](03-stack-and-setup.md) for the component split.
+Turns [`01-project-context.md`](01-project-context.md) §8.1's eleven-section order into a
+build specification, against [`02-design-system.md`](02-design-system.md) v2.0.
 
 ---
 
 ## 1. The governing idea
 
-The homepage has one job: convince a professionally paranoid QA head, inside about four screens, that Medelis's paper trail would survive their audit. Everything below that is secondary.
+The homepage has one job: **get a distributor into a range, or into the enquiry flow, in
+one screen.** It is a doorway, not a brochure. Nobody reading it is deciding whether to
+trust Medelis in the abstract — they are checking whether Medelis carries the molecule
+they need.
 
-That produces a structural rule the rest of this document follows:
+Two structural rules follow.
 
-> **Every section is self-suppressing.** A section renders only if the facts it needs exist. If they do not, it is omitted from the page entirely — not filled, not faked, not stubbed with lorem.
+**Every section is self-suppressing.** Context §8.1 marks sections 6, 8, 9 and 10 as
+hiding when empty. Make that mechanical, not a matter of discipline: `if (!data) return
+null`. At launch four of eleven sections will not render, and that is the correct
+outcome — not a gap to fill.
 
-Design system §11 already says "cut a section rather than fill it with placeholder content the client will never replace." This makes that mechanical rather than a matter of discipline: `if (!data) return null`. The homepage becomes a composition of whatever is currently true, and it gets denser as the client answers questions. Nothing has to be rebuilt when facts arrive — it is data entry.
-
-This matters because of §2.
+**The composition strip appears above the fold.** Design system §1 calls it the one thing
+that is ours, and §4.3 says it goes everywhere a product appears. That means the featured
+product cards, not just the category pages. A distributor scanning the homepage should
+see a molecule string before they see a single marketing sentence.
 
 ---
 
-## 2. Content readiness — read this before estimating
+## 2. What renders at launch
 
-Eight of the twelve sections cannot be written today. Not "need polish" — cannot be written, because the facts do not exist in any document we hold.
-
-| # | Section | Depends on | Status |
+| # | Section | Needs | At launch |
 |---|---|---|---|
-| 1 | Hero | Modalities (context §1.1) | **Blocked** — the H1 names a modality |
-| 2 | Credibility strip | Certifications, years, batch/device/client counts (§1.2) | **Blocked** — all five values |
-| 3 | What we sterilize | Modalities, material compatibility (§1.1) | **Blocked** |
-| 4 | How it works | Turnaround SLA (§1.4) | Partial — the four steps are structural |
-| 5 | Quality & compliance | Certificate numbers, validation, testing (§1.2, §1.5, §1.6) | **Blocked** |
-| 6 | Industries | Nothing — we define the segments | **Ready** |
-| 7 | Facility by the numbers | Chamber count, capacity, cleanroom class (§1.3) | **Blocked** |
-| 8 | Client logos | Written permission, minimum six (§1.8) | **Blocked** + conditional |
-| 9 | Testimonials | Attributed quotes with permission (§1.8) | **Blocked** |
-| 10 | Insights preview | Blog posts — seed list in context §9 | **Ready** — see note |
-| 11 | FAQ | Mixed: some generic, some need §1 answers | Partial |
-| 12 | Quote CTA | Phone, WhatsApp number | Blocked on contact details only |
+| 1 | Hero slider | 2–3 banners, admin-managed | **Renders** — copy writable now |
+| 2 | Range tiles | 6 ranges + product counts | **Renders** — ranges fixed in context §3 |
+| 3 | About intro | 2 paragraphs + 4 stats | Partial — copy writable, **stats blocked** |
+| 4 | Featured products | 6 of 25 published | **Blocked** — no product data |
+| 5 | Why choose us | 4–6 points | **Renders** — writable now |
+| 6 | Certifications | Client's own certificates | **Hides** — context §10 forbids borrowing the reference's |
+| 7 | Business opportunity | Band → `/franchise` | **Renders** — writable now |
+| 8 | Latest news | 3 posts | **Hides** — but see below |
+| 9 | Customers + testimonials | Logos + attributed quotes | **Hides** |
+| 10 | Gallery strip | 5–6 images | **Hides** |
+| 11 | Enquiry CTA | Form + phone + WhatsApp | Renders — **WhatsApp number blocked** |
 
-**Two ready, two partial, eight blocked.** Context §1 asserts these unknowns "block copywriting"; this is the specific accounting. Send that consolidated list before anyone writes a word of section 1, 2, 3, 5 or 7.
+**Five render, one partial, four hide, one blocked.** The page is shorter at launch than
+the spec implies, and design system §10 is right that the instinct to tighten section
+padding to compensate is wrong. Short and confident beats short and cramped.
 
-The one piece of good news is section 10. The twelve seed posts in context §9 are about ISO 11135, IQ/OQ/PQ, residual limits and cycle design — general technical subject matter that needs no Medelis-specific facts at all. That content can be written immediately, it is the strongest available proof of competence, and it is the only substantial thing on this list not gated on the client. **Start the insights content now, in parallel.** It also de-risks section 10 being an empty three-card grid at first review.
+### Two things worth starting now, in parallel
+
+**Product data is the critical path.** Section 4 is the commercial heart of the homepage
+and every category page depends on the same 25 records. Nothing else on this list unblocks
+as much. The content model is settled (context §4) and CSV import exists (decision 2.8) —
+get the client filling a spreadsheet this week, not after design sign-off.
+
+**News is the cheapest indexable surface we have.** Context §12 notes that with only 25
+product pages, news carries most of the SEO weight, and asks for 6–8 range and molecule
+explainers at launch. That copy needs no client input — it is general pharmacology and
+category writing. Writing four of them turns section 8 from hidden to rendering and is the
+only section on this list we can unblock ourselves.
 
 ---
 
 ## 3. Section-by-section
 
-Background assignments are verified against design system §3.4 in [§4](#4-background-rhythm).
+Surfaces alternate `canvas` → `canvas-deep` per design system §3.1. Cards are always white.
 
-### 1 — Hero
+### 1 — Hero slider
 
-**Job:** state the category and the standard in one screen.
-**Background:** white. Nav transparent over it, per design system §6.
+**Surface:** `canvas`, hero content in a `radius-xl` white container.
+**Job:** state what Medelis is and route to products.
 
-**Composition**
+Per design system §8, no hard-edged full-bleed photograph — the hero image sits in a
+rounded container, and the arch-top variant is permitted here, once per page.
 
-- `eyebrow` (mono) — category line, e.g. `CONTRACT STERILIZATION · [[STATE]], INDIA`
-- H1 at `display` — names service and modality
-- `lead` at 56ch — one sentence on the standard, not the service
-- Primary button "Request a quote" (indigo) + tertiary "Download capability statement"
-- `CycleStrip variant="hero"`
+- Pill badge eyebrow — e.g. `Pharmaceutical marketing & distribution`
+- H1 at `display`, 700
+- `lead` at 54ch
+- Primary pill button with circular arrow → `/products`; secondary → `/franchise`
+- 2–3 slides, admin-managed, dots not auto-advancing (accessibility floor §12)
 
-**The H1 is the blocked item that blocks the most.** It cannot be written until §1.1 is answered, so here are pre-staged options — pick on the day the answer arrives rather than reopening the conversation:
+**Positioning constraint:** context decision 2.6 says stay neutral on manufacturing and
+claim no owned facility. The H1 must not imply a plant. "Pharmaceutical marketing and
+distribution" is the safe frame until the client confirms otherwise.
 
-| If the client offers | H1 |
-|---|---|
-| EtO only | Validated ethylene oxide sterilization for medical device manufacturers. |
-| EtO + one other | Contract sterilization, validated to ISO 11135 and documented for audit. |
-| Three or more modalities | Contract sterilization services, validated and documented for every batch. |
-| Modality still unclear | *Do not ship a hero.* Build the page starting at section 3. |
+Mobile caps at 60vh, one CTA, text left-aligned.
 
-Each names the service, carries a standard, and asserts nothing unverifiable. None uses a word from context §4's banned list.
+### 2 — Range tiles
 
-**Recommendation: type-led hero, no photograph.** Three reasons that happen to align — design system §1 argues whitespace reads as confidence; a text LCP element comfortably meets the < 2.0s mobile budget in stack §8 where a hero image would fight for it; and it sidesteps the placeholder-imagery risk in stack §5.1 entirely at the single most scrutinised point on the site. If the client later supplies genuine facility photography, it earns a place in section 7, where a specification-led caption can carry it.
+**Surface:** `canvas`. Six white tiles, `radius-lg`, `shadow-card`.
+**Job:** the primary navigation act of the page.
 
-**Motion:** cycle strip draws on mount, 1200ms, once. Hero text does not reveal-on-scroll — it is already in view.
+Per design system §7.4: circular arrow button top-right, icon, range name in `h3`,
+one-line description, product count in `caption`. Hover lifts `-2px` and fills the arrow
+badge.
 
-### 2 — Credibility strip
+Six ranges is two clean rows of three on desktop, 2-up on mobile. This is the section that
+most rewards the sparse-grid discipline — six tiles is a *complete* grid, so it will look
+better than anything else on the page at launch. Put it directly under the hero.
 
-**Job:** kill doubt above the fold-and-a-half.
-**Background:** white, bounded by hairlines top and bottom. Reads as an instrument panel attached to the hero rather than a section in its own right.
+**One tile may render in `indigo-700` with white text** as a visual anchor (§7.4). Use it
+on General Range or whichever the client wants pushed — not on the category index.
 
-**Composition:** four to five `Stat` blocks, mono numerals, separated by vertical hairlines on desktop and horizontal on mobile. Certification marks inline if available.
+Product counts are blocked until products exist. Per context §3, if the client will not
+accept counts, drop them rather than showing "1 product".
 
-**Content needed:** ISO marks, years operating, batches processed, devices sterilized, client count. All five unknown.
+### 3 — About intro
 
-**Suppression rule — this section needs a floor, not just an on/off switch.** A credibility strip with two numbers is weaker than no credibility strip, the same argument context §6 makes about a four-logo wall. Proposed: **render only with three or more verified values.** Below that, suppress and let section 5 carry the proof. Confirm the threshold; three is a judgement, not a derivation.
+**Surface:** `canvas-deep` band.
+**Job:** one paragraph of credibility, then out.
 
-**Motion:** count-up on scroll into view, 1.2s, once, suppressed under reduced motion.
+Two paragraphs, four stat cards, "Read more" → `/about`. Stat cards per §7.9 — white,
+`radius-lg`, pill badge top-right naming the metric, number in `stat` at `indigo-700`,
+mono caption below, count-up on scroll.
 
-### 3 — What we sterilize
+**Stats are blocked.** Years operating, range count, states served, distributor count —
+none exist. The GeneX reference staggers card heights on desktop; keep that, it makes four
+cards look composed rather than like a row of boxes.
 
-**Job:** answer "can you handle my product".
-**Background:** `slate-50`. Cards white, so they lift off it with hairlines only.
+### 4 — Featured products
 
-**Composition:** four to six `Card`s in a 3-column grid (2 at `md`, 1 at `sm`), each with the optional 3px `teal-500` top edge that design system §6 reserves for service cards. Anatomy per card: mono eyebrow (modality) → H3 → `body-sm` covering typical products and materials → link with arrow to the service detail page.
+**Surface:** `canvas`. Six product cards.
+**Job:** prove there is a real catalogue behind the ranges.
 
-**Content needed:** modality list, typical products, material compatibility. Blocked.
+The most-built component on the site (§7.3), so this section is where it gets its first
+real test. Anatomy: `card-tint` image tray at 4:3 with `object-contain` → alt pill badge
+naming the range → brand name in `h3`, 2-line clamp → **composition strip** → dosage form
+and packing in `caption` → full-width primary enquiry button.
 
-**Note:** card count follows the modality answer. If the client offers one modality, this section becomes a single card, which looks broken — restructure it as a two-column feature panel instead. Decide once §1.1 lands.
+**Blocked on product data.** Do not populate with invented brand names — molecule names
+are factual and public, but a brand name and product code attributed to Medelis is
+fabricated medical content. Build the card against the schema and leave it in its
+loading/empty state until real records exist.
 
-### 4 — How it works
+Must survive a missing image, a 90-character composition and a three-line brand name.
+Fixed card height per row, buttons bottom-aligned via flex.
 
-**Job:** remove the fear of handing over control. This is pillar 2 from context §4, and for the founder persona it is the most important section on the page.
-**Background:** white. Separated from section 5 by a `CycleStrip variant="divider"`.
+Mobile: snap-scroll at 1.4 cards visible.
 
-**Composition:** `CycleStrip variant="process"` as the structural spine, with the four steps from context §6 hung off it — enquiry & spec review → pickup & preconditioning → validated cycle → release with documentation.
+### 5 — Why choose us
 
-**Motion:** orange marker scrubbed to section scroll progress, `scrub: 0.5`. Steps reveal with a 60ms stagger. The optional chemical-indicator dots from design system §1 belong here if anywhere — build the section without them first and judge afterwards.
+**Surface:** `canvas-deep`.
+**Job:** the only section that argues rather than routes.
 
-**Content needed:** step descriptions are writable now from general practice. Turnaround figures are not. Write the steps, leave the durations as data.
+Four to six points: range breadth, quality and sourcing approach, packaging, supply
+reliability, distributor support. White cards, `radius-lg`, Lucide icon in a circular
+`indigo-50` badge, `h4` heading, `body-sm` in `slate-600`.
 
-**This section contains a real problem — see [§8.1](#81-the-cycle-strip-states-process-parameters-as-fact).**
+Writable now, and it should be written **specifically** — "monopoly rights by district"
+beats "customer focus". Context §4's tone rules still apply: nothing a competitor could
+paste onto their own site unchanged.
 
-### 5 — Quality & compliance
+### 6 — Certifications
 
-**Job:** the proof block. Pillar 1. The QA head reads this or leaves.
-**Background:** white — the `CertificationCard` is itself `slate-50`, so a tinted section would flatten it.
+**Hides at launch.** Context §10 is explicit that WHO-GMP, ISO and UKAS belong to the
+reference company and must not be attributed to Medelis. Build the component, ship it
+empty, populate when the client supplies their own.
 
-**Composition:** three to four `CertificationCard`s, then a single tertiary link to the full Quality page. Design system §6 calls this the most important component on the site and instructs 32px padding and room; honour that over fitting more cards in.
+### 7 — Business opportunity
 
-**Content needed:** certification name, issuing body, **certificate number**, validity dates, PDF. Blocked on §1.2.
+**Surface:** `inverse` — `indigo-700` full-width band.
+**Job:** capture the PCD/franchise lead, which is a different and often larger deal than a
+product enquiry.
 
-Design system §6 is explicit that "the certificate number in monospace is the entire point — it says: this is checkable." Which means a `CertificationCard` without a number is not a degraded version of this component, it is a different and much weaker one. **Do not render certification cards without numbers.** If the client supplies logos but withholds numbers, that is a conversation to have, not a gap to design around.
+Pill badge in `rgba(255,255,255,.14)`, H2 in white, one line of `indigo-200`, inverse pill
+button with circular arrow → `/franchise`.
 
-**Do not decorate this section.** Design system §6 and context §6 both say so independently, which is a reasonable signal.
+This is the page's one dark band. Design system §3.1 makes `inverse` a surface token, and
+the footer at `indigo-900` follows section 11 — so keep section 11 light, or the band and
+the footer stack into one dark mass.
 
-### 6 — Industries
+### 8 — Latest news
 
-**Job:** segment self-identification.
-**Background:** `slate-50`.
+**Hides at launch, but see §2** — this is the one section we can unblock ourselves, and
+context §12 wants it seeded with 6–8 explainers anyway. Three white cards, `radius-lg`,
+rounded image container, date in `caption`, title in `h3`, circular arrow.
 
-**Composition:** four to five tiles — device manufacturers, hospitals & CSSD, pharma & labs, exporters — each linking to its landing page. Tile is a `Card` without the teal top edge, so it reads as navigation rather than as a service.
+### 9 — Customers + testimonials
 
-**Content needed:** none. **This section is fully buildable today**, and it is the natural place to start.
+**Hides at launch.** Logos need permission and a minimum of six (§7.11). Testimonials need
+attributed quotes — name, firm, city. An unattributed testimonial is worth nothing to a
+distributor who is deciding whether to trust a supplier.
 
-### 7 — Facility by the numbers
+### 10 — Gallery strip
 
-**Job:** capacity reassurance for the procurement persona.
-**Background:** white.
+**Hides at launch.** Five or six thumbnails in rounded containers → `/gallery`.
 
-**Composition:** four to six `Stat` blocks plus one wide facility photograph at 21:9.
+### 11 — Enquiry CTA
 
-**Content needed:** chamber count, capacity in m³, cleanroom class, aeration, preconditioning, storage. Blocked on §1.3.
+**Surface:** `canvas`. Form inside a white `radius-xl` card.
+**Job:** the general-enquiry catch, for visitors who did not go through a product.
 
-**The photograph is the one slot on this page where a placeholder is genuinely dangerous.** A section captioned with Medelis's own capacity figures, illustrated with a stock cleanroom, is the exact misrepresentation stack §5.1 rule 1 prohibits — and the proximity of real numbers to a borrowed image is what makes it read as a claim. Either real photography or no photograph; the stats and hairlines carry the section on their own. Suppress the image slot rather than filling it.
+Following the Medvita reference, the form is a white card with icon-prefixed inputs — and
+§7.7 is firm that if icons are used they apply to every field or none. Fields: name, firm,
+mobile, email, message. Turnstile + honeypot. Phone and WhatsApp adjacent.
 
-### 8 — Client logos
+Keep this section light so it separates the `indigo-700` band at section 7 from the
+`indigo-900` footer.
 
-**Job:** social proof.
-**Background:** `slate-50`.
-**Conditional:** renders only with six or more logos *and* written permission on file for each. Context §6 is firm on this and design system §6 repeats it.
-
-The admin module in context §8 has a "permission-on-file flag" — gate rendering on that flag, per logo, not on an editor's judgement. If fewer than six clear the gate, the section suppresses and section 9 expands, exactly as context §6 specifies.
-
-### 9 — Testimonials
-
-**Job:** human proof.
-**Background:** white. If section 8 suppressed, this follows section 7's white directly — insert a `CycleStrip variant="divider"` between them to satisfy design system §3.4.
-
-**Composition:** two to three, per design system §6 — no quote graphic, no avatar, no card. Quote at `h3` weight 400, 56ch, short `orange-500` rule above, attribution below.
-
-**Content needed:** attributed quotes — name, role, organisation — with permission. Context §6 notes unattributed testimonials are worthless to this audience. Enforce it: **suppress any testimonial missing an attributed name and organisation.** Make those fields required in the CMS rather than trusting the editor.
-
-### 10 — Insights preview
-
-**Job:** depth signal and SEO surface.
-**Background:** `slate-50`.
-
-**Composition:** three latest posts as `Card`s — mono date eyebrow → H3 title → no excerpt. Titles from context §9's seed list are self-explanatory and an excerpt would dilute them.
-
-**Content needed:** three published posts. Writable now. **Start here alongside section 6.**
-
-### 11 — FAQ
-
-**Job:** objection handling plus `FAQPage` schema.
-**Background:** white.
-
-**Composition:** six questions, `Accordion` per design system §6 — hairline rows, no cards, no background. Link to the full FAQ page.
-
-**Content:** the six chosen for the homepage should be the six a QA head asks first. Roughly three are answerable now from general practice — what documentation accompanies a batch, how validation works, what a half-cycle overkill approach means. Three need client facts: turnaround, certifications held, whether testing is in-house. Ship with what is answerable and expand; an accordion with three rows is not embarrassing, whereas three rows of evasion is.
-
-### 12 — Quote CTA
-
-**Job:** convert.
-**Background:** `indigo-700`. See [§8.2](#82-the-cta-band-and-the-footer-stack-two-dark-sections) for the adjacency problem this creates.
-
-**Composition:** H2 at `text-on-inverse`, one `lead` line at `--text-on-inverse-muted`, inverse (white) primary button to `/request-a-quote`, phone and WhatsApp adjacent as inverse-ghost buttons.
-
-**Recommendation: CTA only, no embedded form.** Context §6 row 12 leaves it open. Three reasons to close it as a CTA: the Tier 1 quote form in context §7 is deliberately long and two-step, and embedding it here means either truncating it into a weaker second capture or letting it dominate the page's closing band; context §7 requires a distinct thank-you URL per form for attribution, which an embedded partial submission muddies; and the long form's length is doing deliberate filtering work that a short homepage version would undo.
+The sticky WhatsApp button appears from here down on mobile.
 
 ---
 
-## 4. Background rhythm
+## 4. Surface rhythm
 
-Design system §3.4 sets two constraints: alternate `white → slate-50 → white`, and never three consecutive white sections without a hairline divider or the cycle strip between them. Verified sequence:
+Verified against design system §3.1. Cards are white throughout; this is the *page*
+surface beneath them.
 
-| # | Section | Background | Note |
-|---|---|---|---|
-| 1 | Hero | `white` | |
-| 2 | Credibility strip | `white` | Hairline top and bottom — satisfies the two-consecutive-white allowance |
-| 3 | What we sterilize | `slate-50` | Cards white |
-| 4 | How it works | `white` | |
-| 5 | Quality & compliance | `white` | Cycle-strip divider between 4 and 5 — permitted |
-| 6 | Industries | `slate-50` | |
-| 7 | Facility | `white` | |
-| 8 | Client logos | `slate-50` | Conditional |
-| 9 | Testimonials | `white` | Divider needed here if 8 suppressed |
-| 10 | Insights | `slate-50` | |
-| 11 | FAQ | `white` | |
-| 12 | Quote CTA | `indigo-700` | Only inverse band on the page |
+| # | Section | Surface |
+|---|---|---|
+| 1 | Hero | `canvas` |
+| 2 | Range tiles | `canvas` |
+| 3 | About intro | `canvas-deep` |
+| 4 | Featured products | `canvas` |
+| 5 | Why choose us | `canvas-deep` |
+| 6 | Certifications | *hidden* |
+| 7 | Business opportunity | `inverse` |
+| 8 | Latest news | *hidden* → `canvas` when populated |
+| 9 | Customers + testimonials | *hidden* → `canvas-deep` |
+| 10 | Gallery | *hidden* → `canvas` |
+| 11 | Enquiry CTA | `canvas` |
+| — | Footer | `inverse-deep` |
 
-No three consecutive whites. One inverse section. Both §3.4 rules hold — **provided** the suppression rules in §3 do not collapse the sequence. Sections 2, 8 and 9 are the ones most likely to disappear, and 8 disappearing puts two whites either side of a gap. Build the background as a derived property of the *rendered* section list, not hardcoded per section, or the rhythm silently breaks the first time a section suppresses.
+**The rhythm has to be derived from the rendered list, not hardcoded per section.** With
+four sections hiding at launch, a hardcoded alternation breaks the first time content
+arrives — section 8 appearing would put two `canvas` bands adjacent. Compute it from the
+filtered array.
+
+At launch the sequence is `canvas · canvas · canvas-deep · canvas · canvas-deep ·
+inverse · canvas · inverse-deep`. Sections 1, 2 and 4 all being `canvas` is fine because
+white cards on a tinted ground already separate them — that is the whole point of §3.1.
 
 ---
 
 ## 5. Components and the client/server split
 
-Stack §8 requires server components by default. Homepage audit:
+Stack §8 requires server components by default.
 
 | Component | Boundary | Why |
 |---|---|---|
-| `Hero` | Server | Text only, under the type-led recommendation |
-| `CycleStrip` | **Client** | GSAP draw and scrub |
-| `CredibilityStrip` / `Stat` | **Client** | Count-up on scroll |
-| `ServicesGrid`, `Card` | Server | Hover is CSS |
-| `HowItWorks` | **Client** | Scrubbed marker |
-| `QualityBlock`, `CertificationCard` | Server | Greyscale-to-colour is CSS |
-| `IndustriesGrid` | Server | |
-| `FacilityStats` | **Client** | Count-up |
+| `HeroSlider` | **Client** | Slide state |
+| `RangeTile`, `RangeGrid` | Server | Hover is CSS |
+| `AboutIntro` | Server | |
+| `StatCard` | **Client** | Count-up on scroll |
+| `ProductCard` | Server | The card itself is static… |
+| `AddToEnquiryList` | **Client** | …but the `+` button writes `localStorage` |
+| `WhyChooseUs` | Server | |
+| `FranchiseBand` | Server | |
+| `NewsCard` | Server | |
 | `LogoWall` | Server | Hover is CSS |
-| `Testimonials` | Server | |
-| `InsightsPreview` | Server | |
-| `FaqSection` / `Accordion` | **Client** | Disclosure state |
-| `QuoteCta` | Server | CTA only, per §3.12 — a form here would make it client |
-| `Reveal` / `StaggerGroup` | **Client** | Thin wrappers; keep the wrapped children server |
+| `TestimonialCarousel` | **Client** | Swipe + dots |
+| `GalleryStrip` | **Client** | Horizontal snap-scroll |
+| `EnquiryForm` | **Client** | RHF + Turnstile |
+| `CircularArrow` | Server | Pure presentation |
+| `CompositionStrip` | Server | Pure presentation |
+| `Reveal` / `StaggerGroup` | **Client** | Thin wrappers; wrapped children stay server |
 
-Nine server, five client. The client components are exactly the ones design system §8 assigns motion or interaction to, which is the right correlation — no section is client-side for convenience.
-
-`Reveal` wrapping server children is the pattern that keeps this budget: the wrapper ships to the browser, the content does not. Note the no-JS defect in stack §11 item 3 applies to every section here, since all twelve are wrapped.
+Note the split inside the product card: the card is a server component and only the
+`+ Add to enquiry list` control is a client island. Making the whole card client because
+of one button would put every featured product's markup in the bundle.
 
 ---
 
-## 6. Motion plan
+## 6. Motion
 
-Everything below is already permitted by design system §8. Nothing new is introduced.
+All permitted by design system §9; nothing new.
 
 | Section | Effect |
 |---|---|
-| 1 | Cycle strip draw, 1200ms, once on mount. No scroll reveal — already in view |
-| 2 | Stat count-up, 1.2s, once |
-| 3 | Card stagger, 60ms increment, max 6 |
-| 4 | Marker scrub to section progress; steps stagger |
-| 5 | Standard reveal. No stagger — restraint is the point |
-| 6 | Tile stagger |
-| 7 | Stat count-up; image standard reveal |
-| 8 | Standard reveal, group not staggered |
-| 9 | Standard reveal |
-| 10 | Card stagger |
-| 11 | Standard reveal; accordion 240ms on interaction |
-| 12 | Standard reveal |
+| 1 | Slide transition, 400ms fade. **No auto-advance** — §12 |
+| 2 | Tile stagger 60ms; hover lift `-2px` + arrow badge fill |
+| 3 | Stat count-up 1.2s easeOutExpo, once |
+| 4 | Card stagger; hover lift |
+| 5 | Standard reveal |
+| 7 | Standard reveal |
+| 11 | Standard reveal |
 
-Twelve reveals down one page is at the upper limit of tasteful. If it reads as busy at first review, the credibility strip and FAQ are the two to drop to a plain fade — both are dense and neither benefits from movement.
-
-**Reduced motion:** per design system §8, Lenis off, reveals become a 120ms opacity fade, count-ups snap to final value, cycle strip freezes drawn. Verify at first preview, not at handoff.
+**Reduced motion:** Lenis off, reveals become a 120ms opacity fade, count-ups snap to
+final value, card lift removed. JS guards matter more than the media query because GSAP
+writes inline styles.
 
 ---
 
-## 7. Mobile above-the-fold
+## 7. Mobile
 
-375 × 812 is the smallest target in design system §9. Budget at that width, hero only:
+Build at 375px first. Context §9 is right that a distributor is holding an Android phone.
 
-| Element | Height |
-|---|---|
-| Nav | 64px |
-| Section top padding (`sm`) | 72px |
-| Eyebrow | ~15px |
-| H1 at `display` minimum, 40px × 1.05, three lines | ~126px |
-| Lead, 18px × 1.55, three lines | ~84px |
-| Primary button (`lg`) | 52px |
-| Secondary button, stacked | 44px |
-| Cycle strip | ~64px |
-
-**Measured against the built page** ([`../design/homepage.html`](../design/homepage.html)) at 375 × 812, rather than estimated:
-
-| Element | Bottom edge |
-|---|---|
-| Nav | 77px |
-| Eyebrow (wraps to two lines at this width) | 157px |
-| H1 — four lines at 40 / 42 | 345px |
-| Lead — seven lines | 564px |
-| Both CTAs, stacked full-width | **716px** |
-| Cycle plot | 963px — below the fold |
-
-This supersedes the earlier three-line constraint on the H1. Four lines fits with 96px of headroom, because the estimate had wrongly counted the cycle strip into the above-fold stack. Keeping the plot below the fold is the better arrangement anyway: the hero text and both CTAs own the first screen, and the plot is the reward for the first scroll.
-
-The two consequences that do hold: the CTAs stack full-width with a 12px gap rather than sitting side by side, and **the hero eyebrow wraps at 375px**, so it needs a looser line-height than the design system's 1.2 or the two lines collide. The built page overrides it to 1.5 for the hero instance only.
-
-The cycle strip drops labels on the narrowest screens and keeps ticks only. Its `divider` variant is already label-free, so the component supports this without a new variant.
+- Hero caps at 60vh, one CTA.
+- Range tiles 2-up. Six tiles is three clean rows.
+- Stats 2×2.
+- Featured products snap-scroll, 1.4 cards visible — **not** 2-up, because the card
+  carries an image tray, a composition strip and a button, and at 160px wide the
+  composition clamps to uselessness.
+- Sticky WhatsApp button from section 11 down.
+- 44×44px touch targets. No horizontal overflow at 320px.
 
 ---
 
-## 8. Two problems this plan surfaces
+## 8. What this plan cannot resolve
 
-### 8.1 The cycle strip states process parameters as fact
+**Product data blocks the commercially important half of the page.** Section 4 is blocked,
+section 2's counts are blocked, and every category page shares the same dependency. This is
+the single highest-value thing to chase.
 
-Design system §1 specifies the strip carries stage labels and durations — the worked example reads `PRECONDITION 10 h · VACUUM 45 min · GAS DWELL 6 h · AERATION 12 h` — and says "the tick positions are proportional to real cycle durations, so the strip encodes something true. That is the whole point." Stack §4.4 says to use those values as placeholders until the client supplies real ones, marked as placeholder in review.
+**Four sections hide at launch.** That is designed behaviour, not a defect, but the client
+should be told before they see the preview and ask why the page is short. Frame it as the
+sections switching on as they supply content.
 
-In the hero, on a compliance-selling site, read by a QA head, those numbers are a specification. They are the first concrete claim the page makes.
+**The green question is unresolved.** Design system v2.0 §3.3 reinstates teal as the
+accent carrying pill badges, links and active states, on the strength of the Medvita
+reference. The client objected to green on 5 August. Both cannot be true. Confirm before
+this rolls across 28 routes — it is a token change now and a repaint later.
 
-The placeholder machinery in stack §5 does not cover this. The `PLACEHOLDER` ribbon in §5.4 is an image component; there is no equivalent for data, and the pre-launch `grep -r "/placeholder/"` check only catches image paths. So invented cycle parameters have no ribbon, no grep, and no purge step — while a stock photograph has all three. The weaker safeguard is on the more dangerous content, because §5's whole framing is about imagery.
-
-**Recommendation:** the hero strip ships with ticks and stage *labels* but no durations until real parameters arrive. Stage names are generic process vocabulary and assert nothing specific; durations are a claim. Tick spacing in the label-only state should be visibly even, so it reads as a diagram rather than as measured data. The fully labelled strip then debuts in section 4, once the client supplies real numbers, which also gives that section something to earn.
-
-Worth extending stack §5's placeholder policy to cover data, not just images, and adding a check that fails the build on any unreplaced parameter. Flagging rather than doing, since it changes a policy in someone else's document.
-
-### 8.2 The CTA band and the footer stack two dark sections
-
-Section 12 is `indigo-700` full-width. The footer immediately below it is `indigo-900` (design system §6). That is two dark bands adjacent, which design system §3.4 prohibits: "Maximum one inverse (indigo) section per screenful. Two dark bands stacked kills the rhythm."
-
-This is structural — it falls out of context §6's ordering, so it will occur on every page that ends with the quote CTA, not just the homepage.
-
-Three ways out:
-
-1. **Accept it as a documented exception.** The rule's intent is mid-scroll rhythm; a page *ending* in a single dark mass is conventional and reads as a deliberate terminus rather than a stutter. Requires a `--border-inverse` hairline between band and footer so the two tones separate, and the design system amended to record the exception rather than leaving a rule the build openly violates.
-2. **Make the CTA band `slate-50`** with an indigo primary button. Keeps the rule intact, costs the closing emphasis.
-3. **Put section 11 (FAQ) after the CTA band.** Breaks the conversion logic — do not.
-
-**Recommendation: option 1**, amended in design system §3.4 rather than silently breached. Option 2 is defensible if the client review says the ending feels heavy.
-
----
-
-## 9. Where the client's dropped sections went
-
-The approved scope PDF ([`00-client-requirements.md`](00-client-requirements.md) §2) lists two homepage features that context §6 does not carry. Context §10 does not record either omission, so this is the mapping to bring to the v1.1 conversation:
-
-| PDF homepage feature | Where its job is done |
-|---|---|
-| #2 Company Introduction | Absorbed into section 1's lead line and section 2. A standalone "about us" block on the homepage serves none of the three personas in context §3 — all three want proof, not history. |
-| #5 Why Choose Us | Distributed across sections 4, 5 and 7, one per messaging pillar. A generic differentiator block is exactly what context §4's tone rules forbid: assertions a competitor could paste onto their own site unchanged. |
-
-Both substitutions are defensible on the strategy in context §3 and §4. Neither is defensible as a silent deletion — present the mapping.
-
----
-
-## 10. Build order
-
-Given §2, build in the order that is not blocked rather than top to bottom.
-
-| Step | Work | Blocked? |
-|---|---|---|
-| 1 | `Section`, `Container`, `Reveal`, `StaggerGroup`, `Card`, `Button`, `Stat` | No |
-| 2 | `CycleStrip`, all three variants, label-only per §8.1 | No |
-| 3 | Section 6 Industries — end to end, first complete section | No |
-| 4 | Section 10 Insights, alongside writing the first three posts | No |
-| 5 | Section 4 How it works — structure and copy, durations as data | Partial |
-| 6 | Section 11 FAQ with the three answerable questions | Partial |
-| 7 | Sections 1, 2, 3, 5, 7 | **Yes** — §1.1, §1.2, §1.3 |
-| 8 | Sections 8, 9 | **Yes** — §1.8 permissions |
-| 9 | Section 12 | Contact details only |
-
-Steps 1–6 are roughly a working homepage skeleton with two genuinely finished sections, which is enough to prove the pipeline at stack §10 phase 1 and to hold the phase 2 design-language conversation. Steps 7–8 are data entry against components that already exist, *if* the self-suppressing architecture in §1 is respected from the start.
-
-The critical path is not the build. It is the ten questions in context §1.
+**Two colour roles fail AA** — design system §3.8. `--text-muted` at `slate-500` is
+3.85:1 on the canvas, and it is what the product packing line, stat captions, team roles
+and range product counts are all set in. Resolve before the product card is built, because
+that component is replicated across every listing on the site.

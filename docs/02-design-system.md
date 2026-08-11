@@ -1,223 +1,168 @@
 # Medelis Healthcare — Design System
 
-**Version:** 1.0
-**Last updated:** 5 August 2026
-**Scope:** Marketing website. Admin panel inherits tokens but not layout language.
+**Version:** 2.0 — supersedes v1.0 entirely.
+**Direction locked to:** the GeneX Institute of Longevity and Medvita references supplied 11 Aug 2026.
+**Scope:** public marketing site + catalogue. Admin panel inherits tokens, not layout.
 
-Companion documents: [`01-context.md`](01-context.md) (why), `03-stack-and-setup.md` (how it gets built).
+Companions: `01-project-context.md` (what and why), `03-stack-and-setup.md` (how it's built).
 
 ---
 
 ## 1. Direction
 
-**The site should feel like a batch record, not a brochure.**
+Clean, modern, sharp. Both references run the same underlying system, and it's worth naming it precisely because every other decision follows:
 
-The most characteristic artifact in this client's world is the sterilization cycle chart — temperature, humidity, pressure and dwell time plotted across a few hours, signed off, filed, and produced on demand during an audit. That document is the product. The website should carry its qualities: precise, instrumented, unhurried, evidence-first.
+**A tinted canvas with white cards floating on it.**
 
-Practically this means:
+The page background is never white — it's a pale blue-grey. Content lives in white cards with generous radius and soft, low-contrast shadows. That single relationship does most of the work: it makes the page feel calm and layered without a single border, and it makes white product imagery sit properly instead of dissolving into the background.
 
-- **Numbers get typographic status.** Monospace numerals, given room. A stat is not a decoration, it is the argument.
-- **Hairlines instead of shadows.** Shadows read consumer software. Thin rules read technical documentation.
-- **Whitespace as confidence.** Cramped pages read as anxious. Generous vertical rhythm reads as a company with nothing to hide.
-- **Colour used sparingly and meaningfully.** The palette is mostly neutral. Colour marks state and action, nothing else.
+Around that:
 
-Deliberately avoided: warm cream + serif + terracotta (the current default look for anything "premium"), dark-mode-with-acid-accent, and stock-photo healthcare warmth. None belong to this subject.
+- **Generous radius.** 16–20px on cards, full pill on buttons. Nothing is square.
+- **Soft elevation, not borders.** Diffuse shadows at low opacity in a blue-tinted black. Hairline borders are the exception now, not the rule.
+- **Big confident headings, quiet body.** A large jump between heading and body size. Headings at 700; body at 400 in a muted slate.
+- **Pill badges as eyebrows.** Small capsule labels in a tinted fill, replacing uppercase-tracked mono labels.
+- **The circular arrow.** A recurring ↗ in a circle, on buttons and card corners. It's the interaction motif that ties both references together and it should tie ours together too.
+- **Rounded image containers.** Photography sits in rounded rectangles and arch shapes, never bleeding to a hard edge.
 
-### Signature element — the cycle strip
+### What this replaces
 
-One memorable device, used with restraint. A hairline horizontal rule with tick marks and monospace stage labels, reading left to right in the actual order of a sterilization cycle:
+v1.0 specified hairline borders, no shadows, 12px maximum radius, no pills, and weights capped at 600. All of that is now wrong. If you have anything built against v1.0, the visual language has inverted — check it against §4 and §5 before reusing.
 
-```
-├────────────┼──────────┼─────────────────┼──────────────┤
- PRECONDITION   VACUUM      GAS DWELL         AERATION
- 10 h           45 min      6 h               12 h
-```
+### The one thing that's ours
 
-Appears in three places and nowhere else:
+Both references are clinics presenting people and services. We're presenting **molecules**. The distinguishing element for Medelis is the **composition line** — treated consistently as a small tinted data strip on every product card, in every search result, and under every product H1.
 
-1. **Hero** — animated draw-on at page load, left to right, ~1.2s, easing out. The site's opening statement is the process itself.
-2. **"How it works" section** — becomes the structural spine of the four steps, with an orange marker travelling along it as the section scrolls.
-3. **Section dividers** — a reduced version (rule + ticks, no labels) separating major page sections, replacing conventional `<hr>` treatments.
-
-The tick positions are proportional to real cycle durations, so the strip encodes something true. That is the whole point — it is structure carrying information, not ornament. If the client supplies real cycle parameters, use them.
-
-Optional micro-interaction, only if it can be done with taste: chemical indicator dots on the process steps that shift from unprocessed grey to processed teal as each step scrolls into view. Cut it if it feels cute.
+It's the functional differentiator (§Project Context: distributors search by molecule, not brand) given a visual identity. It's the one thing a competitor's site won't have, and it costs nothing to build. Everything else follows the reference language faithfully.
 
 ---
 
 ## 2. Logo
 
-The supplied logo carries five colours — lime green, orange, red, indigo, and a second green — on a pale blue plate. It is a print-era mark and it cannot function as a UI palette.
+Five colours on a pale blue plate — a print-era mark. Use it as supplied inside its own lockup; don't extract its colours into the interface beyond §3.
 
-**Rules**
+- **Request vector (AI/EPS/SVG) immediately.** The supplied file is raster and won't survive retina or a favicon.
+- Three variants: full colour on light, mono indigo on light, mono white on indigo.
+- Clear space equal to the "M" height. Minimum 140px wide desktop, 110px mobile.
+- Strip the pale blue background plate when the vector arrives — it's part of the file, not the brand.
 
-- Use the logo as supplied inside its own lockup. Do not recolour it, do not extract its colours into the interface beyond what §3 defines.
-- Request vector (AI/EPS/SVG) from the client immediately. The supplied file is raster and will not survive retina display or a favicon.
-- Produce three approved variants: full colour on light, monochrome indigo on light, monochrome white on indigo. Use the mono variants in the footer and any dark band.
-- Minimum clear space equal to the height of the "M" on all sides. Minimum width 140px desktop, 110px mobile.
-- The pale blue background plate is part of the raster file, not part of the brand. Strip it when the vector arrives.
-
-**Colours deliberately not inherited**
-
-- **Red `#ED1C24`** — in a sterilization context red signals hazard, contamination, or a failed indicator. Using it for anything positive is semantically wrong. It also sits on a display script that will not scale to UI text. Keep it inside the mark.
-- **Lime green `#8CC63F`** — reads agricultural and consumer. Teal does the same job with authority.
-
-> Asset condition and what to request from the client is recorded in [`../brand/README.md`](../brand/README.md). The supplied file is 1024 × 326 lossy JPEG with the pale blue plate baked into the pixels.
+Not inherited into UI: the red `#ED1C24` (display script, doesn't scale, reads as alert) and the lime `#8CC63F` (reads consumer). Both stay inside the mark.
 
 ---
 
 ## 3. Colour
 
-### 3.1 Ramps
-
-**Indigo — anchor.** Derived from the "MEDELIS" wordmark. Dark sections, headings, primary action.
+### 3.1 Surfaces — the defining relationship
 
 | Token | Hex | Use |
 |---|---|---|
-| `indigo-50` | `#F0F1F8` | Tinted section background |
-| `indigo-100` | `#DDDFEF` | Subtle fill, disabled state |
-| `indigo-200` | `#B9BDDC` | Borders on tinted surfaces |
-| `indigo-300` | `#8E94C3` | — |
-| `indigo-400` | `#6169A5` | Muted text on dark |
-| `indigo-500` | `#3C4589` | Hover on primary |
-| `indigo-600` | `#2B3475` | — |
-| `indigo-700` | `#232A6B` | **Brand. Primary buttons, dark bands, H1** |
-| `indigo-800` | `#1A2052` | Deep sections |
-| `indigo-900` | `#12163A` | Footer |
-| `indigo-950` | `#0A0C21` | Deepest |
+| `canvas` | `#EDF1F8` | **Page background.** Every page, everywhere |
+| `canvas-deep` | `#E4EAF4` | Alternating band, filter sidebar |
+| `card` | `#FFFFFF` | Every card, panel, form container |
+| `card-tint` | `#F7F9FC` | Image trays, inactive tabs, table stripes |
+| `inverse` | `#232A6B` | Dark bands, footer, primary buttons |
+| `inverse-deep` | `#12163A` | Footer base |
 
-**Teal — primary accent.** Evolved from the logo green. Sterile, calm, clinical. Carries links, active states, indicator "pass" states.
+The mistake to avoid: a white card on a white page. If a section feels flat, it's because the canvas has gone white somewhere.
 
-| Token | Hex | Use |
-|---|---|---|
-| `teal-50` | `#EAF7F4` | Success/notice background |
-| `teal-100` | `#CBEDE5` | Badge fill |
-| `teal-200` | `#98DBCC` | — |
-| `teal-300` | `#5FC4AF` | Accent on dark backgrounds |
-| `teal-400` | `#2BA891` | Icons on dark |
-| `teal-500` | `#0E8F7A` | **Icons, large headings, decorative — not body text** |
-| `teal-600` | `#0C7867` | Hover |
-| `teal-700` | `#0B6053` | **Links and any text under 24px** |
-| `teal-800` | `#0A4C43` | Text on teal-50 |
-| `teal-900` | `#093E37` | — |
+### 3.2 Indigo — anchor
 
-**Orange — restricted accent.** From the logo. Marks the current position, the active tick, the underline. Never a large surface.
+| Token | Hex |
+|---|---|
+| `indigo-50` | `#F0F2F9` |
+| `indigo-100` | `#DDE1F0` |
+| `indigo-200` | `#B9BFDF` |
+| `indigo-300` | `#8E96C6` |
+| `indigo-400` | `#616BA8` |
+| `indigo-500` | `#3C468C` |
+| `indigo-600` | `#2B3578` |
+| `indigo-700` | `#232A6B` ← brand |
+| `indigo-800` | `#1A2052` |
+| `indigo-900` | `#12163A` |
 
-| Token | Hex | Use |
-|---|---|---|
-| `orange-50` | `#FEF4EA` | Warning background |
-| `orange-100` | `#FDE4CA` | — |
-| `orange-300` | `#F9A65B` | Accent on dark backgrounds |
-| `orange-500` | `#F58220` | **Brand orange. Cycle-strip marker, underline, icon accent** |
-| `orange-600` | `#DC6A0E` | Hover |
-| `orange-700` | `#B5510B` | **Any orange carrying white text, or orange text on white** |
-| `orange-900` | `#743612` | Text on orange-50 |
+### 3.3 Teal — accent
 
-The orange ramp is intentionally sparse. `orange-200`, `orange-400` and `orange-800` are undefined — do not reference them, and configure Tailwind so they fail loudly rather than resolving to nothing.
+Carries pill badges, active states, links, the "New" marker. Ties to the logo green; matches the accent role green plays in the Medvita reference.
 
-**Slate — neutral.** Does most of the work.
+| Token | Hex |
+|---|---|
+| `teal-50` | `#EAF7F4` |
+| `teal-100` | `#CBEDE5` ← pill fill |
+| `teal-300` | `#5FC4AF` |
+| `teal-500` | `#0E8F7A` ← icons, ≥24px text |
+| `teal-600` | `#0C7867` |
+| `teal-700` | `#0B6053` ← links, small text |
+| `teal-800` | `#0A4C43` ← text on teal-100 |
 
-| Token | Hex | Use |
-|---|---|---|
-| `white` | `#FFFFFF` | Page |
-| `slate-25` | `#FBFCFD` | Alternate section |
-| `slate-50` | `#F5F7FA` | Card, alternate section |
-| `slate-100` | `#EDF0F5` | Input fill |
-| `slate-200` | `#DDE2EB` | **Default hairline border** |
-| `slate-300` | `#C2CAD8` | Hover border, dividers on tint |
-| `slate-400` | `#93A0B4` | Disabled text — see §3.5, not placeholders |
-| `slate-500` | `#6B7A91` | Captions, meta — see §3.5 |
-| `slate-600` | `#4E5B70` | **Secondary body text** |
-| `slate-700` | `#3A4557` | — |
-| `slate-800` | `#262E3C` | **Body text** |
-| `slate-900` | `#161C26` | Headings on light |
-| `slate-950` | `#0B0E14` | — |
+### 3.4 Orange — restricted
 
-### 3.2 Semantic tokens
+From the logo. "New launch" badges, one homepage accent. Never a large surface.
 
-Components reference these, never raw ramp values.
+`orange-50 #FEF4EA` · `orange-100 #FDE4CA` · `orange-500 #F58220` · `orange-700 #B5510B`
+
+### 3.5 Slate — text and neutral
+
+`slate-50 #F5F7FA` · `slate-100 #EDF0F5` · `slate-200 #DDE2EB` · `slate-300 #C2CAD8` · `slate-400 #93A0B4` · `slate-500 #6B7A91` · `slate-600 #4E5B70` · `slate-800 #262E3C` · `slate-900 #161C26`
+
+### 3.6 Semantic
 
 ```
---surface-page          white
---surface-raised        slate-50
---surface-sunken        slate-25
---surface-inverse       indigo-700
---surface-inverse-deep  indigo-900
+--surface-canvas   #EDF1F8      --text-heading    slate-900
+--surface-card     #FFFFFF      --text-body       slate-600
+--surface-tint     #F7F9FC      --text-muted      slate-500
+--surface-inverse  indigo-700   --text-on-inverse white
 
---text-primary          slate-900
---text-body             slate-800
---text-secondary        slate-600
---text-muted            slate-500
---text-on-inverse       white
---text-on-inverse-muted indigo-200
---text-link             teal-700
---text-link-hover       teal-800
-
---border-hairline       slate-200
---border-strong         slate-300
---border-inverse        rgba(255,255,255,0.14)
---border-focus          teal-600
-
---action-primary-bg     indigo-700
---action-primary-hover  indigo-500
---action-primary-text   white
---accent-marker         orange-500
-
---state-pass            teal-500
---state-warn            orange-700
---state-fail            #B3261E
+--pill-bg          teal-100     --action-bg       indigo-700
+--pill-text        teal-800     --action-hover    indigo-500
+--pill-alt-bg      indigo-50    --action-text     white
+--pill-alt-text    indigo-700   --focus-ring      teal-600
 ```
 
-### 3.3 Contrast — read this before overriding anything
+Body copy is `slate-600`, not `slate-800`. Both references run a quiet body against a heavy heading; that contrast is most of the "modern" read. `slate-600` on white is 7.4:1 — comfortably AA.
 
-Two brand colours fail WCAG AA in their obvious application. This is not negotiable and drove a real design decision.
+### 3.7 Contrast — two rules that aren't negotiable
 
-Ratios below are **measured**, not estimated — computed from the hex values in §3.1 using the WCAG 2.1 relative-luminance formula. Re-measure if any token changes.
+Ratios below are **measured** from the §3.1–§3.5 hex values using the WCAG 2.1
+relative-luminance formula, not estimated. Re-measure with
+`node scripts/check-contrast.mjs` if any token changes.
 
-| Combination | Ratio | Verdict |
+| Pair | Ratio | Verdict |
 |---|---|---|
-| `indigo-700` on white | 13.0:1 | Pass AAA |
-| White on `indigo-700` | 13.0:1 | Pass AAA |
-| `slate-800` on white | 13.6:1 | Pass AAA |
-| `slate-600` on white | 6.9:1 | Pass AA — just short of AAA (7.0), do not claim AAA |
-| `teal-500` on white | **4.0:1** | **Fails AA for body text.** Large text (≥24px) and icons only |
-| `teal-700` on white | 7.5:1 | Pass AA — use for links |
-| White on `orange-500` | **2.6:1** | **Fails everything.** Never do this |
-| White on `orange-700` | 5.1:1 | Pass AA |
-| `orange-500` on white | 2.6:1 | Fails. Decorative shapes only, never text |
-| `teal-300` on `indigo-700` | 6.2:1 | Pass AA |
+| `indigo-700` on white / white on `indigo-700` | 13.0:1 | AAA |
+| `slate-900` on white | 17.1:1 | AAA |
+| `slate-900` on `canvas` | 15.1:1 | AAA |
+| `slate-600` on white | 6.9:1 | AA — just short of AAA, do not claim AAA |
+| `slate-600` on `canvas` | 6.1:1 | AA |
+| `slate-600` on `card-tint` | 6.5:1 | AA |
+| `teal-800` on `teal-100` | 7.9:1 | AA — pill badge |
+| `indigo-700` on `indigo-50` | 11.6:1 | AA — alt pill, filter chip |
+| `teal-700` on white / on `canvas` | 7.5:1 / 6.6:1 | AA — links |
+| `teal-600` on white / on `canvas` | 5.4:1 / 4.8:1 | Passes 1.4.11 — focus ring |
+| `teal-500` on white | 4.0:1 | **Fails AA for text.** ≥24px and icons only. Passes 1.4.11 as the nav underline |
+| **white on `orange-500`** | **2.6:1** | **Fails everything.** Never |
+| `teal-300` on `indigo-700` | 6.2:1 | AA |
+| `indigo-200` on `indigo-900` | 9.6:1 | AA — footer links |
 
-**Consequence: the primary button is indigo, not orange.** Orange at brand value cannot carry white text. Darkening it to `orange-700` to make it legal produces a muddy rust that looks nothing like the logo. Indigo is higher contrast, more disciplined, and stops the site reading like a consumer app. Orange stays as the accent marker, where its job is to catch the eye at small scale — which is exactly what a low-contrast bright colour is good at.
+**Consequence: the primary button is indigo, not orange.** Orange at brand value can't carry white text, and darkening it enough to pass produces a rust that no longer reads as the logo. Both references use deep navy for primary action anyway.
 
-### 3.4 Colour usage rules
+### 3.8 Two assignments that fail — resolve before build
 
-- No gradients. One permitted exception: a single `indigo-900 → indigo-950` vertical wash behind the footer, if it helps.
-- Maximum one inverse (indigo) section per screenful. Two dark bands stacked kills the rhythm.
-- Section backgrounds alternate `white → slate-50 → white`. Never three consecutive white sections without a hairline divider or the cycle strip between them.
-- Teal and orange never appear in the same component. They are different registers — teal is state, orange is attention.
-
-### 3.5 Assignments that fail — resolve before build
-
-§10 commits to WCAG 2.1 AA on all text, verified before every client review. Three token assignments in §3.1–§3.2 break that commitment. All three are measured, none is a matter of taste, and each needs a decision before component work starts. **These are open items, not settled design.**
+§12 commits to WCAG 2.1 AA on all text. Two role assignments above break it. Both are measured, neither is a matter of taste. **Open items, not settled design.**
 
 | # | Assignment | Measured | Needs | Verdict |
 |---|---|---|---|---|
-| 1 | `slate-500` as `caption` (13px), `stat-label` (12px), `--text-muted` | 4.36 on white · 4.06 on `slate-50` · 3.82 on `slate-100` | 4.5 | **Fails on every surface** |
-| 2 | `slate-400` as placeholder text on `slate-100` input fill | 2.32 | 4.5 | **Fails badly** |
-| 3 | `orange-500` 2px underline as the sole active-nav indicator | 2.59 on white | 3.0 (WCAG 1.4.11) | **Fails** |
+| 1 | `slate-500` as `--text-muted` and `caption` | 4.36 white · **3.85 canvas** · 4.13 `card-tint` · 3.61 `canvas-deep` | 4.5 | **Fails on every surface** |
+| 2 | `orange-700` on `orange-100` — the "New launch" pill | 4.13 | 4.5 | **Fails** |
 
-**1 — Muted text.** This is the widest-reaching of the three. `slate-500` carries stat captions, image credits, form helper text, testimonial role and organisation, and every `caption` on the site. Reassigning `--text-muted` and both mono label tokens to **`slate-600`** clears it everywhere: 6.88 on white, 6.41 on `slate-50`, 6.02 on `slate-100`. Hierarchy survives — body text at `slate-800` is 13.65, so the separation is still obvious. `slate-500` then survives only as a non-text tint.
+**1 — Muted text.** The widest-reaching of the two. `slate-500` is specified for `--text-muted`, for `caption` throughout §7 (product packing lines, stat captions, team roles, product counts on range tiles) and for the spec-table label in §7.6. It fails on plain white and gets worse on the tinted canvas this system is built around — 3.85:1 is the real number a distributor reads a packing line at.
 
-**2 — Placeholders.** Disabled controls are exempt from contrast requirements under WCAG 1.4.3; placeholder text is not. The `slate-400` token is doing both jobs, and only the disabled half is legal. Split it: keep `slate-400` for disabled state, move placeholders to **`slate-600`** (6.02 on `slate-100`). `slate-500` does not rescue this either — it measures 3.82 on the input fill. Worth noting §6 already puts a persistent `<label>` above every field, so placeholders are supplementary rather than load-bearing, which is the right pattern regardless.
+Reassign `--text-muted` and `caption` to **`slate-600`**, which clears every surface: 6.88 white, 6.07 canvas, 6.52 `card-tint`, 5.69 `canvas-deep`. Hierarchy survives, because headings are `slate-900` at 700 and body is `slate-600` at 400 — §3.6's "heavy heading, quiet body" contrast comes from the weight and size jump, not from the muted grey. `slate-500` then survives as a non-text tint only.
 
-**3 — Active nav.** As specified, the current page is indicated by orange alone, which fails 1.4.11 at 2.59 and also contradicts §10's own "never rely on colour alone to signal state". Two fixes, best applied together:
+Note this is the same failure v1.0 carried and it has come through the rewrite unchanged.
 
-- Shift the active link's text to weight 500 and `indigo-700`, so the underline becomes supplementary rather than the sole carrier of state. This resolves the "colour alone" problem properly.
-- If the underline must remain the primary cue, `orange-600` measures 3.44 and passes. `orange-500` cannot be made to pass on white.
+**2 — The "New launch" pill.** 12px at weight 600 is normal text, not large, so it needs 4.5. Two ways out: keep the `orange-100` fill and darken the text to **`#743612`** (7.52:1), which is the `orange-900` v1.0 defined and this version dropped — restore it to the §3.4 ramp; or keep `orange-700` and lighten the fill to `orange-50` (4.66:1), which passes but with almost no margin and makes the badge quieter than the teal and indigo pills beside it. **Prefer restoring `orange-900`.**
 
-The first is preferable — it keeps brand orange at full value where §3.3 argues it belongs.
-
-**Watch item, interpretive rather than clear-cut.** Text inputs are identified by a `slate-100` fill (1.14 against the white page) and a `slate-200` border (1.30). Both are far below 3:1. No slate token below `slate-500` reaches 3:1 as a border on white, so honouring 1.4.11 strictly would mean abandoning the hairline treatment on form fields specifically — a real conflict with §5. With a persistent visible label and a compliant focus ring, a labelled input is defensible under 1.4.11 and most audits accept it. Flagged because it is the one place where the hairline aesthetic and the accessibility floor genuinely pull against each other, and it is better to have taken the decision knowingly than to meet it in an audit.
+`slate-400` also fails as text at 2.65:1 on white. §3.5 lists it without assigning a role — keep it that way, borders and dividers only.
 
 ---
 
@@ -225,271 +170,353 @@ The first is preferable — it keeps brand orange at full value where §3.3 argu
 
 ### 4.1 Faces
 
-| Role | Face | Weights | Source |
-|---|---|---|---|
-| Display + UI | **Geist** | 400, 500, 600 | Google Fonts / `geist` npm |
-| Data, labels, eyebrows | **Geist Mono** | 400, 500 | Google Fonts / `geist` npm |
+| Role | Face | Weights |
+|---|---|---|
+| Display + body | **Plus Jakarta Sans** | 400, 500, 600, 700 |
+| Product codes, stat labels | **Geist Mono** | 400, 500 |
 
-Geist is a neutral grotesque built for technical interfaces. It has the engineered, slightly instrumented quality this brief needs without tipping into coldness, and it is not Inter — which is now the house default across half our projects and would make this site look like the last three.
+Plus Jakarta Sans is the closest free face to both references — geometric-humanist, confident at heavy weights, clean and slightly warm at text sizes. Free on Google Fonts, loads through `next/font`, no licensing conversation with the client.
 
-Geist Mono is doing real work here, not decoration. Every certificate number, cycle parameter, capacity figure, turnaround time and stat label is set in mono. Tabular numerals in a specification context read as measured rather than claimed.
+Alternate if they want more character: **Satoshi** (Fontshare, free for commercial use), closer to the GeneX display face. Do not substitute Poppins or Montserrat.
 
-**Approved alternates** if the client rejects Geist: *Instrument Sans + IBM Plex Mono* (warmer, more institutional) or *Schibsted Grotesk + JetBrains Mono* (sharper, more editorial). Do not substitute Poppins, Outfit, Montserrat, or any geometric humanist — wrong industry entirely.
+**Mono is now heavily restricted.** v1.0 set every number in mono; that belonged to the technical direction and fights this one. Mono survives in exactly two places: product codes (`MDL-CRD-014`) and the small caption under a stat number. Composition strings move to sans — see §4.3.
 
-Only two body weights ship: 400 and 500. 600 is reserved for display sizes above 36px. Nothing is ever 700.
+Weights change from v1.0: **700 is now the heading weight.** These references are built on heavy display type.
 
 ### 4.2 Scale
 
-Fluid between 375px and 1440px viewport.
+Fluid between 375px and 1440px.
 
-| Token | Size (min → max) | Line height | Tracking | Weight | Use |
-|---|---|---|---|---|---|
-| `display` | 40 → 68px | 1.05 | -0.03em | 600 | Hero H1 only |
-| `h1` | 34 → 52px | 1.10 | -0.025em | 600 | Page titles |
-| `h2` | 28 → 38px | 1.15 | -0.02em | 500 | Section headings |
-| `h3` | 22 → 26px | 1.25 | -0.015em | 500 | Card titles, sub-sections |
-| `h4` | 18 → 20px | 1.35 | -0.01em | 500 | Small headings |
-| `lead` | 18 → 21px | 1.55 | -0.005em | 400 | Hero sub, section intros |
-| `body` | 16 → 17px | 1.65 | 0 | 400 | Default |
-| `body-sm` | 15px | 1.6 | 0 | 400 | Dense areas, cards |
-| `caption` | 13px | 1.5 | 0 | 400 | Meta, image credits |
-| `eyebrow` | 12px | 1.2 | **0.12em, uppercase** | 500 | **Geist Mono.** Section labels |
-| `stat` | 36 → 52px | 1.0 | -0.02em | 500 | **Geist Mono, tabular.** Numbers |
-| `stat-label` | 12px | 1.4 | 0.06em, uppercase | 400 | **Geist Mono.** Stat captions |
-| `data` | 14px | 1.5 | 0.02em | 400 | **Geist Mono.** Cert numbers, parameters |
+| Token | Size | Line | Tracking | Weight |
+|---|---|---|---|---|
+| `display` | 40 → 72px | 1.02 | -0.03em | 700 |
+| `h1` | 34 → 52px | 1.08 | -0.025em | 700 |
+| `h2` | 28 → 42px | 1.12 | -0.02em | 700 |
+| `h3` | 20 → 24px | 1.25 | -0.015em | 600 |
+| `h4` | 17 → 19px | 1.35 | -0.01em | 600 |
+| `lead` | 17 → 19px | 1.6 | 0 | 400 |
+| `body` | 16px | 1.65 | 0 | 400 |
+| `body-sm` | 15px | 1.6 | 0 | 400 |
+| `caption` | 13px | 1.5 | 0 | 400 |
+| `pill` | 12px | 1.2 | 0.02em | 600 |
+| `stat` | 36 → 56px | 1.0 | -0.03em | 700 |
+| `stat-label` | 11px | 1.4 | 0.06em, uppercase | 500 (mono) |
+| `code` | 13px | 1.4 | 0.02em | 400 (mono) |
 
-Body copy max width **68ch**. Lead paragraphs **56ch**. Never full-bleed text.
+Body max width 68ch, lead 54ch.
 
-Eyebrow labels are the one place uppercase is allowed. Everything else is sentence case — headings, buttons, nav, labels, all of it.
+**Pill badges are the only uppercase.** Everything else is sentence case — headings, buttons, nav, labels. The references are consistent on this and it's a large part of why they read modern.
 
-### 4.3 Rules
+Note the reference feature lists run body text around 11–12px. Don't copy that. 15px is the floor, and a distributor squinting at a spec on a phone is exactly the user we can't afford to lose.
 
-- One H1 per page, always the page's actual subject.
-- Do not skip heading levels for visual reasons; use the token, keep the semantic tag correct.
-- Mono is for values and labels, never for prose. A paragraph in Geist Mono is a mistake every time.
-- Enable `font-variant-numeric: tabular-nums` globally on `.font-mono` so stat columns align.
-- No text over busy imagery without a solid or 80%-opacity indigo scrim.
+### 4.3 The composition line
+
+The signature treatment. Applied identically everywhere a product appears.
+
+- Set in **sans**, `body-sm`, weight 500, `indigo-700`
+- On a `card-tint` or `indigo-50` fill, `radius-sm`, 6px vertical / 10px horizontal padding
+- Clamped to two lines on cards, never clamped on the product page
+- Molecule names are the content; strengths follow inline
+
+```
+┌────────────────────────────────────────────┐
+│  Metoprolol Succinate 10mg                 │  ← indigo-700, 500, on indigo-50
+└────────────────────────────────────────────┘
+```
+
+Sans rather than mono because mono at 15px with a 60-character composition string wraps badly and fights the soft aesthetic. The tinted strip does the "this is data" job that mono was doing.
 
 ---
 
-## 5. Space, shape, elevation
+## 5. Shape, elevation, space
 
-**Spacing scale** (4px base): 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128, 160.
-
-**Section padding:** 128px desktop / 96px tablet / 72px mobile, vertical. Hero gets 160px top on desktop.
-
-**Container:** max 1240px, 24px gutter mobile, 40px tablet, 64px desktop. A narrow variant at 760px for article bodies.
-
-**Grid:** 12 column, 24px gutter desktop; 8 column tablet; 4 column mobile.
-
-**Radius**
+### Radius
 
 | Token | Value | Applied to |
 |---|---|---|
-| `radius-sm` | 6px | Badges, tags, small controls |
-| `radius-md` | 8px | Inputs, selects, textareas |
-| `radius-lg` | 12px | Cards, panels, images |
-| `radius-xl` | 16px | Large feature panels |
-| `radius-full` | 999px | Nothing except the WhatsApp float and avatar images |
+| `radius-sm` | 8px | Pills, chips, small labels, composition strip |
+| `radius-md` | 12px | Inputs, selects, small buttons |
+| `radius-lg` | 16px | Cards, image containers |
+| `radius-xl` | 20px | Feature panels, hero container, sheets |
+| `radius-2xl` | 28px | Large section containers |
+| `radius-full` | 999px | **Buttons**, avatars, icon buttons, pills |
 
-Buttons use `radius-md`, not pills. Pills read consumer.
+Buttons are pills. This reverses v1.0 and matches both references.
 
-**Borders and elevation**
+### Elevation
 
-The system uses hairlines, not shadows.
+Shadows are back, and they carry the system. All tinted blue-black, never neutral grey.
 
-- Default border: `1px solid slate-200`.
-- Hover: border moves to `slate-300`, background to `slate-25`. No lift, no shadow.
-- Two permitted shadows, both tiny: dropdown menus and the sticky nav after scroll.
-  - `shadow-menu: 0 4px 16px rgba(11,14,20,0.08), 0 1px 2px rgba(11,14,20,0.04)`
-  - `shadow-nav: 0 1px 0 rgba(11,14,20,0.06)`
-- Cards never have shadows. If a card needs to feel raised, change its background to `slate-50` and keep the hairline.
+```
+--shadow-xs:     0 1px 2px  rgba(16,24,64,0.04)
+--shadow-card:   0 2px 8px  rgba(16,24,64,0.05), 0 1px 2px rgba(16,24,64,0.03)
+--shadow-hover:  0 10px 28px rgba(16,24,64,0.09), 0 2px 6px rgba(16,24,64,0.04)
+--shadow-float:  0 16px 40px rgba(16,24,64,0.10)
+--shadow-sheet:  0 -8px 32px rgba(16,24,64,0.12)
+--shadow-nav:    0 1px 0   rgba(16,24,64,0.05)
+```
 
----
+Cards carry `shadow-card` at rest and `shadow-hover` with a `-2px` translateY on hover, 200ms. No borders on cards. The tinted canvas provides the separation that a border used to.
 
-## 6. Components
+### Space
 
-### Buttons
+4px base: 2, 4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 128.
 
-| Variant | Fill | Text | Border | Hover |
-|---|---|---|---|---|
-| Primary | `indigo-700` | white | none | `indigo-500` |
-| Secondary | transparent | `indigo-700` | `1px slate-300` | border `indigo-700`, bg `indigo-50` |
-| Tertiary / link | none | `teal-700` | none | underline, `teal-800` |
-| Inverse (on dark) | white | `indigo-700` | none | `indigo-50` |
-| Inverse ghost | transparent | white | `1px rgba(255,255,255,.3)` | bg `rgba(255,255,255,.08)` |
-
-Sizes: sm 36px / md 44px / lg 52px height. Horizontal padding 1.4× the vertical. `radius-md`. Weight 500. Sentence case, always.
-
-A right-pointing arrow may accompany primary and tertiary buttons; it translates 3px right on hover, 180ms. That is the only button animation.
-
-Focus ring on every interactive element: `2px solid teal-600`, `2px` offset. Never removed.
-
-### Cards
-
-`white` or `slate-50` background, `1px slate-200`, `radius-lg`, 28px padding. Optional 3px top edge in `teal-500` for service cards only, to give the service grid a distinguishing mark. Hover: border to `slate-300`, background to `slate-25`, 180ms.
-
-Anatomy: eyebrow (mono) → H3 → body-sm → link with arrow.
-
-### Navigation
-
-Transparent over the hero on the homepage; solid white with `shadow-nav` and `1px slate-200` bottom border after 60px of scroll. Solid white from the start on every other page.
-
-Height 76px desktop, 64px mobile. Nav links `body-sm`, weight 400, `slate-800`; active item carries a 2px `orange-500` underline offset 6px below the baseline — **see §3.5 item 3, this needs a second non-colour cue.** Dropdowns are simple panels — `white`, `radius-lg`, `shadow-menu`, 8px padding, 200ms fade-and-rise 6px.
-
-Mobile: full-screen overlay, `indigo-900` background, white links at `h3` size, accordion for nested items, stagger in at 40ms intervals.
-
-### Forms
-
-Inputs: 48px height, `slate-100` fill, `1px slate-200`, `radius-md`, 14px horizontal padding. Focus: fill to white, border to `teal-600`, plus the focus ring. Error: border `#B3261E`, message below in `caption`, `#B3261E`.
-
-Labels sit above the field, `body-sm` weight 500, `slate-800`. Required marked with a `teal-700` asterisk. Helper text below in `caption`, `slate-500` — **see §3.5 item 1.** Placeholder text: **see §3.5 item 2, not `slate-400`.**
-
-Multi-step quote form: mono step indicator (`01 / 02`) with a hairline progress rule, orange marker at the current position — the cycle strip again, doing a second job.
-
-### Accordion (FAQ)
-
-Full-width rows separated by `1px slate-200` hairlines, no card, no background. Question in `h4`, weight 500. Plus/minus icon right-aligned, rotating 45° on open, 200ms. Answer body reveals with a height transition, 240ms, `cubic-bezier(0.22,1,0.36,1)`. One open at a time on mobile, multiple allowed on desktop.
-
-### Stat block
-
-Mono numeral at `stat` size in `indigo-700`, unit in `h4` beside it in `slate-500`, label below in `stat-label` mono uppercase `slate-500` — **see §3.5 item 1.** Separated by vertical hairlines on desktop, stacked with horizontal hairlines on mobile. Count-up animation on scroll into view, 1.2s, `easeOutExpo` — suppressed under `prefers-reduced-motion`.
-
-### Certification card
-
-The most important component on the site. Give it room.
-
-Certificate logo (max 48px tall, greyscale by default, full colour on hover) → certification name in `h4` → issuing body in `caption` → **certificate number in `data` mono** → validity dates in `caption` → optional "View certificate" link opening the PDF. `slate-50` background, hairline, `radius-lg`, 32px padding.
-
-The certificate number in monospace is the entire point. It says: this is checkable.
-
-### Testimonial
-
-No quotation marks graphic, no avatar circle, no card. Quote set in `h3` weight 400 at 56ch, a short `orange-500` rule above it, attribution below in `body-sm` — name in weight 500, role and organisation in `slate-500`. Restraint reads as real.
-
-### Logo wall
-
-Greyscale at 55% opacity, full colour at 100% on hover, 200ms. Uniform optical sizing — normalise by visual weight, not by bounding box. Minimum six logos or the section is cut.
-
-### Footer
-
-`indigo-900`. Four columns: logo + one-line description + certifications strip / services / company / contact. Bottom bar with copyright, privacy, terms, separated by a `border-inverse` hairline. Links `indigo-200`, white on hover.
+Section padding 128 / 96 / 72 (desktop / tablet / mobile). Container 1240px, gutters 64 / 40 / 24. Card padding 28px desktop, 20px mobile. Grid 12 / 8 / 4 columns, 24px gutter.
 
 ---
 
-## 7. Imagery
+## 6. The circular arrow
 
-This is where the site will succeed or fail, and it is entirely dependent on the client.
+The interaction motif shared by both references. Used consistently, it becomes the site's signature affordance.
 
-**Direction:** real facility photography, shot or graded cool. Chamber doors, loading trolleys, cleanroom interiors, packaging and sealing, indicator strips, gowned staff mid-task, documentation on a desk. Process, not portraits. Nobody smiling at the camera.
+**On buttons.** Pill button, right-side circular badge containing a ↗ arrow.
 
-**Grade:** desaturate to roughly 40%, cool the shadows toward `indigo-800`, lift midtones slightly. Applied consistently, this makes source photos of mixed quality look like one deliberate system. Implement as a CSS filter layer plus a 12% `indigo-900` overlay so it can be tuned in one place rather than baked into the assets.
+```
+┌──────────────────────────────────┐
+│  Send enquiry              ( ↗ ) │   indigo-700 fill, white text,
+└──────────────────────────────────┘   white circle, indigo arrow
+```
 
-**Composition:** wide crops, generous negative space for text overlay, subject off-centre. 16:9 for section imagery, 3:2 for cards, 21:9 for full-bleed bands.
+Badge is 32px on `lg` buttons, 28px on `md`. On hover the arrow translates 2px up-right and the badge lightens. That's the whole animation.
 
-**If the client cannot supply photography** — and they may not be able to, cleanrooms are hard to shoot — do not fall back on stock. Use the process diagrams, cycle charts, and the signature strip as the visual system, and let typography and whitespace carry the page. An honest diagram beats a fake photograph in this sector every single time.
+**On cards.** A 36px circular icon button, top-right corner, `card-tint` fill with an `indigo-700` arrow. On card hover it fills `indigo-700` with a white arrow. Used on range tiles, news cards and department-style tiles.
 
-Placeholder sourcing for the preview build is covered in `03-stack-and-setup.md` §5. Placeholders are always labelled as such in client review.
-
-**Icons:** Lucide, 1.5px stroke, 20px inline / 24px feature. Never filled. Never two icon families. Icons are `slate-500` by default, `teal-500` when they carry meaning.
+**Never** on tertiary text links — those get a plain 14px arrow with no circle.
 
 ---
 
-## 8. Motion
+## 7. Components
 
-Motion is restraint-first here. The subject is a controlled, validated process; a bouncy website contradicts the argument.
+### 7.1 Button
 
-**Tokens**
+| Variant | Fill | Text | Badge |
+|---|---|---|---|
+| Primary | `indigo-700` | white | White circle, indigo arrow |
+| Secondary | white | `indigo-700` | `indigo-50` circle, indigo arrow |
+| Tertiary | transparent | `teal-700` | None, plain arrow |
+| Inverse | white | `indigo-700` | `indigo-50` circle |
+| Inverse ghost | `rgba(255,255,255,.1)` | white | `rgba(255,255,255,.2)` circle |
+
+Heights 40 / 48 / 56. Pill radius. Weight 600. Sentence case. Secondary carries `shadow-xs`. Focus ring `2px teal-600` at `2px` offset on everything, never removed.
+
+### 7.2 Pill badge
+
+12px, weight 600, 6px/12px padding, `radius-full`.
+
+- Default: `teal-100` fill, `teal-800` text — section eyebrows
+- Alt: `indigo-50` fill, `indigo-700` text — category labels on cards
+- New: `orange-100` fill, `orange-700` text — "New launch"
+- Inverse: `rgba(255,255,255,.14)` fill, white text
+
+### 7.3 Product card — the most-built component on the site
+
+```
+┌─────────────────────────────────┐
+│ ┌─────────────────────────┐ (+) │  ← white card, radius-lg, shadow-card
+│ │                         │     │     circular add-to-list button top-right
+│ │      pack shot          │     │  ← image tray: card-tint fill, radius-md,
+│ │                         │     │     24px padding, 4:3 box, object-contain
+│ └─────────────────────────┘     │
+│                                 │
+│  CARDIOLOGY RANGE               │  ← pill badge, alt variant
+│  Cardimax 10                    │  ← h3, slate-900, 600, 2-line clamp
+│ ┌─────────────────────────────┐ │
+│ │ Metoprolol Succinate 10mg   │ │  ← composition strip, 2-line clamp
+│ └─────────────────────────────┘ │
+│  Tablet  ·  10x10 Tablets       │  ← caption, slate-500
+│                                 │
+│  [ Send enquiry        ( ↗ ) ]  │  ← primary, full width
+└─────────────────────────────────┘
+```
+
+The image tray is the important detail. Pharma pack shots are photographed on white; on a white card they dissolve. The `card-tint` tray with padding contains them and matches the reference language.
+
+**Must survive:** a missing image (neutral pack placeholder, never a broken icon), a 90-character composition, a brand name wrapping to three lines. Fixed card height within a row, clamped text, reserved image box, buttons bottom-aligned via flex.
+
+### 7.4 Range tile
+
+White card, `radius-lg`, `shadow-card`. Circular arrow button top-right. Icon or small illustration, range name in `h3`, one-line description in `body-sm` `slate-600`, product count in `caption` `slate-500`. Hover lifts and fills the arrow badge.
+
+Follows the Medvita departments grid. One tile per row may be rendered in `indigo-700` with white text as a visual anchor — use it on the homepage, not on the category index.
+
+### 7.5 Filter chip / sidebar
+
+Sidebar is a white card, `radius-lg`, sticky at 24px offset. Checkbox rows with 44px touch height.
+
+Applied filters render above the grid as chips: `indigo-50` fill, `indigo-700` text, `radius-full`, with an × at 16px. A "Clear all" tertiary link follows them.
+
+**Mobile:** sidebar becomes a bottom sheet — `radius-xl` top corners, `shadow-sheet`, drag handle, filter groups as accordions, sticky footer with "Clear" and "Show 14 products". The count updates live.
+
+### 7.6 Spec table (product page)
+
+Not a table visually. Label/value rows inside a white card, `card-tint` background on alternate rows, `radius-lg`. Label `caption` `slate-500`, value `body-sm` weight 500 `slate-900`. Product code value in `code` mono.
+
+Mobile: same rows, stacked label-above-value, 12px gap.
+
+### 7.7 Enquiry sheet
+
+Desktop: centred modal, max 560px, `radius-xl`, `shadow-float`, `rgba(18,22,58,0.4)` backdrop.
+Mobile: bottom sheet, 90vh, `radius-xl` top corners, drag handle, form scrolls inside, submit pinned to the bottom.
+
+Top of the sheet carries a read-only product card — thumbnail, brand name, composition strip, product code — on `card-tint`, so the user can see what they're enquiring about.
+
+Inputs: 48px, white fill, `1px slate-200`, `radius-md`. Focus: border `teal-600` plus focus ring. Error: border `#B3261E`, message in `caption` below. Labels above the field, `body-sm` weight 500. Icon-prefixed inputs as in the Medvita contact form are optional; if used, apply to every field or none.
+
+### 7.8 Sticky mobile action bar
+
+Product pages only, appears once the hero scrolls out. White, `shadow-sheet` upward, 12px padding, safe-area inset respected. `[ Send enquiry (↗) ]` full-width primary plus a 48px circular WhatsApp button. This is the main mobile conversion mechanism — build it in the first pass.
+
+### 7.9 Stat card
+
+White card, `radius-lg`, `shadow-card`. Small pill badge top-right naming the metric. Number in `stat`, `indigo-700`. Caption below in `caption` `slate-500`. Count-up on scroll into view, 1.2s, suppressed under reduced motion.
+
+Follows the GeneX "Proven Efficiency in Numbers" block, including the staggered card heights on desktop.
+
+### 7.10 Navigation
+
+Utility bar: `indigo-700`, 36px, white text at 13px — location, phone, email. Mobile: collapses to click-to-call and WhatsApp.
+
+Main nav: white, 76px, `shadow-nav` after 60px scroll. Logo left, links centre at `body-sm` weight 500 `slate-600`, active in `indigo-700` with a 2px `teal-500` underline. Right: search icon, enquiry-list icon with a `teal-500` count badge, and a primary pill CTA.
+
+Dropdowns: white, `radius-lg`, `shadow-float`, 8px padding, 200ms fade + 6px rise.
+
+Mobile drawer: full screen, white, accordion sections, search field pinned at the top, links at `h3`. Staggered in at 40ms.
+
+### 7.11 Team, testimonial, customer
+
+**Team card** — white, `radius-lg`, portrait in `radius-md` at 3:4, name `h4`, role `caption` `slate-500`, specialty pill, circular icon buttons for contact. Horizontal snap-scroll carousel on mobile.
+
+**Testimonial** — white card, `radius-xl`, quote in `h4` weight 400 at 54ch, attribution below with name in weight 600 and role in `slate-500`. Optional portrait in a circle. Swipeable on mobile with dot indicators.
+
+**Customer logos** — greyscale at 55% opacity on `card-tint` tiles, full colour on hover. Minimum six or the section hides.
+
+### 7.12 Footer
+
+`indigo-900`. Logo and one-line description, then link columns (Products, Company, Support), then contact block with address, phones, email, WhatsApp. Optional newsletter field as in Medvita. Bottom bar with copyright, privacy, terms, disclaimer, separated by a `rgba(255,255,255,.12)` hairline. Links `indigo-200`, white on hover.
+
+---
+
+## 8. Imagery
+
+**Containers.** Every image sits in a rounded container — `radius-lg` standard, `radius-xl` for hero and feature blocks. Arch tops (a large top radius with square bottom) are permitted once per page, for a hero portrait, as in Medvita. Never a hard-edged full-bleed photograph.
+
+**Pack shots.** On the `card-tint` tray described in §7.3, `object-fit: contain`, never cropped. Request pack shots on pure white so backgrounds can be knocked out consistently. If the client supplies photos on mixed backgrounds, budget an afternoon to mask them — inconsistent pack shots will undo the whole grid.
+
+**Photography.** Cool, bright, clean — the register both references use. Facility, packaging, distribution, team. Desaturate slightly (85%) and lift shadows for consistency. Avoid stock imagery of doctors with patients; Medelis sells to distributors, not to patients.
+
+**Icons.** Lucide, 1.5px stroke, 20px inline / 24px feature. `slate-500` default, `teal-500` when meaningful, `indigo-700` inside circular badges. Never filled, never a second icon family.
+
+**Illustration.** The Medvita 3D gradient organs are attractive but wrong for a product catalogue — the products are the imagery. Skip them.
+
+---
+
+## 9. Motion
 
 ```
 --ease-out    cubic-bezier(0.22, 1, 0.36, 1)
---ease-in-out cubic-bezier(0.65, 0, 0.35, 1)
---dur-fast    140ms   hover, focus, small state
---dur-base    220ms   accordion, dropdown, tab
+--dur-fast    160ms   hover, focus
+--dur-base    220ms   dropdown, accordion, chip
 --dur-slow    600ms   scroll reveal
---dur-hero    1200ms  cycle strip draw-on, once
 ```
-
-**Permitted**
 
 | Effect | Spec |
 |---|---|
-| Scroll reveal | opacity 0→1, translateY 24→0, 600ms `ease-out`, trigger at `top 88%`, fire once |
-| Staggered children | 60ms increment, maximum 6 items, then reveal as a group |
-| Stat count-up | 1.2s, easeOutExpo, once |
-| Cycle strip draw | `stroke-dashoffset` 1200ms `ease-out`, hero only, once on load |
-| Cycle marker travel | scrubbed to scroll progress within the "How it works" section only |
-| Button arrow | translateX 3px, 140ms |
-| Nav state change | background + border, 200ms |
-| Smooth scroll | Lenis, `lerp: 0.09` — marginally slower than our usual 0.1; this site wants weight |
+| Scroll reveal | opacity 0→1, translateY 24→0, 600ms, `top 88%`, once |
+| Stagger | 60ms increment, max 6 items |
+| Card hover | translateY -2px + `shadow-card`→`shadow-hover`, 200ms |
+| Arrow badge | translate 2px up-right, 160ms |
+| Stat count-up | 1.2s easeOutExpo, once |
+| Sheet | slide up 280ms `ease-out`, backdrop fade 200ms |
+| Smooth scroll | Lenis, `lerp: 0.09` |
 
-**Forbidden**
+**Forbidden:** parallax, cursor followers, page-transition wipes, marquees, horizontal scroll-jacking, text scramble, video backgrounds.
 
-Parallax on imagery. Cursor followers. Page-transition wipes. Marquees. Horizontal scroll-jacking. Text scramble effects. Anything that moves without being scrolled or hovered. 3D. Video backgrounds.
-
-**Reduced motion:** under `prefers-reduced-motion: reduce`, disable Lenis entirely, replace every reveal with a 120ms opacity fade, set count-ups to their final value immediately, and freeze the cycle strip in its drawn state. This is a compliance-selling website; failing an accessibility check would be embarrassing.
+**Reduced motion:** disable Lenis, replace reveals with a 120ms opacity fade, set count-ups to final value, remove card lift. JS guards matter more than the CSS media query, because GSAP writes inline styles CSS can't override — implement both.
 
 ---
 
-## 9. Responsive
+## 10. Designing for 25 products
 
-| Breakpoint | Width | Behaviour |
-|---|---|---|
-| `sm` | 375–639 | Single column. Nav collapses. Sections 72px vertical padding. Display type at scale minimum. |
-| `md` | 640–1023 | Two-column grids. Stats 2×2. Section padding 96px. |
-| `lg` | 1024–1279 | Full nav. Three-column grids. Section padding 128px. |
-| `xl` | 1280+ | Container caps at 1240px. Four-column grids where appropriate. |
+Per `01-project-context.md` §3, the catalogue launches with 25 SKUs across 6 ranges. Grids will hold 3–5 items, not 12.
 
-Touch targets minimum 44×44px. The quote form must be genuinely usable one-handed on a phone — a plant manager will fill it in from the factory floor. Test the file upload on real iOS and Android, not in a device emulator.
-
----
-
-## 10. Accessibility floor
-
-Non-negotiable, verified before every client review.
-
-- WCAG 2.1 AA on all text and interactive contrast. See §3.3 for the two colours that need care, and **§3.5 for the three assignments that currently fail it.**
-- Visible focus indicator on every focusable element. Never `outline: none` without a replacement.
-- Full keyboard operability: nav dropdowns, accordion, multi-step form, mobile menu, modal dismissal on Escape.
-- Semantic landmarks: `header`, `nav`, `main`, `footer`, one `h1`, correct heading order.
-- Every image has meaningful alt text, or `alt=""` if purely decorative. Alt text is a required field in the CMS.
-- Form fields have associated `<label>`s. Errors announced via `aria-live`. Never rely on colour alone to signal an error state.
-- `prefers-reduced-motion` respected as specified in §8.
-- Tested with keyboard only, and with VoiceOver or NVDA on the homepage and the quote form at minimum.
+- **Design the 4-item case first.** Every grid must look deliberate at 2, 3, 4 and 5 items.
+- Cards do **not** stretch to fill a row. A 3-column grid with 4 items leaves one gap on the second row — that's correct and looks fine on a tinted canvas. Do not centre the orphan; left-align consistently.
+- A category with fewer than 3 published products hides itself from nav, homepage and index. Automatic, by count.
+- Homepage featured shows 6. Certifications, testimonials, customers, news and gallery sections all self-hide when empty — several will be at launch.
+- Because there's less content, **whitespace has to carry more.** Section padding stays at the full 128px. The temptation to tighten it up because pages feel short is the wrong instinct; short and confident beats short and cramped.
 
 ---
 
-## 11. Do and don't
+## 11. Responsive
+
+`sm` 375 · `md` 640 · `lg` 1024 · `xl` 1280. Container 1240px.
+
+| Element | Desktop | Tablet | Mobile |
+|---|---|---|---|
+| Product grid | 3 col | 2 col | **2 col** |
+| Range tiles | 3 col | 2 col | 2 col |
+| Featured carousel | 4 visible | 3 | 1.4, snap |
+| Filters | Sidebar card | Sidebar | Bottom sheet |
+| Product hero | Image left / info right | Same | Stacked, gallery first |
+| Product CTA | In hero | In hero | **Sticky bottom bar** |
+| Nav | Full + dropdowns | Full | Drawer |
+| Enquiry form | Modal 560px | Modal | Bottom sheet 90vh |
+| Section padding | 128px | 96px | 72px |
+| Card padding | 28px | 24px | 20px |
+
+Touch targets 44×44px minimum. No horizontal overflow at 320px. Explicit image dimensions. Sticky elements never cover the last interactive element. Test on a real Android device.
+
+Build the category and product templates at 375px before anything else.
+
+---
+
+## 12. Accessibility floor
+
+- WCAG 2.1 AA on all text and interactive contrast. §3.7 lists the two colours needing care.
+- Visible focus on every focusable element; never `outline: none` without a replacement.
+- Full keyboard operation: dropdowns, accordions, filter sheet, enquiry sheet, carousel, drawer. Escape closes sheets and returns focus to the trigger.
+- Sheets and modals trap focus while open and set `aria-modal`.
+- Semantic landmarks, one `h1`, correct heading order.
+- Alt text required in the CMS, defaulting to `{brandName} - {composition}`.
+- Labels associated with inputs; errors via `aria-live`; never colour alone.
+- Carousels are keyboard-navigable and don't auto-advance.
+- `prefers-reduced-motion` respected per §9.
+
+---
+
+## 13. Do and don't
 
 **Do**
 
-- Put a number on the page wherever a number exists.
-- Let sections breathe. If in doubt, add 32px.
-- Use the mono face for anything that could appear in a document.
-- Keep dark bands to one per screenful.
-- Cut a section rather than fill it with placeholder content the client will never replace.
+- Keep the canvas tinted. White page = broken system.
+- Put every image in a rounded container.
+- Use the circular arrow consistently — it's the site's signature affordance.
+- Let headings be genuinely large and body genuinely quiet.
+- Keep the composition strip identical everywhere a product appears.
+- Bottom-align card CTAs so rows stay even.
 
 **Don't**
 
-- Use orange as a large fill or with white text.
-- Add a shadow to a card.
-- Set body copy in teal-500.
-- Use stock photography of smiling clinicians.
-- Add a second accent colour "for variety".
-- Use icons and an illustration style and photography in the same section.
-- Ship a logo wall with four logos.
+- Put a border on a card. The shadow and canvas do that job.
+- Use orange as a fill with white text, or teal-500 for body text.
+- Set composition strings in mono.
+- Add a second accent colour.
+- Copy the reference's 11px body text.
+- Centre an orphan card in an incomplete grid row.
+- Ship a section that's empty because the client hasn't supplied content — hide it.
 
 ---
 
-## 12. Handoff checklist
+## 14. Handoff checklist
 
-- [ ] Vector logo received; three variants exported (colour / indigo / white)
-- [ ] **§3.5 resolved — muted-text token, placeholder token, active-nav indicator**
-- [ ] Colour tokens implemented as CSS custom properties, mapped into Tailwind `@theme`
-- [ ] Geist + Geist Mono self-hosted via `next/font`, subset to latin
-- [ ] Type scale implemented as fluid `clamp()` utilities, not fixed breakpoint jumps
-- [ ] Cycle strip built as a single reusable component with a `variant` prop (hero / process / divider)
-- [ ] Contrast pairs in §3.3 verified in the built site, not just in Figma
-- [ ] `prefers-reduced-motion` path tested
-- [ ] Keyboard pass on homepage and quote form
-- [ ] Placeholder imagery clearly flagged in the client preview
+- [ ] Vector logo received; three variants exported
+- [ ] Tokens in Tailwind v4 `@theme`; canvas, card and shadow tokens verified against both references
+- [ ] Plus Jakarta Sans + Geist Mono self-hosted via `next/font`, latin subset
+- [ ] Type scale as fluid `clamp()`, not breakpoint jumps
+- [ ] Circular arrow built once as a component with `size` and `variant` props
+- [ ] Composition strip built once, used everywhere
+- [ ] Product card tested with missing image, 90-char composition, 3-line brand name
+- [ ] Every grid checked at 2, 3, 4, 5 items
+- [ ] Contrast pairs verified in the built site, not just in Figma
+- [ ] Keyboard and reduced-motion passes on home, category and product
