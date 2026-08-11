@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy": "NEXT_PUBLIC_BASE_PATH=/Medelis next build && touch out/.nojekyll && gh-pages -d out -b gh-pages",
     "start": "next start",
     "lint": "next lint",
     "check-contrast": "node scripts/check-contrast.mjs"
@@ -23,6 +24,7 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.49",
     "typescript": "^5.7.0"
   }
