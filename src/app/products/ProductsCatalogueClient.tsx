@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import CompositionStrip from "@/components/ui/CompositionStrip";
 import CircularArrow from "@/components/ui/CircularArrow";
@@ -19,6 +19,13 @@ export default function ProductsCatalogueClient({
 }: ProductsCatalogueClientProps) {
   const [selectedRange, setSelectedRange] = useState<string>("all");
   const { addToCart, cartItems, openEnquiryModal } = useEnquiryCart();
+
+  useEffect(() => {
+    const range = new URLSearchParams(window.location.search).get("range");
+    if (range && ranges.some((r) => r.slug === range)) {
+      setSelectedRange(range);
+    }
+  }, [ranges]);
 
   const filteredProducts =
     selectedRange === "all"

@@ -30,22 +30,24 @@ export default function FranchiseBand() {
             <div className="flex flex-col sm:flex-row lg:flex-col gap-4 justify-end">
               <Link
                 href="#enquiry"
-                className="inline-flex items-center justify-between bg-white text-[var(--b900)] hover:bg-[var(--b50)] font-bold text-sm sm:text-base px-6 sm:px-7 py-3.5 rounded-full shadow-xl transition-all group border border-white/20"
+                className="inline-flex items-center justify-between gap-3 bg-white text-[var(--color-brand-primary)] hover:bg-[var(--b50)] font-bold text-sm px-5 py-2.5 rounded-full shadow-xl transition-all group"
               >
-                <span>Apply for Franchise</span>
-                <CircularArrow variant="primary" size="md" />
+                <span>Apply for Channel Partner</span>
+                <CircularArrow variant="alt" size="sm" />
               </Link>
 
               <a
-                href="https://wa.me/919829000000"
+                href="https://wa.me/919649824365"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 bg-white/15 hover:bg-white/25 text-white font-bold text-sm sm:text-base px-6 py-3.5 rounded-full border border-white/30 backdrop-blur-sm transition-all"
+                className="inline-flex items-center justify-between gap-3 bg-white text-[var(--color-brand-primary)] hover:bg-[var(--b50)] font-bold text-sm px-5 py-2.5 rounded-full shadow-xl transition-all"
               >
-                <svg className="w-5 h-5 fill-current text-[#90CAF9]" viewBox="0 0 24 24">
-                  <path d="M20.52 3.48A11.93 11.93 0 0012 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 6L.05 24l6.17-1.61A11.9 11.9 0 0012 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 22a9.92 9.92 0 01-5.06-1.39l-.36-.21-3.76.99 1-3.66-.24-.38A9.9 9.9 0 012 12C2 6.48 6.48 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.93 9.93 0 0122 12c0 5.52-4.48 10-10 10z" />
-                </svg>
                 <span>WhatsApp Inquiry</span>
+                <span className="w-7 h-7 rounded-full bg-[var(--color-brand-accent-light)] text-[var(--color-brand-accent)] flex items-center justify-center flex-shrink-0">
+                  <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.36.101 11.943c0 2.105.549 4.16 1.595 5.976L0 24l6.235-1.634a11.882 11.882 0 005.71 1.454h.005c6.585 0 11.945-5.36 11.948-11.943a11.86 11.86 0 00-3.379-8.428" />
+                  </svg>
+                </span>
               </a>
             </div>
           </div>

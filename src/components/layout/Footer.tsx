@@ -52,19 +52,40 @@ export default function Footer() {
               <li><Link href="#why-us" className="hover:text-white transition-colors">Why Choose Us</Link></li>
               <li><Link href="#franchise" className="hover:text-white transition-colors">Business Opportunity</Link></li>
               <li><Link href="#news" className="hover:text-white transition-colors">Latest News</Link></li>
-              <li><Link href="#enquiry" className="hover:text-white transition-colors">Contact</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 
           {/* Col 4: Contact */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-4">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-accent-light)]">Contact</h4>
-            <ul className="flex flex-col gap-2 text-sm text-white/80">
-              <li>Medelis Healthcare</li>
-              <li>Jodhpur, Rajasthan, India</li>
-              <li className="font-mono text-xs text-[var(--color-brand-accent-light)]">+91 98290 00000</li>
-              <li className="text-xs">info@medelishealthcare.com</li>
-            </ul>
+            <div className="text-sm font-bold text-white">Medelis Healthcare</div>
+
+            <div className="flex items-start gap-3">
+              <svg className="w-4 h-4 text-[var(--color-brand-accent-light)] flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z" />
+                <circle cx="12" cy="10" r="2.5" />
+              </svg>
+              <span className="text-xs text-white/80 leading-relaxed">C.O. : 131, 1st floor, 2nd A Cross, Magdi road, Bengaluru-56002</span>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <svg className="w-4 h-4 text-[var(--color-brand-accent-light)] flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 3h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z" />
+              </svg>
+              <div className="flex flex-col gap-1 font-mono text-xs text-white/80">
+                <a href="tel:+919982299977" className="hover:text-white transition-colors">+91 998 229 9977</a>
+                <a href="tel:+919649824365" className="hover:text-white transition-colors">+91 964 982 4365</a>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3">
+              <svg className="w-4 h-4 text-[var(--color-brand-accent-light)] flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="M3 7l9 6 9-6" />
+              </svg>
+              <a href="mailto:Kailash.sharma@medelishealthcare.com" className="text-xs text-white/80 hover:text-white transition-colors break-all">Kailash.sharma@medelishealthcare.com</a>
+            </div>
           </div>
         </div>
 

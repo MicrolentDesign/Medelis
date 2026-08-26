@@ -100,7 +100,7 @@ export const homepageContent: HomepageData = {
       title: "Gastrology",
       description: "Proton pump inhibitors, prokinetics and anti-reflux formulations.",
       productCount: "4 Products",
-      iconName: "shield"
+      iconName: "pill"
     },
     {
       slug: "general",
@@ -203,10 +203,10 @@ export const homepageContent: HomepageData = {
     }
   ],
   contact: {
-    phone: "+91 98290 00000",
-    whatsapp: "+91 98290 00000",
-    email: "info@medelishealthcare.com",
-    address: "Medelis Healthcare, Commercial Complex",
-    location: "Jodhpur, Rajasthan 342001"
+    phone: "+91 998 229 9977",
+    whatsapp: "+91 964 982 4365",
+    email: "medelishealthcare@gmail.com",
+    address: "C.O. : 131, 1st floor, 2nd A Cross, Magdi road",
+    location: "Bengaluru-56002"
   }
 };

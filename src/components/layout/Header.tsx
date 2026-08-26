@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "@/components/brand/Logo";
 import CircularArrow from "@/components/ui/CircularArrow";
 import { useEnquiryCart } from "@/context/EnquiryCartContext";
@@ -10,6 +11,21 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { cartItems, setIsCartOpen } = useEnquiryCart();
+  const pathname = usePathname();
+  const normalizedPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
+
+  const isActive = (href: string) =>
+    href === "/" ? normalizedPath === "/" : normalizedPath === href || normalizedPath.startsWith(`${href}/`);
+
+  const navLinkClass = (active: boolean) =>
+    active
+      ? "text-sm font-semibold text-[var(--color-brand-primary)]"
+      : "text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors";
+
+  const mobileNavLinkClass = (active: boolean) =>
+    active
+      ? "text-base font-semibold text-[var(--color-brand-primary)] py-2 border-b border-gray-100"
+      : "text-base font-medium text-[var(--ink600)] py-2 border-b border-gray-100";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,21 +45,21 @@ export default function Header() {
               <path d="M12 21s7-5.6 7-11a7 7 0 10-14 0c0 5.4 7 11 7 11z" />
               <circle cx="12" cy="10" r="2.5" />
             </svg>
-            <span>Jodhpur, Rajasthan</span>
+            <span>Bengaluru-560023, INDIA</span>
           </div>
           <div className="flex items-center gap-6 text-white/90">
-            <a href="tel:+919829000000" className="hover:text-white transition-colors flex items-center gap-1.5">
+            <a href="tel:+919982299977" className="hover:text-white transition-colors flex items-center gap-1.5">
               <svg className="w-3.5 h-3.5 text-[var(--color-brand-accent-light)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 3h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z" />
               </svg>
-              <span>+91 98290 00000</span>
+              <span>+91 998 229 9977</span>
             </a>
-            <a href="mailto:info@medelishealthcare.com" className="hover:text-white transition-colors flex items-center gap-1.5">
+            <a href="mailto:medelishealthcare@gmail.com" className="hover:text-white transition-colors flex items-center gap-1.5">
               <svg className="w-3.5 h-3.5 text-[var(--color-brand-accent-light)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <path d="M3 7l9 6 9-6" />
               </svg>
-              <span>info@medelishealthcare.com</span>
+              <span>medelishealthcare@gmail.com</span>
             </a>
           </div>
         </div>
@@ -62,25 +78,25 @@ export default function Header() {
 
           {/* Desktop Nav Links */}
           <nav className="hidden lg:flex items-center gap-8">
-            <Link href="/" className="text-sm font-semibold text-[var(--color-brand-primary)]">
+            <Link href="/" className={navLinkClass(isActive("/"))}>
               Home
             </Link>
-            <Link href="/products" className="text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors">
+            <Link href="/products" className={navLinkClass(isActive("/products"))}>
               Products
             </Link>
-            <Link href="/#ranges" className="text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors">
-              Ranges
+            <Link href="/#ranges" className={navLinkClass(false)}>
+              Segment
             </Link>
-            <Link href="/#about" className="text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors">
+            <Link href="/#about" className={navLinkClass(false)}>
               About Us
             </Link>
-            <Link href="/#why-us" className="text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors">
+            <Link href="/#why-us" className={navLinkClass(false)}>
               Why Us
             </Link>
-            <Link href="/#news" className="text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors">
+            <Link href="/#news" className={navLinkClass(false)}>
               Insights
             </Link>
-            <Link href="/#enquiry" className="text-sm font-medium text-[var(--ink600)] hover:text-[var(--color-brand-primary)] transition-colors">
+            <Link href="/contact" className={navLinkClass(isActive("/contact"))}>
               Contact
             </Link>
           </nav>
@@ -140,25 +156,25 @@ export default function Header() {
         {/* Mobile Dropdown */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white border-t border-[var(--ink100)] px-4 pt-3 pb-6 flex flex-col gap-3 shadow-lg">
-            <Link onClick={() => setMobileMenuOpen(false)} href="/" className="text-base font-semibold text-[var(--color-brand-primary)] py-2 border-b border-gray-100">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/" className={mobileNavLinkClass(isActive("/"))}>
               Home
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/products" className="text-base font-medium text-[var(--ink600)] py-2 border-b border-gray-100">
-              Products Catalogue
+            <Link onClick={() => setMobileMenuOpen(false)} href="/products" className={mobileNavLinkClass(isActive("/products"))}>
+              Products
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#ranges" className="text-base font-medium text-[var(--ink600)] py-2 border-b border-gray-100">
-              Ranges
+            <Link onClick={() => setMobileMenuOpen(false)} href="/#ranges" className={mobileNavLinkClass(false)}>
+              Segment
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#about" className="text-base font-medium text-[var(--ink600)] py-2 border-b border-gray-100">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/#about" className={mobileNavLinkClass(false)}>
               About Us
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#why-us" className="text-base font-medium text-[var(--ink600)] py-2 border-b border-gray-100">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/#why-us" className={mobileNavLinkClass(false)}>
               Why Us
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#news" className="text-base font-medium text-[var(--ink600)] py-2 border-b border-gray-100">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/#news" className={mobileNavLinkClass(false)}>
               Insights
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#enquiry" className="text-base font-medium text-[var(--ink600)] py-2">
+            <Link onClick={() => setMobileMenuOpen(false)} href="/contact" className={`${mobileNavLinkClass(isActive("/contact"))} border-b-0`}>
               Contact
             </Link>
             <Link

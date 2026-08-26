@@ -16,3 +16,7 @@ export async function getFeaturedProducts(): Promise<ProductItem[]> {
 export async function getNews(): Promise<NewsItem[]> {
   return homepageContent.news;
 }
+
+export async function getContact(): Promise<HomepageData["contact"]> {
+  return homepageContent.contact;
+}

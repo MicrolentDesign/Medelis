@@ -1,6 +1,8 @@
 import Link from "next/link";
 import PillBadge from "@/components/ui/PillBadge";
 import CircularArrow from "@/components/ui/CircularArrow";
+import OrthopaedicIcon from "@/components/icons/OrthopaedicIcon";
+import GastrologyIcon from "@/components/icons/GastrologyIcon";
 import { RangeItem } from "@/lib/content/types";
 
 interface RangeGridProps {
@@ -25,20 +27,15 @@ export default function RangeGrid({ ranges }: RangeGridProps) {
             <p className="text-sm sm:text-base text-[var(--ink600)]">
               Launching with six super-speciality ranges rather than eighteen thin ones. A range publishes once it holds at least three verified products.
             </p>
-            <Link href="#featured" className="tlink mt-3 inline-flex">
-              <span>Explore All Products</span>
-              <svg className="w-4 h-4 stroke-current stroke-2 fill-none" viewBox="0 0 14 14">
-                <path d="M3.5 10.5l7-7M5 3.5h5.5V9" />
-              </svg>
-            </Link>
           </div>
         </div>
 
         {/* 6 Range Cards Grid (Plain White Default -> Deep Blue Fill on Hover) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {ranges.map((r) => (
-            <div
+            <Link
               key={r.slug}
+              href={`/products?range=${r.slug}`}
               className="group bg-white hover:bg-[var(--b900)] text-[var(--ink900)] hover:text-white rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 shadow-md hover:shadow-2xl card-lift cursor-pointer border border-slate-100"
             >
               <div>
@@ -65,11 +62,7 @@ export default function RangeGrid({ ranges }: RangeGridProps) {
                         <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
                       </svg>
                     )}
-                    {r.iconName === "bone" && (
-                      <svg className="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24">
-                        <path d="M17 3a2.5 2.5 0 00-2.5 2.5c0 .53.16 1.02.43 1.43L8.93 12.93A2.49 2.49 0 007.5 12 2.5 2.5 0 105 14.5c0 .53.16 1.02.43 1.43l6 6c.41.27.9.43 1.43.43a2.5 2.5 0 102.5-2.5c0-.53-.16-1.02-.43-1.43l-6-6c-.41-.27-.9-.43-1.43-.43A2.49 2.49 0 008.93 7.07l6-6C15.34 4.8 15.83 4.64 16.36 4.64" />
-                      </svg>
-                    )}
+                    {r.iconName === "bone" && <OrthopaedicIcon className="w-6 h-6" />}
                     {r.iconName === "plus-square" && (
                       <svg className="w-6 h-6 stroke-current stroke-2 fill-none" viewBox="0 0 24 24">
                         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -77,6 +70,7 @@ export default function RangeGrid({ ranges }: RangeGridProps) {
                         <line x1="8" y1="12" x2="16" y2="12" />
                       </svg>
                     )}
+                    {r.iconName === "pill" && <GastrologyIcon className="w-6 h-6" />}
                   </div>
 
                   <CircularArrow variant="card" size="md" />
@@ -91,15 +85,12 @@ export default function RangeGrid({ ranges }: RangeGridProps) {
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center justify-between transition-colors">
+              <div className="mt-6 pt-4 border-t border-slate-100 group-hover:border-white/20 flex items-center transition-colors">
                 <span className="text-xs font-medium text-[var(--ink400)] group-hover:text-white/70">
                   {r.productCount}
                 </span>
-                <span className="text-xs font-bold text-[var(--b900)] group-hover:text-white flex items-center gap-1">
-                  Learn More &rarr;
-                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

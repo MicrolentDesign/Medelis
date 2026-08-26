@@ -118,7 +118,7 @@ export default function EnquiryModal() {
                 suppressHydrationWarning
                 type="text"
                 required
-                placeholder="e.g. Jodhpur, Rajasthan"
+                placeholder="e.g. Bangalore, Karnataka"
                 className="w-full h-10 rounded-xl border border-slate-200 px-3 text-xs outline-none focus:border-[var(--b700)]"
               />
             </div>

@@ -20,7 +20,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <PillBadge>Featured Catalogue</PillBadge>
+            <PillBadge>Featured Products Catalogue</PillBadge>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--ink900)] mt-3">
               Searchable by{" "}
               <span className="text-[var(--b900)]">Molecule & Composition</span>
@@ -112,6 +112,17 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
               </div>
             );
           })}
+        </div>
+
+        {/* Explore All Products CTA */}
+        <div className="mt-12 flex justify-center">
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-3 bg-white text-[var(--color-brand-primary)] hover:bg-[var(--b50)] font-bold text-sm px-6 py-3 rounded-full shadow-md border border-slate-100 transition-all group"
+          >
+            <span>Explore All Products</span>
+            <CircularArrow variant="alt" size="sm" />
+          </Link>
         </div>
       </div>
     </section>
