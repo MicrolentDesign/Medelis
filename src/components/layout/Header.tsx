@@ -7,9 +7,19 @@ import Logo from "@/components/brand/Logo";
 import CircularArrow from "@/components/ui/CircularArrow";
 import { useEnquiryCart } from "@/context/EnquiryCartContext";
 
+const SEGMENTS = [
+  { slug: "cardiology", title: "Cardiology Range" },
+  { slug: "diabetic", title: "Diabetic Care" },
+  { slug: "neurology", title: "Neurology" },
+  { slug: "orthopaedic", title: "Orthopaedic Range" },
+  { slug: "gastrology", title: "Gastrology" },
+  { slug: "general", title: "General Medicine" },
+];
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSegmentOpen, setMobileSegmentOpen] = useState(false);
   const { cartItems, setIsCartOpen } = useEnquiryCart();
   const pathname = usePathname();
   const normalizedPath = pathname === "/" ? "/" : pathname.replace(/\/$/, "");
@@ -81,19 +91,37 @@ export default function Header() {
             <Link href="/" className={navLinkClass(isActive("/"))}>
               Home
             </Link>
+            <div className="group relative">
+              <Link href="/#ranges" className={`${navLinkClass(false)} inline-flex items-center gap-1`}>
+                Segment
+                <svg className="w-3 h-3 stroke-current stroke-2 fill-none transition-transform group-hover:rotate-180" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </Link>
+              <div className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 absolute top-full left-0 pt-3 z-50">
+                <div className="bg-white rounded-2xl shadow-float p-2 min-w-[220px]">
+                  {SEGMENTS.map((seg) => (
+                    <Link
+                      key={seg.slug}
+                      href={`/${seg.slug}`}
+                      className="block px-4 py-2.5 rounded-xl text-sm font-medium text-[var(--ink600)] hover:bg-[var(--b50)] hover:text-[var(--color-brand-primary)] transition-colors"
+                    >
+                      {seg.title}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
             <Link href="/products" className={navLinkClass(isActive("/products"))}>
               Products
             </Link>
-            <Link href="/#ranges" className={navLinkClass(false)}>
-              Segment
-            </Link>
-            <Link href="/#about" className={navLinkClass(false)}>
+            <Link href="/about" className={navLinkClass(isActive("/about"))}>
               About Us
             </Link>
-            <Link href="/#why-us" className={navLinkClass(false)}>
+            <Link href="/why-us" className={navLinkClass(isActive("/why-us"))}>
               Why Us
             </Link>
-            <Link href="/#news" className={navLinkClass(false)}>
+            <Link href="/insights" className={navLinkClass(isActive("/insights"))}>
               Insights
             </Link>
             <Link href="/contact" className={navLinkClass(isActive("/contact"))}>
@@ -159,19 +187,47 @@ export default function Header() {
             <Link onClick={() => setMobileMenuOpen(false)} href="/" className={mobileNavLinkClass(isActive("/"))}>
               Home
             </Link>
+            <div className="border-b border-gray-100">
+              <button
+                onClick={() => setMobileSegmentOpen(!mobileSegmentOpen)}
+                className={`${mobileNavLinkClass(false)} border-b-0 w-full flex items-center justify-between`}
+              >
+                <span>Segment</span>
+                <svg
+                  className={`w-4 h-4 stroke-current stroke-2 fill-none transition-transform ${mobileSegmentOpen ? "rotate-180" : ""}`}
+                  viewBox="0 0 24 24"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              {mobileSegmentOpen && (
+                <div className="flex flex-col gap-1 pb-3 pl-3">
+                  {SEGMENTS.map((seg) => (
+                    <Link
+                      key={seg.slug}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setMobileSegmentOpen(false);
+                      }}
+                      href={`/${seg.slug}`}
+                      className="text-sm font-medium text-[var(--ink600)] py-2"
+                    >
+                      {seg.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <Link onClick={() => setMobileMenuOpen(false)} href="/products" className={mobileNavLinkClass(isActive("/products"))}>
               Products
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#ranges" className={mobileNavLinkClass(false)}>
-              Segment
-            </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#about" className={mobileNavLinkClass(false)}>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/about" className={mobileNavLinkClass(isActive("/about"))}>
               About Us
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#why-us" className={mobileNavLinkClass(false)}>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/why-us" className={mobileNavLinkClass(isActive("/why-us"))}>
               Why Us
             </Link>
-            <Link onClick={() => setMobileMenuOpen(false)} href="/#news" className={mobileNavLinkClass(false)}>
+            <Link onClick={() => setMobileMenuOpen(false)} href="/insights" className={mobileNavLinkClass(isActive("/insights"))}>
               Insights
             </Link>
             <Link onClick={() => setMobileMenuOpen(false)} href="/contact" className={`${mobileNavLinkClass(isActive("/contact"))} border-b-0`}>

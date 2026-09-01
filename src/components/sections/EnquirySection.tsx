@@ -168,7 +168,7 @@ export default function EnquirySection({ contact, showMap = false }: EnquirySect
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[var(--ink700)] mb-1">Molecules / Ranges Required</label>
+                  <label className="block text-xs font-bold text-[var(--ink700)] mb-1">Molecules / Segments Required</label>
                   <textarea
                     rows={3}
                     required

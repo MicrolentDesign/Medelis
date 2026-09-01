@@ -16,9 +16,9 @@ export default function RangeGrid({ ranges }: RangeGridProps) {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>
-            <PillBadge>Therapeutic Ranges</PillBadge>
+            <PillBadge>Therapeutic Segments</PillBadge>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[var(--ink900)] mt-3">
-              Six Ranges that Drive{" "}
+              Six Segments that Drive{" "}
               <span className="text-[var(--b900)]">Real Impact</span>
             </h2>
           </div>
@@ -35,7 +35,7 @@ export default function RangeGrid({ ranges }: RangeGridProps) {
           {ranges.map((r) => (
             <Link
               key={r.slug}
-              href={`/products?range=${r.slug}`}
+              href={`/${r.slug}`}
               className="group bg-white hover:bg-[var(--b900)] text-[var(--ink900)] hover:text-white rounded-2xl p-7 flex flex-col justify-between transition-all duration-300 shadow-md hover:shadow-2xl card-lift cursor-pointer border border-slate-100"
             >
               <div>

@@ -19,16 +19,12 @@ export default function AboutSection() {
             </div>
 
             <p className="text-sm sm:text-base text-[var(--ink600)] leading-relaxed">
-              Medelis Healthcare is an Indian pharmaceutical marketing and distribution enterprise headquartered in Jodhpur, Rajasthan. We supply high-potency molecules across cardiology, neurology, diabetes, orthopaedics, gastrology, and general medicine.
-            </p>
-
-            <p className="text-sm sm:text-base text-[var(--ink600)] leading-relaxed">
-              Every strip is manufactured in WHO-GMP certified facilities with strict batch quality controls, transparent composition labelling, and reliable supply chain logistics.
+              Based in Nagpur, Maharashtra, Medelis Healthcare was founded in the year 2009. We have witnessed tremendous growth with the support of our team members, building a large client base across various parts of the country — and now operate from Bengaluru, Karnataka, supplying high-potency molecules across cardiology, neurology, diabetes, orthopaedics, gastrology, and general medicine.
             </p>
 
             <div className="pt-2">
               <Link
-                href="#enquiry"
+                href="/about"
                 className="inline-flex items-center gap-3 bg-[var(--color-brand-primary)] hover:bg-[var(--color-brand-primary-hover)] text-white text-sm font-bold pl-6 pr-2.5 py-3 rounded-full shadow-md transition-all group"
               >
                 <span>Partner With Us</span>

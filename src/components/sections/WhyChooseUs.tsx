@@ -11,10 +11,10 @@ export default function WhyChooseUs({ items }: WhyChooseUsProps) {
   return (
     <section id="why-us" className="py-20 bg-[var(--canvas-deep)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-stretch">
           {/* Left Column Image */}
-          <div className="relative order-2 lg:order-1">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3]">
+          <div className="relative order-2 lg:order-1 min-h-[320px]">
+            <div className="relative rounded-3xl overflow-hidden shadow-xl h-full">
               <Image
                 src={getAssetUrl("/images/hero_workout.png")}
                 alt="Active lifestyle and distributor confidence"

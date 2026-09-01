@@ -18,12 +18,21 @@ export interface StatItem {
   subtext?: string;
 }
 
+export interface RangeCategory {
+  label: string;
+  note: string;
+  molecules: string;
+  iconName: string;
+}
+
 export interface RangeItem {
   slug: string;
   title: string;
   description: string;
+  longDescription?: string;
   productCount: string;
   iconName: string;
+  categories?: RangeCategory[];
 }
 
 export interface ProductItem {
@@ -55,6 +64,7 @@ export interface NewsItem {
   date: string;
   readTime: string;
   imageUrl: string;
+  content?: string[];
 }
 
 export interface HomepageData {

@@ -17,7 +17,7 @@ export default async function HomePage() {
       <Hero slides={data.slides} stats={data.stats} />
 
       {/* 2. Featured Products Showcase (Moved UP right under Hero to drive business) */}
-      <FeaturedProducts products={data.featuredProducts} />
+      <FeaturedProducts products={data.featuredProducts.slice(0, 3)} />
 
       {/* 3. Therapeutic Range Tiles (Plain white default -> Deep blue hover) */}
       <RangeGrid ranges={data.ranges} />

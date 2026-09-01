@@ -35,12 +35,12 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-accent-light)]">Products</h4>
             <ul className="flex flex-col gap-2 text-sm text-white/80">
-              <li><Link href="#ranges" className="hover:text-white transition-colors">Cardiology</Link></li>
-              <li><Link href="#ranges" className="hover:text-white transition-colors">Neurology</Link></li>
-              <li><Link href="#ranges" className="hover:text-white transition-colors">Diabetic</Link></li>
-              <li><Link href="#ranges" className="hover:text-white transition-colors">Gastrology</Link></li>
-              <li><Link href="#ranges" className="hover:text-white transition-colors">Orthopaedic</Link></li>
-              <li><Link href="#ranges" className="hover:text-white transition-colors">General</Link></li>
+              <li><Link href="/cardiology" className="hover:text-white transition-colors">Cardiology</Link></li>
+              <li><Link href="/neurology" className="hover:text-white transition-colors">Neurology</Link></li>
+              <li><Link href="/diabetic" className="hover:text-white transition-colors">Diabetic</Link></li>
+              <li><Link href="/gastrology" className="hover:text-white transition-colors">Gastrology</Link></li>
+              <li><Link href="/orthopaedic" className="hover:text-white transition-colors">Orthopaedic</Link></li>
+              <li><Link href="/general" className="hover:text-white transition-colors">General</Link></li>
             </ul>
           </div>
 
@@ -48,10 +48,9 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <h4 className="text-xs font-bold uppercase tracking-widest text-[var(--color-brand-accent-light)]">Company</h4>
             <ul className="flex flex-col gap-2 text-sm text-white/80">
-              <li><Link href="#about" className="hover:text-white transition-colors">About Us</Link></li>
-              <li><Link href="#why-us" className="hover:text-white transition-colors">Why Choose Us</Link></li>
-              <li><Link href="#franchise" className="hover:text-white transition-colors">Business Opportunity</Link></li>
-              <li><Link href="#news" className="hover:text-white transition-colors">Latest News</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link href="/why-us" className="hover:text-white transition-colors">Why Choose Us</Link></li>
+              <li><Link href="/insights" className="hover:text-white transition-colors">Insights</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
@@ -92,12 +91,14 @@ export default function Footer() {
         {/* Legal Bar */}
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60 border-b border-white/10">
           <span>© 2026 Medelis Healthcare. All rights reserved.</span>
-          <div className="flex items-center gap-4">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <span>·</span>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <span>·</span>
-            <a href="#" className="hover:text-white transition-colors">Disclaimer</a>
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <span>&middot;</span>
+            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">Terms and Conditions</Link>
+            <span>&middot;</span>
+            <Link href="/shipping-policy" className="hover:text-white transition-colors">Shipping Policy</Link>
+            <span>&middot;</span>
+            <Link href="/return-policy" className="hover:text-white transition-colors">Return Policy</Link>
           </div>
         </div>
 

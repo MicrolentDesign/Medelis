@@ -1,5 +1,5 @@
 import { homepageContent } from "@/content/data";
-import { HomepageData, RangeItem, ProductItem, NewsItem } from "./types";
+import { HomepageData, RangeItem, ProductItem, NewsItem, WhyUsItem, StatItem } from "./types";
 
 export async function getHomepageData(): Promise<HomepageData> {
   return homepageContent;
@@ -19,4 +19,12 @@ export async function getNews(): Promise<NewsItem[]> {
 
 export async function getContact(): Promise<HomepageData["contact"]> {
   return homepageContent.contact;
+}
+
+export async function getWhyUs(): Promise<WhyUsItem[]> {
+  return homepageContent.whyUs;
+}
+
+export async function getStats(): Promise<StatItem[]> {
+  return homepageContent.stats;
 }

@@ -32,8 +32,9 @@ export default function NewsSection({ news }: NewsSectionProps) {
         {/* 3 News Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {news.map((item) => (
-            <article
+            <Link
               key={item.slug}
+              href={`/insights/${item.slug}`}
               className="bg-white rounded-2xl p-4 shadow-md flex flex-col justify-between transition-all duration-300 card-lift"
             >
               <div>
@@ -69,7 +70,7 @@ export default function NewsSection({ news }: NewsSectionProps) {
                 </span>
                 <CircularArrow variant="card" size="md" />
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
